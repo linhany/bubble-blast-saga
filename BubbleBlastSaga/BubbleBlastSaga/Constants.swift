@@ -24,7 +24,7 @@ struct Constants {
     static let leftFireAngleBound = -1.18
     static let rightFireAngleBound = 1.18
 
-    static let noOfNormalBubbleTypes = 4
+    static let noOfNormalBubbleTypes = 7
 
     static let bubbleGridCellReuseIdentifier = "bubbleGridCell"
     static let loadLevelsCellIdentifier = "LevelCell"
@@ -34,6 +34,13 @@ struct Constants {
     static let orangeBubbleIdentifier = "bubble-orange"
     static let blueBubbleIdentifier = "bubble-blue"
     static let greenBubbleIdentifier = "bubble-green"
+    static let purpleBubbleIdentifier = "bubble-purple"
+    static let grayBubbleIdentifier = "bubble-gray"
+    static let pinkBubbleIdentifier = "bubble-pink"
+    static let bombBubbleIdentifier = "bubble-bomb"
+    static let lightningBubbleIdentifier = "bubble-lightning"
+    static let starBubbleIdentifier = "bubble-star"
+    static let indestructibleBubbleIdentifier = "bubble-indestructible"
     static let gameObjectIdentifier = "GameObject"
 
     static let notifyBubbleGridUpdated = "Bubble grid updated."

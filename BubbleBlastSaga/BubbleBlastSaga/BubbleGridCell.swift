@@ -48,6 +48,13 @@ class BubbleGridCell: UICollectionViewCell {
         case .normalOrange: imageView.image = UIImage(named: Constants.orangeBubbleIdentifier)
         case .normalBlue: imageView.image = UIImage(named: Constants.blueBubbleIdentifier)
         case .normalGreen: imageView.image = UIImage(named: Constants.greenBubbleIdentifier)
+        case .normalPurple: imageView.image = UIImage(named: Constants.purpleBubbleIdentifier)
+        case .normalGray: imageView.image = UIImage(named: Constants.grayBubbleIdentifier)
+        case .normalPink: imageView.image = UIImage(named: Constants.pinkBubbleIdentifier)
+        case .bomb: imageView.image = UIImage(named: Constants.bombBubbleIdentifier)
+        case .lightning: imageView.image = UIImage(named: Constants.lightningBubbleIdentifier)
+        case .star: imageView.image = UIImage(named: Constants.starBubbleIdentifier)
+        case .indestructible: imageView.image = UIImage(named: Constants.indestructibleBubbleIdentifier)
         case .empty: imageView.image = nil
         }
         contentView.addSubview(imageView)

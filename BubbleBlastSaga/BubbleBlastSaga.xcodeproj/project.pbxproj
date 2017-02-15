@@ -49,6 +49,10 @@
 		A771217E1E542B31007564A2 /* TraversalHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121641E542B31007564A2 /* TraversalHelper.swift */; };
 		A77121871E542D5A007564A2 /* GameLevel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A77121861E542D5A007564A2 /* GameLevel.storyboard */; };
 		A77121891E544AC7007564A2 /* CannonImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121881E544AC7007564A2 /* CannonImageView.swift */; };
+		A771218B1E54BC30007564A2 /* BombBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771218A1E54BC30007564A2 /* BombBubble.swift */; };
+		A771218D1E54BC3B007564A2 /* LightningBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771218C1E54BC3B007564A2 /* LightningBubble.swift */; };
+		A771218F1E54BC60007564A2 /* StarBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771218E1E54BC60007564A2 /* StarBubble.swift */; };
+		A77121911E54BC71007564A2 /* IndestructibleBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121901E54BC71007564A2 /* IndestructibleBubble.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +121,10 @@
 		A77121641E542B31007564A2 /* TraversalHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraversalHelper.swift; sourceTree = "<group>"; };
 		A77121861E542D5A007564A2 /* GameLevel.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GameLevel.storyboard; sourceTree = "<group>"; };
 		A77121881E544AC7007564A2 /* CannonImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CannonImageView.swift; sourceTree = "<group>"; };
+		A771218A1E54BC30007564A2 /* BombBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombBubble.swift; sourceTree = "<group>"; };
+		A771218C1E54BC3B007564A2 /* LightningBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningBubble.swift; sourceTree = "<group>"; };
+		A771218E1E54BC60007564A2 /* StarBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarBubble.swift; sourceTree = "<group>"; };
+		A77121901E54BC71007564A2 /* IndestructibleBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndestructibleBubble.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +278,10 @@
 				A77121331E5424B2007564A2 /* StorageManager.swift */,
 				A771214D1E542B31007564A2 /* BubbleType.swift */,
 				A77121541E542B31007564A2 /* GameBubble.swift */,
+				A771218A1E54BC30007564A2 /* BombBubble.swift */,
+				A771218C1E54BC3B007564A2 /* LightningBubble.swift */,
+				A771218E1E54BC60007564A2 /* StarBubble.swift */,
+				A77121901E54BC71007564A2 /* IndestructibleBubble.swift */,
 				A771215B1E542B31007564A2 /* NormalBubble.swift */,
 				A771215C1E542B31007564A2 /* NormalBubbleColor.swift */,
 			);
@@ -434,7 +446,10 @@
 				A771213B1E5424B2007564A2 /* LevelDesignViewController.swift in Sources */,
 				A77121731E542B31007564A2 /* GameViewController.swift in Sources */,
 				A77121421E5424B2007564A2 /* UIAlertControllerExtension.swift in Sources */,
+				A771218D1E54BC3B007564A2 /* LightningBubble.swift in Sources */,
 				A771217D1E542B31007564A2 /* Scene.swift in Sources */,
+				A771218B1E54BC30007564A2 /* BombBubble.swift in Sources */,
+				A771218F1E54BC60007564A2 /* StarBubble.swift in Sources */,
 				A771213C1E5424B2007564A2 /* LevelsTableViewController.swift in Sources */,
 				A77121741E542B31007564A2 /* ModelManager.swift in Sources */,
 				A771217B1E542B31007564A2 /* Queue.swift in Sources */,
@@ -455,6 +470,7 @@
 				A77120FA1E542454007564A2 /* AppDelegate.swift in Sources */,
 				A771217A1E542B31007564A2 /* PhysicsWorld.swift in Sources */,
 				A771216B1E542B31007564A2 /* CollisionType.swift in Sources */,
+				A77121911E54BC71007564A2 /* IndestructibleBubble.swift in Sources */,
 				A77121891E544AC7007564A2 /* CannonImageView.swift in Sources */,
 				A77121401E5424B2007564A2 /* PaletteButton.swift in Sources */,
 				A77121411E5424B2007564A2 /* StorageManager.swift in Sources */,

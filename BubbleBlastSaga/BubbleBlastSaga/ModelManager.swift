@@ -132,6 +132,14 @@ class ModelManager {
         case .normalOrange: return NormalBubble(color: .orange)
         case .normalBlue: return NormalBubble(color: .blue)
         case .normalGreen: return NormalBubble(color: .green)
+        case .normalPurple: return NormalBubble(color: .purple)
+        case .normalGray: return NormalBubble(color: .gray)
+        case .normalPink: return NormalBubble(color: .pink)
+        case .bomb: return BombBubble()
+        case .lightning: return LightningBubble()
+        case .star: return StarBubble()
+        case .indestructible: return IndestructibleBubble()
+
         case .empty: return nil
         }
     }

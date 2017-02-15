@@ -18,8 +18,13 @@ class GameBubble: GameObject, NSCoding {
         fatalError("Must override this")
     }
 
+    func assignImageString() {
+        fatalError("Must override this")
+    }
+
     override init() {
         super.init()
+        assignImageString()
     }
 
     func encode(with aCoder: NSCoder) {

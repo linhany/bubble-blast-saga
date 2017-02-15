@@ -19,15 +19,17 @@ class NormalBubble: GameBubble {
     init(color: NormalBubbleColor) {
         self.color = color
         super.init()
-        assignImageString()
     }
 
-    func assignImageString() {
+    override func assignImageString() {
         switch color {
         case .red: imageString = Constants.redBubbleIdentifier
         case .orange: imageString = Constants.orangeBubbleIdentifier
         case .blue: imageString = Constants.blueBubbleIdentifier
         case .green: imageString = Constants.greenBubbleIdentifier
+        case .purple: imageString = Constants.purpleBubbleIdentifier
+        case .gray: imageString = Constants.grayBubbleIdentifier
+        case .pink: imageString = Constants.pinkBubbleIdentifier
         }
     }
 
@@ -37,6 +39,9 @@ class NormalBubble: GameBubble {
         case .orange: return .normalOrange
         case .blue: return .normalBlue
         case .green: return .normalGreen
+        case .purple: return .normalPurple
+        case .gray: return .normalGray
+        case .pink: return .normalPink
         }
     }
 

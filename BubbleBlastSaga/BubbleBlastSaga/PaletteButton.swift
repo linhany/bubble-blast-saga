@@ -29,7 +29,6 @@ class PaletteButton: UIButton {
 		Tutor: magic number, coding style - 1 (cap at -5).
 		
 		*/
-		
         layer.borderWidth = 5
     }
 
@@ -63,7 +62,6 @@ class PaletteButton: UIButton {
 
     private func setUpBorderProperties() {
         layer.cornerRadius = frame.size.width / 2
-        layer.borderWidth = 0
         layer.borderColor = UIColor.black.cgColor
     }
 

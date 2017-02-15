@@ -33,10 +33,10 @@
                                         <rect key="frame" x="9" y="9" width="750" height="175.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4AP-V9-qmY" userLabel="Palette">
-                                                <rect key="frame" x="0.0" y="0.0" width="750" height="79.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="750" height="53.5"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gce-vy-rws" userLabel="Red Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.5" width="79" height="78.5"/>
+                                                        <rect key="frame" x="0.0" y="0.5" width="53" height="52.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Gce-vy-rws" secondAttribute="height" multiplier="1:1" id="VW8-1f-faQ"/>
                                                         </constraints>
@@ -49,7 +49,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-B6-8sd" userLabel="Orange Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                                        <rect key="frame" x="84" y="0.5" width="79" height="78.5"/>
+                                                        <rect key="frame" x="58" y="0.0" width="53" height="53.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="fa9-B6-8sd" secondAttribute="height" multiplier="1:1" id="VrL-Gs-rZD"/>
                                                         </constraints>
@@ -62,7 +62,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-ck-C4v" userLabel="Blue Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                                        <rect key="frame" x="168" y="0.0" width="78.5" height="79.5"/>
+                                                        <rect key="frame" x="116" y="0.5" width="53" height="52.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Hid-ck-C4v" secondAttribute="height" multiplier="1:1" id="5tz-Az-ymL"/>
                                                         </constraints>
@@ -75,7 +75,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="4" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zr7-zw-X06" userLabel="Green Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                                        <rect key="frame" x="251.5" y="0.5" width="79" height="78.5"/>
+                                                        <rect key="frame" x="174" y="0.5" width="53.5" height="52.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="zr7-zw-X06" secondAttribute="height" multiplier="1:1" id="vhM-Hf-qbp"/>
                                                         </constraints>
@@ -87,20 +87,102 @@
                                                             <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Tl-iI-gYo"/>
                                                         </connections>
                                                     </button>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9St-Ac-AZi" userLabel="Placeholder">
-                                                        <rect key="frame" x="335.5" y="14.5" width="79" height="50"/>
-                                                    </imageView>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5hv-oL-B6R" userLabel="Placeholder">
-                                                        <rect key="frame" x="419.5" y="14.5" width="79" height="50"/>
-                                                    </imageView>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EIl-zK-CH3" userLabel="Placeholder">
-                                                        <rect key="frame" x="503.5" y="14.5" width="78.5" height="50"/>
-                                                    </imageView>
+                                                    <button opaque="NO" tag="5" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Way-ZS-W6j" userLabel="Purple Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
+                                                        <rect key="frame" x="232.5" y="0.0" width="53" height="53.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Way-ZS-W6j" secondAttribute="height" multiplier="1:1" id="Z6q-qh-zYH"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" image="bubble-purple">
+                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9VN-OT-jev"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="6" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UWz-I8-98h" userLabel="Gray Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
+                                                        <rect key="frame" x="290.5" y="0.5" width="53" height="52.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="UWz-I8-98h" secondAttribute="height" multiplier="1:1" id="zrc-fu-2xL"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" image="bubble-gray">
+                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lwo-Kj-sgl"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="7" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JrF-iz-l4L" userLabel="Pink Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
+                                                        <rect key="frame" x="348.5" y="0.5" width="53" height="52.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="JrF-iz-l4L" secondAttribute="height" multiplier="1:1" id="8Qt-Iy-lHI"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" image="bubble-pink">
+                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xPq-gO-MXX"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="8" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pep-7t-MqC" userLabel="Bomb Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
+                                                        <rect key="frame" x="406.5" y="0.5" width="53" height="52.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="pep-7t-MqC" secondAttribute="height" multiplier="1:1" id="3Ii-uU-2VC"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" image="bubble-bomb">
+                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0EG-Fv-fL7"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="9" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBv-aU-sae" userLabel="Lightning Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
+                                                        <rect key="frame" x="464.5" y="0.0" width="53" height="53.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="rBv-aU-sae" secondAttribute="height" multiplier="1:1" id="IZO-nB-Jrn"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" image="bubble-lightning">
+                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GOS-kf-IdZ"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="10" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="atN-aS-FlD" userLabel="Star Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
+                                                        <rect key="frame" x="522.5" y="0.5" width="53.5" height="52.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="atN-aS-FlD" secondAttribute="height" multiplier="1:1" id="zzJ-DM-HtK"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" image="bubble-star">
+                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tv8-pg-gK0"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="11" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ty8-Ei-sXG" userLabel="Indestructible Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
+                                                        <rect key="frame" x="581" y="0.5" width="53" height="52.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Ty8-Ei-sXG" secondAttribute="height" multiplier="1:1" id="cBB-iv-IjU"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" image="bubble-indestructible">
+                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jUi-sH-CmN"/>
+                                                        </connections>
+                                                    </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Jm-LC-6kt" userLabel="Placeholder">
-                                                        <rect key="frame" x="587" y="14.5" width="79" height="50"/>
+                                                        <rect key="frame" x="639" y="2" width="53" height="50"/>
                                                     </imageView>
-                                                    <button opaque="NO" tag="5" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owX-FF-Yn9" userLabel="Erase" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                                        <rect key="frame" x="671" y="0.5" width="79" height="78.5"/>
+                                                    <button opaque="NO" tag="12" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owX-FF-Yn9" userLabel="Erase" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
+                                                        <rect key="frame" x="697" y="0.5" width="53" height="52.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="owX-FF-Yn9" secondAttribute="height" multiplier="1:1" id="bZC-Un-dmL"/>
                                                         </constraints>
@@ -115,12 +197,29 @@
                                                 </subviews>
                                                 <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                                 <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstItem="atN-aS-FlD" firstAttribute="width" secondItem="atN-aS-FlD" secondAttribute="height" multiplier="1:1" id="4x3-yM-j3t"/>
+                                                    <constraint firstItem="Ty8-Ei-sXG" firstAttribute="width" secondItem="Ty8-Ei-sXG" secondAttribute="height" multiplier="1:1" id="5aX-QS-jLz"/>
+                                                    <constraint firstItem="atN-aS-FlD" firstAttribute="width" secondItem="atN-aS-FlD" secondAttribute="height" multiplier="1:1" id="AbC-gL-Y7h"/>
+                                                    <constraint firstItem="Way-ZS-W6j" firstAttribute="width" secondItem="Way-ZS-W6j" secondAttribute="height" multiplier="1:1" id="DQq-Rs-c5Y"/>
+                                                    <constraint firstItem="atN-aS-FlD" firstAttribute="width" secondItem="atN-aS-FlD" secondAttribute="height" multiplier="1:1" id="EZT-NL-PWv"/>
+                                                    <constraint firstItem="UWz-I8-98h" firstAttribute="width" secondItem="UWz-I8-98h" secondAttribute="height" multiplier="1:1" id="JIp-oD-SIM"/>
+                                                    <constraint firstItem="rBv-aU-sae" firstAttribute="width" secondItem="rBv-aU-sae" secondAttribute="height" multiplier="1:1" id="OEo-kH-d4y"/>
+                                                    <constraint firstItem="rBv-aU-sae" firstAttribute="width" secondItem="rBv-aU-sae" secondAttribute="height" multiplier="1:1" id="Z4v-Cb-MyL"/>
+                                                    <constraint firstItem="JrF-iz-l4L" firstAttribute="width" secondItem="JrF-iz-l4L" secondAttribute="height" multiplier="1:1" id="bdY-X1-NcO"/>
+                                                    <constraint firstItem="Ty8-Ei-sXG" firstAttribute="width" secondItem="Ty8-Ei-sXG" secondAttribute="height" multiplier="1:1" id="bv8-WD-0rM"/>
+                                                    <constraint firstItem="Ty8-Ei-sXG" firstAttribute="width" secondItem="Ty8-Ei-sXG" secondAttribute="height" multiplier="1:1" id="c34-dL-YTA"/>
+                                                    <constraint firstItem="JrF-iz-l4L" firstAttribute="width" secondItem="JrF-iz-l4L" secondAttribute="height" multiplier="1:1" id="fLm-aT-N3D"/>
+                                                    <constraint firstItem="Ty8-Ei-sXG" firstAttribute="width" secondItem="Ty8-Ei-sXG" secondAttribute="height" multiplier="1:1" id="fxb-sp-TGr"/>
+                                                    <constraint firstItem="pep-7t-MqC" firstAttribute="width" secondItem="pep-7t-MqC" secondAttribute="height" multiplier="1:1" id="lOA-aS-CTb"/>
+                                                    <constraint firstItem="UWz-I8-98h" firstAttribute="width" secondItem="UWz-I8-98h" secondAttribute="height" multiplier="1:1" id="rXZ-B9-tQp"/>
+                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="YZV-Yx-i5D" userLabel="Buttons">
-                                                <rect key="frame" x="0.0" y="85.5" width="750" height="90"/>
+                                                <rect key="frame" x="0.0" y="59.5" width="750" height="116"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zoc-c1-5fB" userLabel="Start">
-                                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="90"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="116"/>
                                                         <state key="normal" image="start">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
@@ -132,7 +231,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdY-lx-mIV" userLabel="Save">
-                                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="90"/>
+                                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="116"/>
                                                         <state key="normal" image="save">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
@@ -144,7 +243,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlo-Jo-Fql" userLabel="Load">
-                                                        <rect key="frame" x="375" y="0.0" width="187.5" height="90"/>
+                                                        <rect key="frame" x="375" y="0.0" width="187.5" height="116"/>
                                                         <state key="normal" image="load">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
@@ -158,7 +257,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8RK-c9-Z2b" userLabel="Reset">
-                                                        <rect key="frame" x="562.5" y="0.0" width="187.5" height="90"/>
+                                                        <rect key="frame" x="562.5" y="0.0" width="187.5" height="116"/>
                                                         <state key="normal" image="reset">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
@@ -175,7 +274,7 @@
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="u6n-dV-csh" firstAttribute="leading" secondItem="fYn-wj-zNG" secondAttribute="leading" constant="9" id="CRR-U5-zLk"/>
                                     <constraint firstAttribute="trailing" secondItem="u6n-dV-csh" secondAttribute="trailing" constant="9" id="TdD-B2-k9r"/>
@@ -302,9 +401,16 @@
     <resources>
         <image name="background" width="512" height="683"/>
         <image name="bubble-blue" width="168" height="168"/>
+        <image name="bubble-bomb" width="168" height="168"/>
+        <image name="bubble-gray" width="168" height="168"/>
         <image name="bubble-green" width="168" height="168"/>
+        <image name="bubble-indestructible" width="168" height="168"/>
+        <image name="bubble-lightning" width="168" height="168"/>
         <image name="bubble-orange" width="168" height="168"/>
+        <image name="bubble-pink" width="168" height="168"/>
+        <image name="bubble-purple" width="168" height="168"/>
         <image name="bubble-red" width="168" height="168"/>
+        <image name="bubble-star" width="168" height="168"/>
         <image name="erase" width="168" height="168"/>
         <image name="load" width="405" height="207"/>
         <image name="reset" width="467" height="210"/>

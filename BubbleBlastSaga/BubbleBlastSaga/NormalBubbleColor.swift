@@ -15,4 +15,7 @@ enum NormalBubbleColor: Int {
     case orange = 1
     case blue = 2
     case green = 3
+    case purple = 4
+    case gray = 5
+    case pink = 6
 }

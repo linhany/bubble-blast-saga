@@ -128,7 +128,7 @@ class Renderer {
         guard let imageString = gameObject.imageString,
               let position = gameObject.position,
               let size = gameObject.size else {
-                return
+            return
         }
         let image = UIImage(named: imageString)
         let imageView = UIImageView(image: image)

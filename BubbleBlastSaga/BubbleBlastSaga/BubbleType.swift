@@ -19,5 +19,14 @@ enum BubbleType: Int {
     case normalOrange = 2
     case normalBlue = 3
     case normalGreen = 4
-    case empty = 5
+    case normalPurple = 5
+    case normalGray = 6
+    case normalPink = 7
+
+    case bomb = 8
+    case lightning = 9
+    case star = 10
+    case indestructible = 11
+
+    case empty = 12
 }
