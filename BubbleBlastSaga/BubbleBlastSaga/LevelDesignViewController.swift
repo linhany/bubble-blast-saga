@@ -81,6 +81,11 @@ class LevelDesignViewController: UIViewController {
             }
             levelsTableVC.levelNames = storageManager.getLevelNamesFromDocumentDirectoryAsStrings()
             levelsTableVC.delegate = self
+        } else if segue.identifier == Constants.startGameLevelSegueIndentifier {
+            guard let gameVC = segue.destination as? GameViewController else {
+                return
+            }
+            gameVC.modelManager = modelManager
         }
     }
 

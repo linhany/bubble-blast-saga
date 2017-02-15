@@ -19,6 +19,16 @@ class NormalBubble: GameBubble {
     init(color: NormalBubbleColor) {
         self.color = color
         super.init()
+        assignImageString()
+    }
+
+    func assignImageString() {
+        switch color {
+        case .red: imageString = Constants.redBubbleIdentifier
+        case .orange: imageString = Constants.orangeBubbleIdentifier
+        case .blue: imageString = Constants.blueBubbleIdentifier
+        case .green: imageString = Constants.greenBubbleIdentifier
+        }
     }
 
     override var type: BubbleType {

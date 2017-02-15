@@ -6,12 +6,12 @@
 //  Copyright © 2017 nus.cs3217.a0139498j. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Abstract class for a game bubble.
 /// Subclass this when adding more bubble types to the game.
 /// Conforms to NSObject and NSCoding for object archiving.
-class GameBubble: NSObject, NSCoding {
+class GameBubble: GameObject, NSCoding {
 
     /// The `BubbleType` of the `GameBubble`
     var type: BubbleType {
@@ -19,6 +19,7 @@ class GameBubble: NSObject, NSCoding {
     }
 
     override init() {
+        super.init()
     }
 
     func encode(with aCoder: NSCoder) {

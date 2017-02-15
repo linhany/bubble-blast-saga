@@ -64,7 +64,7 @@ class PaletteButton: UIButton {
     private func setUpBorderProperties() {
         layer.cornerRadius = frame.size.width / 2
         layer.borderWidth = 0
-        layer.borderColor = UIColor.white.cgColor
+        layer.borderColor = UIColor.black.cgColor
     }
 
 }

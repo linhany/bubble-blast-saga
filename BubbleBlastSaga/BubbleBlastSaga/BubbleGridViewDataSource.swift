@@ -38,13 +38,12 @@ extension BubbleGridViewDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.bubbleGridCellReuseIdentifer,
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.bubbleGridCellReuseIdentifier,
             for: indexPath as IndexPath) as? BubbleGridCell else {
             fatalError("Cell not assigned the proper view subclass!")
         }
         let width = collectionView.bounds.width
-        cell.initImageViewSize(gridWidth: width)
-
+        cell.initImageView(gridWidth: width, isBorderHidden: false)
         return cell
     }
 

@@ -55,6 +55,7 @@ class ModelManager {
         guard isInGrid(row: row, column: column) else {
             return
         }
+
         gridState[row][column] = bubble
         nc.post(name: Notification.Name(rawValue: Constants.notifyBubbleGridUpdated),
                 object: nil,
@@ -78,6 +79,35 @@ class ModelManager {
             return nil
         }
         return gridState[row][column]
+    }
+
+    /// Returns neighbours of a bubble, specified by its
+    /// `row` and `column` in the grid.
+    /// Returns an empty array if bubble has no neighbours.
+    /// Returns nil if bubble is not in the grid.
+    /// Neighbours are surrounding cells of this GameBubble.
+    func getNeighboursOfBubbleAt(row: Int, column: Int) -> [GameBubble]? {
+        guard isInGrid(row: row, column: column) else {
+            return nil
+        }
+        var neighbours: [GameBubble] = []
+        let neighbourEvenRowOffsets = [(-1, -1), (1, -1), (0, -1), (-1, 0), (1, 0), (0, 1)]
+        let neighbourOddRowOffsets = [(-1, 1), (1, 1), (0, -1), (-1, 0), (1, 0), (0, 1)]
+        let neighbourOffsets = isEven(row) ? neighbourEvenRowOffsets : neighbourOddRowOffsets
+
+        for (rowOffset, columnOffset) in neighbourOffsets {
+            let neighbourRow = row + rowOffset
+            let neighbourColumn = column + columnOffset
+            guard isInGrid(row: neighbourRow, column: neighbourColumn) else {
+                continue
+            }
+            guard let neighbour = getBubbleAt(row: neighbourRow, column: neighbourColumn) else {
+                continue
+            }
+            neighbours.append(neighbour)
+        }
+
+        return neighbours
     }
 
     /// Returns the internal representation of the grid state.
@@ -104,6 +134,15 @@ class ModelManager {
         case .normalGreen: return NormalBubble(color: .green)
         case .empty: return nil
         }
+    }
+
+    /// Returns a random normal bubble.
+    func buildRandomNormalBubble() -> GameBubble {
+        let colorInt = Int(arc4random_uniform(UInt32(Constants.noOfNormalBubbleTypes)))
+        guard let color = NormalBubbleColor(rawValue: colorInt) else {
+            fatalError("Random function is wrong!")
+        }
+        return NormalBubble(color: color)
     }
 
     /// Checks if the parameter `gridState` is valid by iterating through every row

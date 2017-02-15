@@ -55,7 +55,7 @@ extension LevelsTableViewController {
     /// Sets the text of the cell as the level name.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.loadLevelsCellIdentifer,
+            withIdentifier: Constants.loadLevelsCellIdentifier,
             for: indexPath)
 
         cell.textLabel?.text = levelNames[indexPath.row]

@@ -13,21 +13,42 @@
 		A77121041E542454007564A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A77121021E542454007564A2 /* LaunchScreen.storyboard */; };
 		A771210F1E542454007564A2 /* BubbleBlastSagaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771210E1E542454007564A2 /* BubbleBlastSagaTests.swift */; };
 		A771211A1E542454007564A2 /* BubbleBlastSagaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121191E542454007564A2 /* BubbleBlastSagaUITests.swift */; };
-		A77121351E5424B2007564A2 /* BubbleGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121271E5424B2007564A2 /* BubbleGridCell.swift */; };
 		A77121361E5424B2007564A2 /* BubbleGridViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121281E5424B2007564A2 /* BubbleGridViewDataSource.swift */; };
 		A77121371E5424B2007564A2 /* BubbleGridViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121291E5424B2007564A2 /* BubbleGridViewDelegate.swift */; };
-		A77121381E5424B2007564A2 /* BubbleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771212A1E5424B2007564A2 /* BubbleType.swift */; };
-		A77121391E5424B2007564A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771212B1E5424B2007564A2 /* Constants.swift */; };
-		A771213A1E5424B2007564A2 /* GameBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771212C1E5424B2007564A2 /* GameBubble.swift */; };
 		A771213B1E5424B2007564A2 /* LevelDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771212D1E5424B2007564A2 /* LevelDesignViewController.swift */; };
 		A771213C1E5424B2007564A2 /* LevelsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771212E1E5424B2007564A2 /* LevelsTableViewController.swift */; };
-		A771213D1E5424B2007564A2 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771212F1E5424B2007564A2 /* ModelManager.swift */; };
-		A771213E1E5424B2007564A2 /* NormalBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121301E5424B2007564A2 /* NormalBubble.swift */; };
-		A771213F1E5424B2007564A2 /* NormalBubbleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121311E5424B2007564A2 /* NormalBubbleColor.swift */; };
 		A77121401E5424B2007564A2 /* PaletteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121321E5424B2007564A2 /* PaletteButton.swift */; };
 		A77121411E5424B2007564A2 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121331E5424B2007564A2 /* StorageManager.swift */; };
 		A77121421E5424B2007564A2 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121341E5424B2007564A2 /* UIAlertControllerExtension.swift */; };
 		A77121441E5424DE007564A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A77121431E5424DE007564A2 /* Main.storyboard */; };
+		A77121651E542B31007564A2 /* AnimationRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771214B1E542B31007564A2 /* AnimationRenderer.swift */; };
+		A77121661E542B31007564A2 /* BubbleGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771214C1E542B31007564A2 /* BubbleGridCell.swift */; };
+		A77121671E542B31007564A2 /* BubbleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771214D1E542B31007564A2 /* BubbleType.swift */; };
+		A77121681E542B31007564A2 /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771214E1E542B31007564A2 /* CGPointExtension.swift */; };
+		A77121691E542B31007564A2 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771214F1E542B31007564A2 /* Circle.swift */; };
+		A771216A1E542B31007564A2 /* Collision.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121501E542B31007564A2 /* Collision.swift */; };
+		A771216B1E542B31007564A2 /* CollisionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121511E542B31007564A2 /* CollisionType.swift */; };
+		A771216C1E542B31007564A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121521E542B31007564A2 /* Constants.swift */; };
+		A771216D1E542B31007564A2 /* EdgeLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121531E542B31007564A2 /* EdgeLoop.swift */; };
+		A771216E1E542B31007564A2 /* GameBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121541E542B31007564A2 /* GameBubble.swift */; };
+		A771216F1E542B31007564A2 /* GameLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121551E542B31007564A2 /* GameLevelScene.swift */; };
+		A77121701E542B31007564A2 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121561E542B31007564A2 /* GameLogic.swift */; };
+		A77121711E542B31007564A2 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121571E542B31007564A2 /* GameObject.swift */; };
+		A77121721E542B31007564A2 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121581E542B31007564A2 /* GameView.swift */; };
+		A77121731E542B31007564A2 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121591E542B31007564A2 /* GameViewController.swift */; };
+		A77121741E542B31007564A2 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771215A1E542B31007564A2 /* ModelManager.swift */; };
+		A77121751E542B31007564A2 /* NormalBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771215B1E542B31007564A2 /* NormalBubble.swift */; };
+		A77121761E542B31007564A2 /* NormalBubbleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771215C1E542B31007564A2 /* NormalBubbleColor.swift */; };
+		A77121771E542B31007564A2 /* PhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771215D1E542B31007564A2 /* PhysicsBody.swift */; };
+		A77121781E542B31007564A2 /* PhysicsBodyOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771215E1E542B31007564A2 /* PhysicsBodyOwner.swift */; };
+		A77121791E542B31007564A2 /* PhysicsBodyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771215F1E542B31007564A2 /* PhysicsBodyType.swift */; };
+		A771217A1E542B31007564A2 /* PhysicsWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121601E542B31007564A2 /* PhysicsWorld.swift */; };
+		A771217B1E542B31007564A2 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121611E542B31007564A2 /* Queue.swift */; };
+		A771217C1E542B31007564A2 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121621E542B31007564A2 /* Renderer.swift */; };
+		A771217D1E542B31007564A2 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121631E542B31007564A2 /* Scene.swift */; };
+		A771217E1E542B31007564A2 /* TraversalHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121641E542B31007564A2 /* TraversalHelper.swift */; };
+		A77121871E542D5A007564A2 /* GameLevel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A77121861E542D5A007564A2 /* GameLevel.storyboard */; };
+		A77121891E544AC7007564A2 /* CannonImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121881E544AC7007564A2 /* CannonImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,21 +81,42 @@
 		A77121151E542454007564A2 /* BubbleBlastSagaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubbleBlastSagaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77121191E542454007564A2 /* BubbleBlastSagaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleBlastSagaUITests.swift; sourceTree = "<group>"; };
 		A771211B1E542454007564A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A77121271E5424B2007564A2 /* BubbleGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleGridCell.swift; sourceTree = "<group>"; };
 		A77121281E5424B2007564A2 /* BubbleGridViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleGridViewDataSource.swift; sourceTree = "<group>"; };
 		A77121291E5424B2007564A2 /* BubbleGridViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleGridViewDelegate.swift; sourceTree = "<group>"; };
-		A771212A1E5424B2007564A2 /* BubbleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleType.swift; sourceTree = "<group>"; };
-		A771212B1E5424B2007564A2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		A771212C1E5424B2007564A2 /* GameBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBubble.swift; sourceTree = "<group>"; };
 		A771212D1E5424B2007564A2 /* LevelDesignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesignViewController.swift; sourceTree = "<group>"; };
 		A771212E1E5424B2007564A2 /* LevelsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsTableViewController.swift; sourceTree = "<group>"; };
-		A771212F1E5424B2007564A2 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
-		A77121301E5424B2007564A2 /* NormalBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalBubble.swift; sourceTree = "<group>"; };
-		A77121311E5424B2007564A2 /* NormalBubbleColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalBubbleColor.swift; sourceTree = "<group>"; };
 		A77121321E5424B2007564A2 /* PaletteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteButton.swift; sourceTree = "<group>"; };
 		A77121331E5424B2007564A2 /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		A77121341E5424B2007564A2 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		A77121431E5424DE007564A2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		A771214B1E542B31007564A2 /* AnimationRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationRenderer.swift; sourceTree = "<group>"; };
+		A771214C1E542B31007564A2 /* BubbleGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleGridCell.swift; sourceTree = "<group>"; };
+		A771214D1E542B31007564A2 /* BubbleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleType.swift; sourceTree = "<group>"; };
+		A771214E1E542B31007564A2 /* CGPointExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
+		A771214F1E542B31007564A2 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
+		A77121501E542B31007564A2 /* Collision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collision.swift; sourceTree = "<group>"; };
+		A77121511E542B31007564A2 /* CollisionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollisionType.swift; sourceTree = "<group>"; };
+		A77121521E542B31007564A2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A77121531E542B31007564A2 /* EdgeLoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeLoop.swift; sourceTree = "<group>"; };
+		A77121541E542B31007564A2 /* GameBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBubble.swift; sourceTree = "<group>"; };
+		A77121551E542B31007564A2 /* GameLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelScene.swift; sourceTree = "<group>"; };
+		A77121561E542B31007564A2 /* GameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
+		A77121571E542B31007564A2 /* GameObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
+		A77121581E542B31007564A2 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		A77121591E542B31007564A2 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		A771215A1E542B31007564A2 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		A771215B1E542B31007564A2 /* NormalBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalBubble.swift; sourceTree = "<group>"; };
+		A771215C1E542B31007564A2 /* NormalBubbleColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalBubbleColor.swift; sourceTree = "<group>"; };
+		A771215D1E542B31007564A2 /* PhysicsBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsBody.swift; sourceTree = "<group>"; };
+		A771215E1E542B31007564A2 /* PhysicsBodyOwner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsBodyOwner.swift; sourceTree = "<group>"; };
+		A771215F1E542B31007564A2 /* PhysicsBodyType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsBodyType.swift; sourceTree = "<group>"; };
+		A77121601E542B31007564A2 /* PhysicsWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsWorld.swift; sourceTree = "<group>"; };
+		A77121611E542B31007564A2 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		A77121621E542B31007564A2 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		A77121631E542B31007564A2 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		A77121641E542B31007564A2 /* TraversalHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraversalHelper.swift; sourceTree = "<group>"; };
+		A77121861E542D5A007564A2 /* GameLevel.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GameLevel.storyboard; sourceTree = "<group>"; };
+		A77121881E544AC7007564A2 /* CannonImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CannonImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,21 +169,14 @@
 			children = (
 				A77120F91E542454007564A2 /* AppDelegate.swift */,
 				A77120FB1E542454007564A2 /* ViewController.swift */,
-				A77121271E5424B2007564A2 /* BubbleGridCell.swift */,
-				A77121281E5424B2007564A2 /* BubbleGridViewDataSource.swift */,
-				A77121291E5424B2007564A2 /* BubbleGridViewDelegate.swift */,
-				A771212A1E5424B2007564A2 /* BubbleType.swift */,
-				A771212B1E5424B2007564A2 /* Constants.swift */,
-				A771212C1E5424B2007564A2 /* GameBubble.swift */,
-				A771212D1E5424B2007564A2 /* LevelDesignViewController.swift */,
-				A771212E1E5424B2007564A2 /* LevelsTableViewController.swift */,
-				A771212F1E5424B2007564A2 /* ModelManager.swift */,
-				A77121301E5424B2007564A2 /* NormalBubble.swift */,
-				A77121311E5424B2007564A2 /* NormalBubbleColor.swift */,
-				A77121321E5424B2007564A2 /* PaletteButton.swift */,
-				A77121331E5424B2007564A2 /* StorageManager.swift */,
-				A77121341E5424B2007564A2 /* UIAlertControllerExtension.swift */,
+				A771217F1E542B48007564A2 /* GameEngine */,
+				A77121811E542BB9007564A2 /* BubbleGameEngine */,
+				A77121831E542BF3007564A2 /* Controller */,
+				A77121841E542BF9007564A2 /* Model */,
+				A77121851E542BFE007564A2 /* View */,
+				A77121821E542BDD007564A2 /* Helpers */,
 				A77121431E5424DE007564A2 /* Main.storyboard */,
+				A77121861E542D5A007564A2 /* GameLevel.storyboard */,
 				A77121001E542454007564A2 /* Assets.xcassets */,
 				A77121021E542454007564A2 /* LaunchScreen.storyboard */,
 				A77121051E542454007564A2 /* Info.plist */,
@@ -165,6 +200,90 @@
 				A771211B1E542454007564A2 /* Info.plist */,
 			);
 			path = BubbleBlastSagaUITests;
+			sourceTree = "<group>";
+		};
+		A771217F1E542B48007564A2 /* GameEngine */ = {
+			isa = PBXGroup;
+			children = (
+				A77121571E542B31007564A2 /* GameObject.swift */,
+				A77121621E542B31007564A2 /* Renderer.swift */,
+				A77121631E542B31007564A2 /* Scene.swift */,
+				A77121581E542B31007564A2 /* GameView.swift */,
+				A77121801E542B6D007564A2 /* PhysicsEngine */,
+			);
+			name = GameEngine;
+			sourceTree = "<group>";
+		};
+		A77121801E542B6D007564A2 /* PhysicsEngine */ = {
+			isa = PBXGroup;
+			children = (
+				A77121601E542B31007564A2 /* PhysicsWorld.swift */,
+				A771215D1E542B31007564A2 /* PhysicsBody.swift */,
+				A771215E1E542B31007564A2 /* PhysicsBodyOwner.swift */,
+				A771215F1E542B31007564A2 /* PhysicsBodyType.swift */,
+				A77121501E542B31007564A2 /* Collision.swift */,
+				A771214E1E542B31007564A2 /* CGPointExtension.swift */,
+				A77121511E542B31007564A2 /* CollisionType.swift */,
+				A771214F1E542B31007564A2 /* Circle.swift */,
+				A77121531E542B31007564A2 /* EdgeLoop.swift */,
+			);
+			name = PhysicsEngine;
+			sourceTree = "<group>";
+		};
+		A77121811E542BB9007564A2 /* BubbleGameEngine */ = {
+			isa = PBXGroup;
+			children = (
+				A771214B1E542B31007564A2 /* AnimationRenderer.swift */,
+				A77121551E542B31007564A2 /* GameLevelScene.swift */,
+				A77121561E542B31007564A2 /* GameLogic.swift */,
+				A77121641E542B31007564A2 /* TraversalHelper.swift */,
+			);
+			name = BubbleGameEngine;
+			sourceTree = "<group>";
+		};
+		A77121821E542BDD007564A2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A77121341E5424B2007564A2 /* UIAlertControllerExtension.swift */,
+				A77121521E542B31007564A2 /* Constants.swift */,
+				A77121611E542B31007564A2 /* Queue.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		A77121831E542BF3007564A2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A77121591E542B31007564A2 /* GameViewController.swift */,
+				A771212D1E5424B2007564A2 /* LevelDesignViewController.swift */,
+				A771212E1E5424B2007564A2 /* LevelsTableViewController.swift */,
+				A77121281E5424B2007564A2 /* BubbleGridViewDataSource.swift */,
+				A77121291E5424B2007564A2 /* BubbleGridViewDelegate.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		A77121841E542BF9007564A2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A771215A1E542B31007564A2 /* ModelManager.swift */,
+				A77121331E5424B2007564A2 /* StorageManager.swift */,
+				A771214D1E542B31007564A2 /* BubbleType.swift */,
+				A77121541E542B31007564A2 /* GameBubble.swift */,
+				A771215B1E542B31007564A2 /* NormalBubble.swift */,
+				A771215C1E542B31007564A2 /* NormalBubbleColor.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A77121851E542BFE007564A2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A771214C1E542B31007564A2 /* BubbleGridCell.swift */,
+				A77121321E5424B2007564A2 /* PaletteButton.swift */,
+				A77121881E544AC7007564A2 /* CannonImageView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +399,7 @@
 				A77121041E542454007564A2 /* LaunchScreen.storyboard in Resources */,
 				A77121011E542454007564A2 /* Assets.xcassets in Resources */,
 				A77121441E5424DE007564A2 /* Main.storyboard in Resources */,
+				A77121871E542D5A007564A2 /* GameLevel.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,22 +424,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A77121351E5424B2007564A2 /* BubbleGridCell.swift in Sources */,
-				A771213A1E5424B2007564A2 /* GameBubble.swift in Sources */,
+				A77121781E542B31007564A2 /* PhysicsBodyOwner.swift in Sources */,
+				A77121711E542B31007564A2 /* GameObject.swift in Sources */,
 				A77121361E5424B2007564A2 /* BubbleGridViewDataSource.swift in Sources */,
+				A77121791E542B31007564A2 /* PhysicsBodyType.swift in Sources */,
+				A771217C1E542B31007564A2 /* Renderer.swift in Sources */,
+				A77121751E542B31007564A2 /* NormalBubble.swift in Sources */,
+				A771216C1E542B31007564A2 /* Constants.swift in Sources */,
 				A771213B1E5424B2007564A2 /* LevelDesignViewController.swift in Sources */,
+				A77121731E542B31007564A2 /* GameViewController.swift in Sources */,
 				A77121421E5424B2007564A2 /* UIAlertControllerExtension.swift in Sources */,
+				A771217D1E542B31007564A2 /* Scene.swift in Sources */,
 				A771213C1E5424B2007564A2 /* LevelsTableViewController.swift in Sources */,
-				A771213F1E5424B2007564A2 /* NormalBubbleColor.swift in Sources */,
+				A77121741E542B31007564A2 /* ModelManager.swift in Sources */,
+				A771217B1E542B31007564A2 /* Queue.swift in Sources */,
 				A77121371E5424B2007564A2 /* BubbleGridViewDelegate.swift in Sources */,
-				A771213E1E5424B2007564A2 /* NormalBubble.swift in Sources */,
+				A77121701E542B31007564A2 /* GameLogic.swift in Sources */,
+				A77121671E542B31007564A2 /* BubbleType.swift in Sources */,
+				A771217E1E542B31007564A2 /* TraversalHelper.swift in Sources */,
+				A77121651E542B31007564A2 /* AnimationRenderer.swift in Sources */,
+				A77121691E542B31007564A2 /* Circle.swift in Sources */,
 				A77120FC1E542454007564A2 /* ViewController.swift in Sources */,
-				A771213D1E5424B2007564A2 /* ModelManager.swift in Sources */,
-				A77121391E5424B2007564A2 /* Constants.swift in Sources */,
+				A77121721E542B31007564A2 /* GameView.swift in Sources */,
+				A771216D1E542B31007564A2 /* EdgeLoop.swift in Sources */,
+				A771216F1E542B31007564A2 /* GameLevelScene.swift in Sources */,
+				A771216E1E542B31007564A2 /* GameBubble.swift in Sources */,
+				A77121681E542B31007564A2 /* CGPointExtension.swift in Sources */,
+				A771216A1E542B31007564A2 /* Collision.swift in Sources */,
+				A77121771E542B31007564A2 /* PhysicsBody.swift in Sources */,
 				A77120FA1E542454007564A2 /* AppDelegate.swift in Sources */,
-				A77121381E5424B2007564A2 /* BubbleType.swift in Sources */,
+				A771217A1E542B31007564A2 /* PhysicsWorld.swift in Sources */,
+				A771216B1E542B31007564A2 /* CollisionType.swift in Sources */,
+				A77121891E544AC7007564A2 /* CannonImageView.swift in Sources */,
 				A77121401E5424B2007564A2 /* PaletteButton.swift in Sources */,
 				A77121411E5424B2007564A2 /* StorageManager.swift in Sources */,
+				A77121661E542B31007564A2 /* BubbleGridCell.swift in Sources */,
+				A77121761E542B31007564A2 /* NormalBubbleColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,6 +702,7 @@
 				A77121201E542454007564A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A77121211E542454007564A2 /* Build configuration list for PBXNativeTarget "BubbleBlastSagaTests" */ = {
 			isa = XCConfigurationList;
@@ -570,6 +711,7 @@
 				A77121231E542454007564A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A77121241E542454007564A2 /* Build configuration list for PBXNativeTarget "BubbleBlastSagaUITests" */ = {
 			isa = XCConfigurationList;
@@ -578,6 +720,7 @@
 				A77121261E542454007564A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

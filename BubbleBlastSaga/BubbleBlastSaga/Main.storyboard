@@ -14,7 +14,7 @@
         <!--Level Design View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LevelDesignViewController" customModule="LevelDesigner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LevelDesignViewController" customModule="BubbleBlastSaga" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -26,16 +26,16 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="c3y-YN-DEj" userLabel="Background">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                             </imageView>
-                            <view opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYn-wj-zNG" userLabel="Lower Bar">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYn-wj-zNG" userLabel="Lower Bar">
                                 <rect key="frame" x="0.0" y="839.5" width="768" height="184.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="u6n-dV-csh" userLabel="Interactions">
                                         <rect key="frame" x="9" y="9" width="750" height="175.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4AP-V9-qmY" userLabel="Palette">
-                                                <rect key="frame" x="0.0" y="0.0" width="750" height="79"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="750" height="79.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gce-vy-rws" userLabel="Red Bubble" customClass="PaletteButton" customModule="LevelDesigner" customModuleProvider="target">
+                                                    <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gce-vy-rws" userLabel="Red Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.5" width="79" height="78.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Gce-vy-rws" secondAttribute="height" multiplier="1:1" id="VW8-1f-faQ"/>
@@ -48,8 +48,8 @@
                                                             <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="thP-Yq-sem"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-B6-8sd" userLabel="Orange Bubble" customClass="PaletteButton" customModule="LevelDesigner" customModuleProvider="target">
-                                                        <rect key="frame" x="84" y="0.0" width="79" height="79"/>
+                                                    <button opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-B6-8sd" userLabel="Orange Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
+                                                        <rect key="frame" x="84" y="0.5" width="79" height="78.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="fa9-B6-8sd" secondAttribute="height" multiplier="1:1" id="VrL-Gs-rZD"/>
                                                         </constraints>
@@ -61,8 +61,8 @@
                                                             <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U7h-2N-Lnz"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-ck-C4v" userLabel="Blue Bubble" customClass="PaletteButton" customModule="LevelDesigner" customModuleProvider="target">
-                                                        <rect key="frame" x="168" y="0.5" width="78.5" height="78.5"/>
+                                                    <button opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-ck-C4v" userLabel="Blue Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
+                                                        <rect key="frame" x="168" y="0.0" width="78.5" height="79.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Hid-ck-C4v" secondAttribute="height" multiplier="1:1" id="5tz-Az-ymL"/>
                                                         </constraints>
@@ -74,7 +74,7 @@
                                                             <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L6J-7Z-Zg9"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" tag="4" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zr7-zw-X06" userLabel="Green Bubble" customClass="PaletteButton" customModule="LevelDesigner" customModuleProvider="target">
+                                                    <button opaque="NO" tag="4" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zr7-zw-X06" userLabel="Green Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
                                                         <rect key="frame" x="251.5" y="0.5" width="79" height="78.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="zr7-zw-X06" secondAttribute="height" multiplier="1:1" id="vhM-Hf-qbp"/>
@@ -99,7 +99,7 @@
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Jm-LC-6kt" userLabel="Placeholder">
                                                         <rect key="frame" x="587" y="14.5" width="79" height="50"/>
                                                     </imageView>
-                                                    <button opaque="NO" tag="5" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owX-FF-Yn9" userLabel="Erase" customClass="PaletteButton" customModule="LevelDesigner" customModuleProvider="target">
+                                                    <button opaque="NO" tag="5" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owX-FF-Yn9" userLabel="Erase" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
                                                         <rect key="frame" x="671" y="0.5" width="79" height="78.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="owX-FF-Yn9" secondAttribute="height" multiplier="1:1" id="bZC-Un-dmL"/>
@@ -117,19 +117,22 @@
                                                 <gestureRecognizers/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="YZV-Yx-i5D" userLabel="Buttons">
-                                                <rect key="frame" x="0.0" y="85" width="750" height="90.5"/>
+                                                <rect key="frame" x="0.0" y="85.5" width="750" height="90"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zoc-c1-5fB" userLabel="Start">
-                                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="90.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="90"/>
                                                         <state key="normal" image="start">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
                                                         <variation key="widthClass=compact">
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         </variation>
+                                                        <connections>
+                                                            <segue destination="Mto-Iz-mMd" kind="showDetail" identifier="StartGameLevelSegue" id="gqs-fB-Q0k"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdY-lx-mIV" userLabel="Save">
-                                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="90.5"/>
+                                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="90"/>
                                                         <state key="normal" image="save">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
@@ -141,7 +144,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlo-Jo-Fql" userLabel="Load">
-                                                        <rect key="frame" x="375" y="0.0" width="187.5" height="90.5"/>
+                                                        <rect key="frame" x="375" y="0.0" width="187.5" height="90"/>
                                                         <state key="normal" image="load">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
@@ -155,7 +158,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8RK-c9-Z2b" userLabel="Reset">
-                                                        <rect key="frame" x="562.5" y="0.0" width="187.5" height="90.5"/>
+                                                        <rect key="frame" x="562.5" y="0.0" width="187.5" height="90"/>
                                                         <state key="normal" image="reset">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
@@ -171,7 +174,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="u6n-dV-csh" firstAttribute="leading" secondItem="fYn-wj-zNG" secondAttribute="leading" constant="9" id="CRR-U5-zLk"/>
@@ -190,7 +193,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="bubbleGridCell" id="xt9-6M-vHt" userLabel="Bubble Grid Cell" customClass="BubbleGridCell" customModule="LevelDesigner" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="bubbleGridCell" id="xt9-6M-vHt" userLabel="Bubble Grid Cell" customClass="BubbleGridCell" customModule="BubbleBlastSaga" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -260,7 +263,7 @@
         <!--Levels Table View Controller-->
         <scene sceneID="78Q-mw-gxV">
             <objects>
-                <tableViewController modalPresentationStyle="currentContext" id="fa9-cs-5V8" customClass="LevelsTableViewController" customModule="LevelDesigner" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="currentContext" id="fa9-cs-5V8" customClass="LevelsTableViewController" customModule="BubbleBlastSaga" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="NC0-pi-YH1">
                         <rect key="frame" x="0.0" y="0.0" width="758" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -287,6 +290,14 @@
             </objects>
             <point key="canvasLocation" x="1094" y="49"/>
         </scene>
+        <!--GameLevel-->
+        <scene sceneID="enu-tM-b8Q">
+            <objects>
+                <viewControllerPlaceholder storyboardName="GameLevel" id="Mto-Iz-mMd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TQl-cZ-b8X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-236" y="489"/>
+        </scene>
     </scenes>
     <resources>
         <image name="background" width="512" height="683"/>
@@ -298,6 +309,6 @@
         <image name="load" width="405" height="207"/>
         <image name="reset" width="467" height="210"/>
         <image name="save" width="435" height="231"/>
-        <image name="start" width="453" height="210"/>
+        <image name="start" width="453" height="208"/>
     </resources>
 </document>

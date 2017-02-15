@@ -9,21 +9,43 @@
 /// The constants used in the application.
 struct Constants {
 
-    static let noOfRowsInGameGrid = 12
+    static let noOfRowsInGameGrid = 14
     static let noOfColumnsInEvenRowOfGameGrid = 12
     static let noOfColumnsInOddRowOfGameGrid = noOfColumnsInEvenRowOfGameGrid - 1
 
-    static let bubbleGridCellReuseIdentifer = "bubbleGridCell"
-    static let loadLevelsCellIdentifer = "LevelCell"
+    static let noOfRunsBeforeRendering = 20
+
+    static let gameBubbleCollisionAdjustedPercentage = 0.85
+    static let gameLoopFramesPerSecond = 60
+    static let gameBubbleClusterLimit = 3
+
+    static let reverseDirectionMultiplier = -1
+
+    static let leftFireAngleBound = -1.3
+    static let rightFireAngleBound = 1.3
+
+    static let noOfNormalBubbleTypes = 4
+
+    static let bubbleGridCellReuseIdentifier = "bubbleGridCell"
+    static let loadLevelsCellIdentifier = "LevelCell"
     static let loadLevelsSegueIdentifier = "ShowLoadLevelsSegue"
-    static let redBubbleIdentifer = "bubble-red"
-    static let orangeBubbleIdentifer = "bubble-orange"
-    static let blueBubbleIdentifer = "bubble-blue"
-    static let greenBubbleIdentifer = "bubble-green"
+    static let startGameLevelSegueIndentifier = "StartGameLevelSegue"
+    static let redBubbleIdentifier = "bubble-red"
+    static let orangeBubbleIdentifier = "bubble-orange"
+    static let blueBubbleIdentifier = "bubble-blue"
+    static let greenBubbleIdentifier = "bubble-green"
+    static let gameObjectIdentifier = "GameObject"
 
     static let notifyBubbleGridUpdated = "Bubble grid updated."
     static let notifyPosition = "Position in grid"
     static let notifyBubbleType = "Bubble type"
+    static let notifyMovingGameObject = "Game object moving."
+    static let notifyRemovedGameObject = "Game object removed."
+
+    static let notifyNewlySnappedGameBubble = "Game bubble snapped into grid!"
+    static let notifyRemoveDisconnectedGameBubble = "Game bubble disconnected!"
+    static let notifyRemoveClusteredGameBubble = "Game bubble clustered!"
+    static let fallingBubbleAnimationDuration = 2.0
 
     static let feedbackLevelSavingCancelled = "SAVING CANCELLED!"
     static let feedbackLevelNameRequired = "LEVEL NAME REQUIRED!"
