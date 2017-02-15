@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Level Design View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LevelDesignViewController" customModule="LevelDesigner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="c3y-YN-DEj" userLabel="Background">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                            </imageView>
+                            <view opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYn-wj-zNG" userLabel="Lower Bar">
+                                <rect key="frame" x="0.0" y="839.5" width="768" height="184.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="u6n-dV-csh" userLabel="Interactions">
+                                        <rect key="frame" x="9" y="9" width="750" height="175.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4AP-V9-qmY" userLabel="Palette">
+                                                <rect key="frame" x="0.0" y="0.0" width="750" height="79"/>
+                                                <subviews>
+                                                    <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gce-vy-rws" userLabel="Red Bubble" customClass="PaletteButton" customModule="LevelDesigner" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.5" width="79" height="78.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Gce-vy-rws" secondAttribute="height" multiplier="1:1" id="VW8-1f-faQ"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" image="bubble-red">
+                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="thP-Yq-sem"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-B6-8sd" userLabel="Orange Bubble" customClass="PaletteButton" customModule="LevelDesigner" customModuleProvider="target">
+                                                        <rect key="frame" x="84" y="0.0" width="79" height="79"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="fa9-B6-8sd" secondAttribute="height" multiplier="1:1" id="VrL-Gs-rZD"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" image="bubble-orange">
+                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U7h-2N-Lnz"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hid-ck-C4v" userLabel="Blue Bubble" customClass="PaletteButton" customModule="LevelDesigner" customModuleProvider="target">
+                                                        <rect key="frame" x="168" y="0.5" width="78.5" height="78.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Hid-ck-C4v" secondAttribute="height" multiplier="1:1" id="5tz-Az-ymL"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" image="bubble-blue">
+                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L6J-7Z-Zg9"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="4" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zr7-zw-X06" userLabel="Green Bubble" customClass="PaletteButton" customModule="LevelDesigner" customModuleProvider="target">
+                                                        <rect key="frame" x="251.5" y="0.5" width="79" height="78.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="zr7-zw-X06" secondAttribute="height" multiplier="1:1" id="vhM-Hf-qbp"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" image="bubble-green">
+                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Tl-iI-gYo"/>
+                                                        </connections>
+                                                    </button>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9St-Ac-AZi" userLabel="Placeholder">
+                                                        <rect key="frame" x="335.5" y="14.5" width="79" height="50"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5hv-oL-B6R" userLabel="Placeholder">
+                                                        <rect key="frame" x="419.5" y="14.5" width="79" height="50"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EIl-zK-CH3" userLabel="Placeholder">
+                                                        <rect key="frame" x="503.5" y="14.5" width="78.5" height="50"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Jm-LC-6kt" userLabel="Placeholder">
+                                                        <rect key="frame" x="587" y="14.5" width="79" height="50"/>
+                                                    </imageView>
+                                                    <button opaque="NO" tag="5" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owX-FF-Yn9" userLabel="Erase" customClass="PaletteButton" customModule="LevelDesigner" customModuleProvider="target">
+                                                        <rect key="frame" x="671" y="0.5" width="79" height="78.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="owX-FF-Yn9" secondAttribute="height" multiplier="1:1" id="bZC-Un-dmL"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" image="erase">
+                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="bubbleSelectorPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FI2-MN-9Tj"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
+                                                <gestureRecognizers/>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="YZV-Yx-i5D" userLabel="Buttons">
+                                                <rect key="frame" x="0.0" y="85" width="750" height="90.5"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zoc-c1-5fB" userLabel="Start">
+                                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="90.5"/>
+                                                        <state key="normal" image="start">
+                                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        </state>
+                                                        <variation key="widthClass=compact">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        </variation>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdY-lx-mIV" userLabel="Save">
+                                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="90.5"/>
+                                                        <state key="normal" image="save">
+                                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        </state>
+                                                        <variation key="widthClass=compact">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        </variation>
+                                                        <connections>
+                                                            <action selector="saveButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zG0-Ns-Hla"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlo-Jo-Fql" userLabel="Load">
+                                                        <rect key="frame" x="375" y="0.0" width="187.5" height="90.5"/>
+                                                        <state key="normal" image="load">
+                                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        </state>
+                                                        <variation key="widthClass=compact">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        </variation>
+                                                        <connections>
+                                                            <segue destination="fa9-cs-5V8" kind="popoverPresentation" identifier="ShowLoadLevelsSegue" popoverAnchorView="xlo-Jo-Fql" id="VKC-iH-NO5">
+                                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                            </segue>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8RK-c9-Z2b" userLabel="Reset">
+                                                        <rect key="frame" x="562.5" y="0.0" width="187.5" height="90.5"/>
+                                                        <state key="normal" image="reset">
+                                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        </state>
+                                                        <variation key="widthClass=compact">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        </variation>
+                                                        <connections>
+                                                            <action selector="resetButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a7T-Xs-AiS"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="u6n-dV-csh" firstAttribute="leading" secondItem="fYn-wj-zNG" secondAttribute="leading" constant="9" id="CRR-U5-zLk"/>
+                                    <constraint firstAttribute="trailing" secondItem="u6n-dV-csh" secondAttribute="trailing" constant="9" id="TdD-B2-k9r"/>
+                                    <constraint firstAttribute="bottom" secondItem="u6n-dV-csh" secondAttribute="bottom" id="WvC-zI-UmU"/>
+                                    <constraint firstItem="u6n-dV-csh" firstAttribute="top" secondItem="fYn-wj-zNG" secondAttribute="top" constant="9" id="kzI-Rp-yfb"/>
+                                </constraints>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7J8-sB-Zfu" userLabel="Bubble Grid">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="839.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rkw-ze-o7C">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="bubbleGridCell" id="xt9-6M-vHt" userLabel="Bubble Grid Cell" customClass="BubbleGridCell" customModule="LevelDesigner" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Hk0-n6-Nq6"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Cw4-HT-bz8"/>
+                                    <outletCollection property="gestureRecognizers" destination="V3l-kV-Ms4" appends="YES" id="xTc-OI-3nQ"/>
+                                    <outletCollection property="gestureRecognizers" destination="jQx-e7-Nyw" appends="YES" id="Ol3-eC-Me0"/>
+                                    <outletCollection property="gestureRecognizers" destination="Xxg-92-CMq" appends="YES" id="doO-t3-zL6"/>
+                                </connections>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D12-vZ-kTA" userLabel="Feedback">
+                                <rect key="frame" x="384" y="831.5" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="fYn-wj-zNG" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.18" id="2WJ-6i-5gd"/>
+                            <constraint firstItem="fYn-wj-zNG" firstAttribute="top" secondItem="D12-vZ-kTA" secondAttribute="bottom" constant="8" id="Aca-wF-w11"/>
+                            <constraint firstItem="7J8-sB-Zfu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="F6a-WQ-yrq"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="c3y-YN-DEj" secondAttribute="bottom" id="F71-ni-Vsq"/>
+                            <constraint firstItem="D12-vZ-kTA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JIM-Tr-lum"/>
+                            <constraint firstAttribute="trailing" secondItem="7J8-sB-Zfu" secondAttribute="trailing" id="MYQ-1r-8Sk"/>
+                            <constraint firstItem="fYn-wj-zNG" firstAttribute="top" secondItem="7J8-sB-Zfu" secondAttribute="bottom" id="O7s-4O-I8G"/>
+                            <constraint firstAttribute="trailing" secondItem="fYn-wj-zNG" secondAttribute="trailing" id="SfY-wV-DNu"/>
+                            <constraint firstAttribute="bottom" secondItem="fYn-wj-zNG" secondAttribute="bottom" id="eWd-nZ-4Xf"/>
+                            <constraint firstItem="c3y-YN-DEj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jYn-Pk-pUQ"/>
+                            <constraint firstItem="c3y-YN-DEj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="kyy-7j-JOn"/>
+                            <constraint firstAttribute="trailing" secondItem="c3y-YN-DEj" secondAttribute="trailing" id="l0g-yC-fqR"/>
+                            <constraint firstItem="7J8-sB-Zfu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="lzz-Oh-jqi"/>
+                            <constraint firstItem="fYn-wj-zNG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="u8q-iW-MZg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bubbleGrid" destination="7J8-sB-Zfu" id="osB-3k-PdY"/>
+                        <outlet property="paletteArea" destination="4AP-V9-qmY" id="N7u-UH-Njm"/>
+                        <outlet property="userFeedback" destination="D12-vZ-kTA" id="Y1p-Ci-FNP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="V3l-kV-Ms4">
+                    <connections>
+                        <action selector="handleTap:" destination="BYZ-38-t0r" id="jJr-1n-Y6u"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="jQx-e7-Nyw">
+                    <connections>
+                        <action selector="handlePan:" destination="BYZ-38-t0r" id="4wa-8W-wn0"/>
+                    </connections>
+                </panGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Xxg-92-CMq">
+                    <connections>
+                        <action selector="handleLongPress:" destination="BYZ-38-t0r" id="oK7-G5-gMl"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="25.78125" y="40.4296875"/>
+        </scene>
+        <!--Levels Table View Controller-->
+        <scene sceneID="78Q-mw-gxV">
+            <objects>
+                <tableViewController modalPresentationStyle="currentContext" id="fa9-cs-5V8" customClass="LevelsTableViewController" customModule="LevelDesigner" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="NC0-pi-YH1">
+                        <rect key="frame" x="0.0" y="0.0" width="758" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LevelCell" id="Srk-6R-WhG">
+                                <rect key="frame" x="0.0" y="28" width="758" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Srk-6R-WhG" id="9Ex-yd-HsV">
+                                    <rect key="frame" x="0.0" y="0.0" width="758" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fa9-cs-5V8" id="e6c-UF-BqP"/>
+                            <outlet property="delegate" destination="fa9-cs-5V8" id="igH-1s-bwh"/>
+                        </connections>
+                    </tableView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="758" height="1024"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QKj-Pg-pAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1094" y="49"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background" width="512" height="683"/>
+        <image name="bubble-blue" width="168" height="168"/>
+        <image name="bubble-green" width="168" height="168"/>
+        <image name="bubble-orange" width="168" height="168"/>
+        <image name="bubble-red" width="168" height="168"/>
+        <image name="erase" width="168" height="168"/>
+        <image name="load" width="405" height="207"/>
+        <image name="reset" width="467" height="210"/>
+        <image name="save" width="435" height="231"/>
+        <image name="start" width="453" height="210"/>
+    </resources>
+</document>
