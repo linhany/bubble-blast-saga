@@ -21,8 +21,8 @@ struct Constants {
 
     static let reverseDirectionMultiplier = -1
 
-    static let leftFireAngleBound = -1.3
-    static let rightFireAngleBound = 1.3
+    static let leftFireAngleBound = -1.18
+    static let rightFireAngleBound = 1.18
 
     static let noOfNormalBubbleTypes = 4
 
@@ -42,9 +42,11 @@ struct Constants {
     static let notifyMovingGameObject = "Game object moving."
     static let notifyRemovedGameObject = "Game object removed."
 
+    static let notifyLoadingCannonGameBubble = "Game bubble loaded into cannon!"
     static let notifyNewlySnappedGameBubble = "Game bubble snapped into grid!"
     static let notifyRemoveDisconnectedGameBubble = "Game bubble disconnected!"
     static let notifyRemoveClusteredGameBubble = "Game bubble clustered!"
+    static let loadingBubbleAnimationDuration = 0.2
     static let fallingBubbleAnimationDuration = 2.0
 
     static let feedbackLevelSavingCancelled = "SAVING CANCELLED!"

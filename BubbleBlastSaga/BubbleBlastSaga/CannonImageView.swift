@@ -24,7 +24,6 @@ class CannonImageView: UIImageView {
             angle < Constants.rightFireAngleBound else {
                 return
         }
-
         transform = CGAffineTransform.identity
         transform =
             CGAffineTransform(rotationAngle: CGFloat(angle))

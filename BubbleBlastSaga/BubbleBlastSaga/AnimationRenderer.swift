@@ -12,6 +12,7 @@ import UIKit
 /// Creates custom animations for non-gameplay special effects using Swift libraries.
 class AnimationRenderer: Renderer {
 
+    private var loadCannonGameBubbles: [GameBubble] = []
     private var newlySnappedGameBubbles: [GameBubble] = []
     private var disconnectedGameBubbles: [GameBubble] = []
     private var clusteredGameBubbles: [GameBubble] = []
@@ -21,6 +22,7 @@ class AnimationRenderer: Renderer {
         addObserverForNewlySnappedGameBubble()
         addObserverForRemoveDisconnectedGameBubble()
         addObserverForRemoveClusteredGameBubble()
+        addObserverForLoadingCannonGameBubble()
     }
 
     override func moveImage(_ image: UIImageView, for gameObject: GameObject, on view: UIView) {
@@ -47,13 +49,15 @@ class AnimationRenderer: Renderer {
     }
 
     private func moveImage(_ image: UIImageView, for gameBubble: GameBubble, on view: UIView) {
+        guard let position = gameBubble.position else {
+            assertionFailure("Game bubble must have a position!")
+            super.moveImage(image, for: gameBubble, on: view)
+            return
+        }
         if newlySnappedGameBubbles.contains(gameBubble) {
-            guard let position = gameBubble.position else {
-                assertionFailure("Game bubble must have a position!")
-                super.moveImage(image, for: gameBubble, on: view)
-                return
-            }
             animateBounce(gameBubbleImage: image, to: position, on: view)
+        } else if loadCannonGameBubbles.contains(gameBubble) {
+            animateLoad(gameBubbleImage: image, to: position)
         }
         super.moveImage(image, for: gameBubble, on: view)
     }
@@ -98,6 +102,16 @@ class AnimationRenderer: Renderer {
         animator.addBehavior(behavior)
     }
 
+    private func animateLoad(gameBubbleImage: UIImageView, to position: CGPoint) {
+        UIView.animate(
+            withDuration: Constants.loadingBubbleAnimationDuration,
+            animations: {
+                gameBubbleImage.center = position
+        },
+            completion: { _ in
+        })
+    }
+
     // MARK: - Notification helper functions
 
     private func addObserverForNewlySnappedGameBubble() {
@@ -122,6 +136,14 @@ class AnimationRenderer: Renderer {
             object: nil,
             queue: nil,
             using: updateRemoveClusteredGameBubble)
+    }
+
+    private func addObserverForLoadingCannonGameBubble() {
+        nc.addObserver(
+            forName: Notification.Name(rawValue: Constants.notifyLoadingCannonGameBubble),
+            object: nil,
+            queue: nil,
+            using: updateLoadCannonGameBubble)
     }
 
     private func updateNewlySnappedGameBubble(notification: Notification) {
@@ -152,5 +174,15 @@ class AnimationRenderer: Renderer {
                     return
         }
         clusteredGameBubbles.append(gameBubble)
+    }
+
+    private func updateLoadCannonGameBubble(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let gameBubble = userInfo["GameBubble"]
+                as? GameBubble else {
+                    assertionFailure("Poster did not post it right.")
+                    return
+        }
+        loadCannonGameBubbles.append(gameBubble)
     }
 }

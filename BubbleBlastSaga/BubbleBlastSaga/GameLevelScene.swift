@@ -124,11 +124,23 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
             assertionFailure("Queue cannot be empty! Game should be over.")
             return
         }
-        add(gameObject: projectile)
-        projectile.position = gameViewController.getCannonPosition()
         let bubbleWidth = gameViewController.getBubbleWidth()
-        projectile.size = CGSize(width: bubbleWidth, height: bubbleWidth)
+        if !gameObjects.contains(projectile) {
+            add(gameObject: projectile)
+            projectile.size = CGSize(width: bubbleWidth, height: bubbleWidth)
+        } else {
+            postNotification(name: Constants.notifyLoadingCannonGameBubble,
+                             userInfo: ["GameBubble": projectile])
+        }
+        projectile.position = gameViewController.getCannonPosition()
         currentProjectile = projectile
+        guard let nextProjectile = try? projectileQueue.peek() else {
+            // only one bubble left.
+            return
+        }
+        add(gameObject: nextProjectile)
+        nextProjectile.position = gameViewController.getNextBubblePosition()
+        nextProjectile.size = CGSize(width: bubbleWidth, height: bubbleWidth)
     }
 
     private func handleCollision(_ collision: Collision) {

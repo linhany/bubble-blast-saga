@@ -64,6 +64,13 @@ class GameViewController: UIViewController {
         return cannonArea.center
     }
 
+    func getNextBubblePosition() -> CGPoint {
+        let origin = cannonArea.frame.origin
+        let x = origin.x + getBubbleRadius()
+        let y = origin.y
+        return CGPoint(x: x, y: y)
+    }
+
     func getBubbleRowAndCol(bubble: GameBubble) -> (Int, Int)? {
         guard let position = bubble.position else {
             assertionFailure("Target bubble does not have a position!")
