@@ -45,6 +45,7 @@ class AnimationRenderer: Renderer {
         newlySnappedGameBubbles.removeAll()
         disconnectedGameBubbles.removeAll()
         clusteredGameBubbles.removeAll()
+        loadCannonGameBubbles.removeAll()
         super.untrackGameObjects()
     }
 

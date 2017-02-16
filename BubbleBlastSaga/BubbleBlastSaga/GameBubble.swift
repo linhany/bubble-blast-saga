@@ -31,6 +31,8 @@ class GameBubble: GameObject, NSCoding {
     }
 
     required init?(coder aDecoder: NSCoder) {
+        super.init()
+        assignImageString()
     }
 
 }

@@ -61,32 +61,125 @@ class GameLogic {
     }
 
     func handleNewlySnappedBubble(_ newBubble: GameBubble) {
-        if let (row, col) = gameViewController.getBubbleRowAndCol(bubble: newBubble),
-           let neighbors = modelManager.getNeighboursOfBubbleAt(row: row, column: col) {
-            for neighbor in neighbors {
-                switch neighbor.type {
-                case .star:
-                    handleRemovalOfAllBubblesWithSameColor(as: newBubble)
-                    removeClusteredGameBubbles([neighbor])
-                default: continue
-                }
+        guard let (row, col) = gameViewController.getBubbleRowAndCol(bubble: newBubble),
+              let neighbors = modelManager.getNeighboursOfBubbleAt(row: row, column: col) else {
+            assertionFailure("GameBubble must be in grid!")
+            return
+        }
+
+        for neighbor in neighbors {
+            if let _ = neighbor as? NormalBubble {
+                continue
             }
+            activate(bubble: neighbor, with: newBubble)
         }
         removeConnectedBubblesOfSameColor(as: newBubble)
         removeUnattachedBubbles()
     }
 
-    func handleRemovalOfAllBubblesWithSameColor(as gameBubble: GameBubble) {
-        let bubblesToRemove = getAllBubblesOfSameColor(as: gameBubble)
-        removeClusteredGameBubbles(bubblesToRemove)
+    /// Activates a bubble, by removing it, and unleashing any special effect it has.
+    /// For now just use cluster effect for all removal.
+    func activate(bubble: GameBubble, with activatorBubble: GameBubble ) {
+        switch bubble.type {
+        case .bomb:
+            bombAllAdjacentBubbles(as: bubble)
+        case .lightning:
+            zapAllBubblesOnSameRow(as: bubble)
+        case .star:
+            activateAllBubblesWithSameType(as: activatorBubble, with: bubble)
+        case .indestructible: return
+            // TODO: CHANGE ANIMATION DEPENDING ON ACTIVATORBUBBLE.
+        default: removeClusteredGameBubbles([bubble])
+        }
     }
 
-    func getAllBubblesOfSameColor(as gameBubble: GameBubble) -> [GameBubble] {
+    func bombAllAdjacentBubbles(as bombBubble: GameBubble) {
+        guard let bombBubble = bombBubble as? BombBubble else {
+            assertionFailure("Bubble must be a BombBubble")
+            return
+        }
+        guard let bubblesToBomb = getAdjacentBubbles(of: bombBubble) else {
+            return
+        }
+        // Bomb itself too.
+        // TODO: CHANGE ANIMATION
+        removeClusteredGameBubbles([bombBubble])
+        for bubble in bubblesToBomb {
+            activate(bubble: bubble, with: bombBubble)
+        }
+    }
+
+    func zapAllBubblesOnSameRow(as lightningBubble: GameBubble) {
+        guard let lightningBubble = lightningBubble as? LightningBubble else {
+            assertionFailure("Bubble must be a LightningBubble")
+            return
+        }
+        guard let bubblesToZap = getBubblesOnSameRow(as: lightningBubble) else {
+            return
+        }
+        // Zap itself too.
+        // TODO: CHANGE ANIMATION
+        removeClusteredGameBubbles([lightningBubble])
+        for bubble in bubblesToZap {
+            activate(bubble: bubble, with: lightningBubble)
+        }
+    }
+
+    func activateAllBubblesWithSameType(as bubble: GameBubble, with starBubble: GameBubble) {
+        guard let starBubble = starBubble as? StarBubble else {
+            assertionFailure("Bubble must be a StarBubble")
+            return
+        }
+        let bubblesOfSameType = getAllBubblesOfSameType(as: bubble)
+        // remove bubble &
+        // remove star bubble too.
+        // TODO: CHANGE ANIMATION
+        // Check if starbubble is sitll in grid??
+        removeClusteredGameBubbles([bubble, starBubble])
+        for bubbleOfSameType in bubblesOfSameType {
+            activate(bubble: bubbleOfSameType, with: starBubble)
+        }
+    }
+
+    func getAdjacentBubbles(of gameBubble: GameBubble) -> [GameBubble]? {
+        guard let (row, col) = gameViewController.getBubbleRowAndCol(bubble: gameBubble),
+            let neighbors = modelManager.getNeighboursOfBubbleAt(row: row, column: col) else {
+                assertionFailure("GameBubble is not in the grid!")
+                return nil
+        }
+        return neighbors
+    }
+
+    /// Excludes the gameBubble itself.
+    func getBubblesOnSameRow(as gameBubble: GameBubble) -> [GameBubble]? {
+        guard let (row, col) = gameViewController.getBubbleRowAndCol(bubble: gameBubble) else {
+            assertionFailure("GameBubble must be in the grid!")
+            return nil
+        }
+        var bubbles: [GameBubble] = []
+        let noOfColumns = row % 2 == 0
+            ? Constants.noOfColumnsInEvenRowOfGameGrid
+            : Constants.noOfColumnsInOddRowOfGameGrid
+        for column in 0..<noOfColumns {
+            guard col != column else {
+                continue
+            }
+            if let bubble = modelManager.getBubbleAt(row: row, column: column) {
+                bubbles.append(bubble)
+            }
+        }
+
+        return bubbles
+    }
+
+    /// Excluding the gameBubble itself.
+    func getAllBubblesOfSameType(as gameBubble: GameBubble) -> [GameBubble] {
         var bubblesToRemove: [GameBubble] = []
         let grid = modelManager.getGridState()
         for row in 0..<grid.count {
             for col in 0..<grid[row].count {
-                if let bubble = modelManager.getBubbleAt(row: row, column: col) {
+                if let bubble = modelManager.getBubbleAt(row: row, column: col),
+                    bubble !== gameBubble {
                     if gameBubble.type == bubble.type {
                         bubblesToRemove.append(bubble)
                     }
@@ -95,6 +188,8 @@ class GameLogic {
         }
         return bubblesToRemove
     }
+
+    // END
 
     /// Adds `gameBubble` to grid.
     func addToBubbleGridModel(gameBubble: GameBubble) {
