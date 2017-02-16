@@ -61,8 +61,39 @@ class GameLogic {
     }
 
     func handleNewlySnappedBubble(_ newBubble: GameBubble) {
+        if let (row, col) = gameViewController.getBubbleRowAndCol(bubble: newBubble),
+           let neighbors = modelManager.getNeighboursOfBubbleAt(row: row, column: col) {
+            for neighbor in neighbors {
+                switch neighbor.type {
+                case .star:
+                    handleRemovalOfAllBubblesWithSameColor(as: newBubble)
+                    removeClusteredGameBubbles([neighbor])
+                default: continue
+                }
+            }
+        }
         removeConnectedBubblesOfSameColor(as: newBubble)
         removeUnattachedBubbles()
+    }
+
+    func handleRemovalOfAllBubblesWithSameColor(as gameBubble: GameBubble) {
+        let bubblesToRemove = getAllBubblesOfSameColor(as: gameBubble)
+        removeClusteredGameBubbles(bubblesToRemove)
+    }
+
+    func getAllBubblesOfSameColor(as gameBubble: GameBubble) -> [GameBubble] {
+        var bubblesToRemove: [GameBubble] = []
+        let grid = modelManager.getGridState()
+        for row in 0..<grid.count {
+            for col in 0..<grid[row].count {
+                if let bubble = modelManager.getBubbleAt(row: row, column: col) {
+                    if gameBubble.type == bubble.type {
+                        bubblesToRemove.append(bubble)
+                    }
+                }
+            }
+        }
+        return bubblesToRemove
     }
 
     /// Adds `gameBubble` to grid.
