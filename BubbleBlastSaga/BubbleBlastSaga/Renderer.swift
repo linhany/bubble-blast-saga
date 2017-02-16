@@ -70,6 +70,13 @@ class Renderer {
         untrackGameObjects()
     }
 
+    func reset() {
+        for (_, image) in gameObjectImages {
+            image.removeFromSuperview()
+        }
+        untrackGameObjects()
+    }
+
     /// Redraws moving `GameObject`s on `view`.
     private func redrawMovingGameObjects(on view: UIView) {
         for movingGameObject in movingGameObjects {

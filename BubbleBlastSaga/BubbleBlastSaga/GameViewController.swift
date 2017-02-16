@@ -14,13 +14,21 @@ class GameViewController: UIViewController {
     @IBOutlet private var bubbleGrid: UICollectionView!
     @IBOutlet private var cannonArea: UIView!
     internal var modelManager: ModelManager? = nil
+    internal var gameView: GameView? = nil
 
     override func viewDidAppear(_ animated: Bool) {
+        bubbleGrid.isUserInteractionEnabled = false
+        presentGameScene()
+    }
+
+    func presentGameScene() {
         guard let modelManager = modelManager else {
             fatalError("Model Manager reference was not passed!")
         }
-        bubbleGrid.isUserInteractionEnabled = false
-        let scene = GameLevelScene(modelManager: modelManager,
+        guard let modelManagerCopy = modelManager.copy() as? ModelManager else {
+            fatalError("Copying failed!")
+        }
+        let scene = GameLevelScene(modelManager: modelManagerCopy,
                                    gameViewController: self,
                                    gameProjectileQueue: initialiseQueue())
         guard let gameView = view as? GameView else {
@@ -28,6 +36,30 @@ class GameViewController: UIViewController {
         }
 
         gameView.present(scene, with: AnimationRenderer())
+        self.gameView = gameView
+    }
+
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        stopGame()
+    }
+
+    @IBAction func retryButtonPressed(_ sender: UIButton) {
+        retryGame()
+    }
+
+    func stopGame() {
+        guard let gameView = gameView else {
+            return
+        }
+        gameView.stopPresenting()
+    }
+
+    func retryGame() {
+        guard let gameView = gameView else {
+            return
+        }
+        gameView.stopPresenting()
+        presentGameScene()
     }
 
     func animateCannonFire() {

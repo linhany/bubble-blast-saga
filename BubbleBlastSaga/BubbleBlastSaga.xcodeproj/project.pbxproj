@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A745464A1E55D2B0005C8B67 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74546491E55D2B0005C8B67 /* RoundedButton.swift */; };
 		A77120FA1E542454007564A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77120F91E542454007564A2 /* AppDelegate.swift */; };
 		A77120FC1E542454007564A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77120FB1E542454007564A2 /* ViewController.swift */; };
 		A77121011E542454007564A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77121001E542454007564A2 /* Assets.xcassets */; };
@@ -73,6 +74,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A74546491E55D2B0005C8B67 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		A77120F61E542454007564A2 /* BubbleBlastSaga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubbleBlastSaga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77120F91E542454007564A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A77120FB1E542454007564A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				A771214C1E542B31007564A2 /* BubbleGridCell.swift */,
+				A74546491E55D2B0005C8B67 /* RoundedButton.swift */,
 				A77121321E5424B2007564A2 /* PaletteButton.swift */,
 				A77121881E544AC7007564A2 /* CannonImageView.swift */,
 			);
@@ -440,6 +443,7 @@
 				A77121711E542B31007564A2 /* GameObject.swift in Sources */,
 				A77121361E5424B2007564A2 /* BubbleGridViewDataSource.swift in Sources */,
 				A77121791E542B31007564A2 /* PhysicsBodyType.swift in Sources */,
+				A745464A1E55D2B0005C8B67 /* RoundedButton.swift in Sources */,
 				A771217C1E542B31007564A2 /* Renderer.swift in Sources */,
 				A77121751E542B31007564A2 /* NormalBubble.swift in Sources */,
 				A771216C1E542B31007564A2 /* Constants.swift in Sources */,

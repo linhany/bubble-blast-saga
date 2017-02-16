@@ -56,6 +56,13 @@ class PhysicsWorld {
         physicsBodies.remove(at: foundIndexToRemove)
     }
 
+    static func reset() {
+        for physicsBody in physicsBodies {
+            remove(physicsBody: physicsBody)
+        }
+        physicsBodies.removeAll()
+    }
+
     /// Advances the `PhysicsWorld`.
     func run() {
         updatePhysicsBodies()

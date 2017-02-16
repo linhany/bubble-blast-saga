@@ -55,6 +55,11 @@ class LevelDesignViewController: UIViewController {
         return true
     }
 
+    @IBAction func backToLevelDesignViewController(segue: UIStoryboardSegue) {
+        /// Force reload to update view.
+        modelManager.reloadGridState()
+    }
+
     // MARK: - Lower bar user interactions
 
     /// Palette options are implemented as buttons in the storyboard.
@@ -85,7 +90,10 @@ class LevelDesignViewController: UIViewController {
             guard let gameVC = segue.destination as? GameViewController else {
                 return
             }
-            gameVC.modelManager = modelManager
+            guard let modelManagerCopy = modelManager.copy() as? ModelManager else {
+                fatalError("Copying failed!")
+            }
+            gameVC.modelManager = modelManagerCopy
         }
     }
 

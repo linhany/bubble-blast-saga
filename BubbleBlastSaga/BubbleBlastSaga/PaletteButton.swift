@@ -40,24 +40,17 @@ class PaletteButton: UIButton {
 
     /// Shows a simple animation that represents a press of the button.
     func animatePress() {
-        UIView.animate(
-            withDuration: Constants.paletteAnimationDuration,
-            animations: {
-                self.transform =
-                    CGAffineTransform(scaleX: CGFloat(Constants.paletteTransformScale),
-                                      y: CGFloat(Constants.paletteTransformScale))
-            },
-            completion: { (_: Bool) in
-                self.restorePress()
-            })
-    }
+        transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
 
-    /// Helper function for animatePress() to restore the button to its original size.
-    private func restorePress() {
-        UIView.animate(withDuration: Constants.paletteAnimationDuration,
-                       animations: {
-                       self.transform = CGAffineTransform.identity
-        })
+        UIView.animate(withDuration: 2.0,
+                       delay: 0,
+                       usingSpringWithDamping: 0.2,
+                       initialSpringVelocity: 6.0,
+                       options: .allowUserInteraction,
+                       animations: { [weak self] in
+                        self?.transform = .identity
+            },
+                       completion: nil)
     }
 
     private func setUpBorderProperties() {

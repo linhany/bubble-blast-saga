@@ -9,17 +9,18 @@
 import Foundation
 
 /// Handles game objects models.
-class ModelManager {
+class ModelManager: NSObject {
 
     /// 2D array representing state of bubble grid in offset layout.
-    private var gridState: [[GameBubble?]]
+    fileprivate var gridState: [[GameBubble?]]
 
     /// Notification Center to notify view when model is updated.
     private let nc = NotificationCenter.default
 
     /// Initialisation sets up a fixed size 2D array that models the game grid.
-    init() {
+    required override init() {
         gridState = []
+        super.init()
         for row in 0..<Constants.noOfRowsInGameGrid {
             gridState.append([])
             let currentRowCount = isEven(row)
@@ -47,6 +48,10 @@ class ModelManager {
                             with: gridState[row][column])
             }
         }
+    }
+
+    func reloadGridState() {
+        loadGridState(gridState: gridState)
     }
 
     /// Assigns a `bubble` to the location in grid state specified by `row` and `column`.
@@ -185,4 +190,12 @@ class ModelManager {
         return row % 2 == 0
     }
 
+}
+
+extension ModelManager: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        let theCopy = type(of: self).init()
+        theCopy.gridState = self.gridState
+        return theCopy
+    }
 }

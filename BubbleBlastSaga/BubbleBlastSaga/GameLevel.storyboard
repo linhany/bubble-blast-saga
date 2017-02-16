@@ -34,16 +34,49 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cannon-base" translatesAutoresizingMaskIntoConstraints="NO" id="iwo-Pq-fit">
                                         <rect key="frame" x="318" y="53.5" width="133" height="100"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VmT-S0-0yd" userLabel="Back" customClass="RoundedButton" customModule="BubbleBlastSaga" customModuleProvider="target">
+                                        <rect key="frame" x="15" y="94.5" width="138" height="46"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <state key="normal" title="BACK">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="widthClass=compact">
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xji-lf-gmU"/>
+                                            <segue destination="Z3k-1l-vLa" kind="unwind" unwindAction="backToLevelDesignViewControllerWithSegue:" id="LQl-Fg-KFh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZT-xI-x26" userLabel="Retry" customClass="RoundedButton" customModule="BubbleBlastSaga" customModuleProvider="target">
+                                        <rect key="frame" x="615" y="94" width="138" height="46"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <state key="normal" title="RETRY">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="widthClass=compact">
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="retryButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uEp-CD-9d0"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="GSK-Bv-mHZ" firstAttribute="top" secondItem="fYn-wj-zNG" secondAttribute="top" id="0GI-TM-DLF"/>
                                     <constraint firstItem="GSK-Bv-mHZ" firstAttribute="centerX" secondItem="fYn-wj-zNG" secondAttribute="centerX" id="54c-VC-Smq"/>
+                                    <constraint firstItem="VmT-S0-0yd" firstAttribute="leading" secondItem="fYn-wj-zNG" secondAttribute="leading" constant="15" id="9Px-gp-Y9x"/>
+                                    <constraint firstItem="pZT-xI-x26" firstAttribute="width" secondItem="fYn-wj-zNG" secondAttribute="width" multiplier="0.18" id="GEH-ji-UI2"/>
                                     <constraint firstAttribute="bottom" secondItem="iwo-Pq-fit" secondAttribute="bottom" id="Iaz-6s-tz9"/>
+                                    <constraint firstAttribute="bottom" secondItem="pZT-xI-x26" secondAttribute="bottom" multiplier="1.1" id="K1q-Sc-Ls7"/>
                                     <constraint firstItem="iwo-Pq-fit" firstAttribute="height" secondItem="fYn-wj-zNG" secondAttribute="height" multiplier="0.65" id="LXK-Hg-6Jm"/>
                                     <constraint firstItem="GSK-Bv-mHZ" firstAttribute="height" secondItem="fYn-wj-zNG" secondAttribute="height" id="XHc-MM-HII"/>
+                                    <constraint firstItem="VmT-S0-0yd" firstAttribute="width" secondItem="fYn-wj-zNG" secondAttribute="width" multiplier="0.18" id="ZN2-5m-3l0"/>
                                     <constraint firstItem="iwo-Pq-fit" firstAttribute="centerX" secondItem="fYn-wj-zNG" secondAttribute="centerX" id="ei5-3g-aGH"/>
+                                    <constraint firstAttribute="bottom" secondItem="VmT-S0-0yd" secondAttribute="bottom" multiplier="1.1" id="ics-3u-pOq"/>
                                     <constraint firstItem="GSK-Bv-mHZ" firstAttribute="width" secondItem="iwo-Pq-fit" secondAttribute="width" id="tBB-fe-gvo"/>
+                                    <constraint firstAttribute="trailing" secondItem="pZT-xI-x26" secondAttribute="trailing" constant="15" id="ug0-d9-hyC"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7J8-sB-Zfu" userLabel="Bubble Grid">
@@ -94,6 +127,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="Z3k-1l-vLa" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="25.78125" y="40.4296875"/>
         </scene>

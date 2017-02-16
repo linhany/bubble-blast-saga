@@ -17,7 +17,7 @@ class Scene {
     internal var gameObjects: [GameObject]
 
     /// The `PhysicsWorld` that this `Scene` runs to handle `gameObjects` behavior.
-    internal let physicsWorld: PhysicsWorld
+    internal var physicsWorld: PhysicsWorld
 
     /// The `PhysicsBody` associated with this `Scene`, if any.
     internal var physicsBody: PhysicsBody?
@@ -68,6 +68,12 @@ class Scene {
 
     /// Override to respond to user touch, if needed.
     func handleTouch(at touchLocation: CGPoint) {
+    }
+
+    func reset() {
+        gameObjects = []
+        PhysicsWorld.reset()
+        physicsWorld = PhysicsWorld()
     }
 
     /// Simulate the `physicsWorld`.
