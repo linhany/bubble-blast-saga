@@ -61,10 +61,10 @@ struct TraversalHelper {
                     continue
                 }
 
+                // Cluster check ignores non normal bubble neighbours.
                 guard let coloredNeighbour = neighbour as? NormalBubble,
                       let coloredBubble = bubble as? NormalBubble else {
-                    assertionFailure("Currently only handles normal colored bubbles!")
-                    return nil
+                    continue
                 }
                 if !visited.contains(neighbourIndexPath)
                     && coloredBubble.type == coloredNeighbour.type {
