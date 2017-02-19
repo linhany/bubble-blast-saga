@@ -33,6 +33,8 @@ class PhysicsWorld {
     /// The array that tracks `Collision`s occuring.
     private var collisions: [Collision] = []
 
+    private var physicsBodiesToCheckAgainst: [PhysicsBody] = []
+
     /// Adds the `physicsBody` into this `PhysicsWorld`.
     /// Static to enable an individual `PhysicsBody` to add itself in upon
     /// initialisation.
@@ -103,10 +105,14 @@ class PhysicsWorld {
     /// Current implementation does not support collisions 
     /// between two stationary physics bodies.
     private func detectCollisions() {
+        physicsBodiesToCheckAgainst = PhysicsWorld.physicsBodies
+        var index = 0
         for physicsBody in PhysicsWorld.physicsBodies {
             if physicsBody.isResting {
+                index += 1
                 continue
             }
+            physicsBodiesToCheckAgainst.remove(at: index)
             doCollisionTestsOn(physicsBody)
         }
     }
@@ -126,11 +132,7 @@ class PhysicsWorld {
     /// Current implementation only supports moving `Circle` physicsBody,
     /// and stationary `Circle` and `EdgeLoop` `physicsBody`s.
     private func doCollisionTestsOn(_ physicsBody: PhysicsBody) {
-        for otherPhysicsBody in PhysicsWorld.physicsBodies {
-            // Avoid doing collision test with itself.
-            guard otherPhysicsBody !== physicsBody else {
-                continue
-            }
+        for otherPhysicsBody in physicsBodiesToCheckAgainst {
             doCollisionTestOn(physicsBody, with: otherPhysicsBody)
         }
     }

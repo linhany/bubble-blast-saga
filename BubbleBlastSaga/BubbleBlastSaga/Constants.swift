@@ -54,7 +54,7 @@ struct Constants {
     static let notifyRemoveDisconnectedGameBubble = "Game bubble disconnected!"
     static let notifyRemoveClusteredGameBubble = "Game bubble clustered!"
     static let loadingBubbleAnimationDuration = 0.2
-    static let fallingBubbleAnimationDuration = 2.0
+    static let fallingBubbleAnimationDuration = 1.5
 
     static let feedbackLevelSavingCancelled = "SAVING CANCELLED!"
     static let feedbackLevelNameRequired = "LEVEL NAME REQUIRED!"

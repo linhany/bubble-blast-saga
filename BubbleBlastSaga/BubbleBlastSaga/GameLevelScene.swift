@@ -26,16 +26,8 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
     /// The Queue of `GameBubble`s for the player to shoot.
     private var projectileQueue = Queue<GameBubble>()
 
-    /// The Boolean that returns true if the projectile is ready to be fired.
-    private var isReadyToFire: Bool = true
-
-    /// The newly snapped bubble in the grid.
-    private var newlySnappedBubble: GameBubble?
-
-    /// Since our game currently only allows one projectile in the game at any
-    /// one time, we keep reference to it and only let the user fire after it has
-    /// been snapped into the grid.
-    private var currentProjectile: GameBubble?
+    /// The newly snapped bubbles in the grid.
+    private var newlySnappedBubbles: [GameBubble] = []
 
     init(modelManager: ModelManager,
          gameViewController: GameViewController,
@@ -48,29 +40,28 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
         physicsBody = PhysicsBody(edgeLoopFrom: gameViewController.view.frame)
         physicsWorld.contactDelegate = self
         gameLogic.delegate = self
-        prepareToFire()
+        setUpProjectiles()
     }
 
     override func update() {
         // Skip updating unless there is a newly snapped bubble in the grid.
-        guard let newBubble = newlySnappedBubble else {
+        if newlySnappedBubbles.isEmpty {
             return
         }
-        gameLogic.handleNewlySnappedBubble(newBubble)
-        newlySnappedBubble = nil
-        prepareToFire()
+        for newBubble in newlySnappedBubbles {
+            gameLogic.handleNewlySnappedBubble(newBubble)
+        }
+        newlySnappedBubbles.removeAll()
     }
 
     override func handleTouch(at touchLocation: CGPoint) {
-        guard isReadyToFire && isWithinFiringAngleRange(touchLocation) else {
+        guard isWithinFiringAngleRange(touchLocation) else {
             return
         }
-        guard let gameProjectile = currentProjectile else {
+        guard let gameProjectile = getNextProjectile() else {
             assertionFailure("Projectile was not set up!")
             return
         }
-        isReadyToFire = false
-        gameViewController.animateCannonFire()
         let radius = gameViewController.getBubbleRadius()
         let physicsBodyRadius =
             radius * CGFloat(Constants.gameBubbleCollisionAdjustedPercentage)
@@ -81,6 +72,75 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
         let direction = offset.normalized()
         gameProjectile.physicsBody?.velocity = CGVector(dx: direction.x,
                                                         dy: direction.y)
+        gameViewController.animateCannonFire()
+        showNextProjectiles()
+    }
+
+    // MARK: - Handling projectiles.
+
+    func setUpProjectiles() {
+        let nextProjectiles = getNextProjectilesInQueue()
+        guard nextProjectiles.count == 2 else {
+            assertionFailure("Should have 2 next projectiles.")
+            return
+        }
+        let bubbleWidth = gameViewController.getBubbleWidth()
+        let firstProjectile = nextProjectiles[0]
+        add(gameObject: firstProjectile)
+        firstProjectile.size = CGSize(width: bubbleWidth, height: bubbleWidth)
+        firstProjectile.position = gameViewController.getCannonPosition()
+
+        let secondProjectile = nextProjectiles[1]
+        add(gameObject: secondProjectile)
+        secondProjectile.size = CGSize(width: bubbleWidth, height: bubbleWidth)
+        secondProjectile.position = gameViewController.getNextBubblePosition()
+    }
+
+    func getNextProjectile() -> GameBubble? {
+        // which bubble colors are still in the grid?
+        // what if there is only special bubbles left. game is over if theres only special bubbles left?.. YES?
+        // how to show upcoming bubble?
+
+        // dequeue the next projectile, show the peek().
+        guard let projectileToFire = try? projectileQueue.dequeue() else {
+            assertionFailure("Queue cannot be empty! Game should be over.")
+            return nil
+        }
+        return projectileToFire
+    }
+
+    func showNextProjectiles() {
+        let nextProjectiles = getNextProjectilesInQueue()
+        if nextProjectiles.isEmpty {
+            // game is over
+            return
+        }
+        let firstProjectile = nextProjectiles[0]
+        firstProjectile.position = gameViewController.getCannonPosition()
+        postNotification(name: Constants.notifyLoadingCannonGameBubble,
+                         userInfo: ["GameBubble": firstProjectile])
+        if nextProjectiles.count == 2 {
+            let nextProjectileToShow = nextProjectiles[1]
+            let bubbleWidth = gameViewController.getBubbleWidth()
+            // show next projectile as well.
+            add(gameObject: nextProjectileToShow)
+            nextProjectileToShow.position = gameViewController.getNextBubblePosition()
+            nextProjectileToShow.size = CGSize(width: bubbleWidth, height: bubbleWidth)
+        }
+    }
+
+    /// Currently returns next 2 projectiles.
+    func getNextProjectilesInQueue() -> [GameBubble] {
+        var nextProjectiles: [GameBubble] = []
+        let projectileArray = projectileQueue.toArray()
+        if let firstProjectile = projectileArray.first {
+            nextProjectiles.append(firstProjectile)
+        }
+        if projectileArray.count >= 2 {
+            let secondProjectile = projectileArray[1]
+            nextProjectiles.append(secondProjectile)
+        }
+        return nextProjectiles
     }
 
     // MARK - PhysicsContactDelegate Protocol
@@ -116,52 +176,64 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
 
     // MARK - Private helper functions
 
-    /// Prepares to fire by adding the projectile from projectileQueue
-    /// as a gameObject, initialising its attributes.
-    private func prepareToFire() {
-        isReadyToFire = true
-        guard let projectile = try? projectileQueue.dequeue() else {
-            assertionFailure("Queue cannot be empty! Game should be over.")
-            return
-        }
-        let bubbleWidth = gameViewController.getBubbleWidth()
-        if !gameObjects.contains(projectile) {
-            add(gameObject: projectile)
-            projectile.size = CGSize(width: bubbleWidth, height: bubbleWidth)
-        } else {
-            postNotification(name: Constants.notifyLoadingCannonGameBubble,
-                             userInfo: ["GameBubble": projectile])
-        }
-        projectile.position = gameViewController.getCannonPosition()
-        currentProjectile = projectile
-        guard let nextProjectile = try? projectileQueue.peek() else {
-            // only one bubble left.
-            return
-        }
-        add(gameObject: nextProjectile)
-        nextProjectile.position = gameViewController.getNextBubblePosition()
-        nextProjectile.size = CGSize(width: bubbleWidth, height: bubbleWidth)
-    }
-
     private func handleCollision(_ collision: Collision) {
         let physicsBody = collision.physicsBody
+        let otherPhysicsBody = collision.otherPhysicsBody
         guard let projectile = physicsBody.physicsBodyOwner as? GameBubble,
-                  projectile === currentProjectile else {
+            !physicsBody.isResting else {
             return
         }
-        handleCollision(projectile: projectile,
-                        collisionType: collision.collisionType)
-    }
-
-    private func handleCollision(projectile: GameBubble, collisionType: CollisionType) {
-        switch collisionType {
-        case .circleWithCircle: snapToClosestGridCell(projectile)
+        switch collision.collisionType {
+        case .circleWithCircle: otherPhysicsBody.isResting
+            ? snapToClosestGridCell(projectile) : bounceProjectilesOff(collision)
         case .circleWithTopOfEdgeLoop: snapToClosestGridCell(projectile)
         case .circleWithLeftOfEdgeLoop: bounceProjectileOffWall(projectile)
         case .circleWithRightOfEdgeLoop: bounceProjectileOffWall(projectile)
         case .circleWithBottomOfEdgeLoop: dropOutFromBottom(projectile)
         }
     }
+
+    private func bounceProjectilesOff(_ collision: Collision) {
+        let firstPhysicsBody = collision.physicsBody
+        let secondPhysicsBody = collision.otherPhysicsBody
+        guard let firstBubblePosition = firstPhysicsBody.position,
+              let firstBubble = firstPhysicsBody.physicsBodyType as? Circle,
+              let secondBubblePosition = secondPhysicsBody.position,
+              let secondBubble = secondPhysicsBody.physicsBodyType as? Circle
+              else {
+            assertionFailure("Bubbles must be circles and have positions!")
+            return
+        }
+        let firstBubbleRadius = firstBubble.radius
+        let secondBubbleRadius = secondBubble.radius
+
+        // Move away projectiles
+        let midpoint = (firstBubblePosition + secondBubblePosition) / 2
+        let firstBubbleNewPosition = midpoint +
+            ((firstBubblePosition - secondBubblePosition).normalized()) * firstBubbleRadius
+        let secondBubbleNewPosition = midpoint +
+            ((secondBubblePosition - firstBubblePosition).normalized()) * secondBubbleRadius
+        firstPhysicsBody.position = firstBubbleNewPosition
+        secondPhysicsBody.position = secondBubbleNewPosition
+
+        let normalized = (secondBubblePosition - firstBubblePosition).normalized()
+
+        let p = firstPhysicsBody.velocity.dx * normalized.x +
+            firstPhysicsBody.velocity.dy * normalized.y -
+            secondPhysicsBody.velocity.dx * normalized.x -
+            secondPhysicsBody.velocity.dy * normalized.y
+
+        let firstBubbleNewVelocityX = firstPhysicsBody.velocity.dx - (p * normalized.x)
+        let firstBubbleNewVelocityY = firstPhysicsBody.velocity.dy - (p * normalized.y)
+        let secondBubbleNewVelocityX = secondPhysicsBody.velocity.dx + (p * normalized.x)
+        let secondBubbleNewVelocityY = secondPhysicsBody.velocity.dy + (p * normalized.y)
+
+        firstPhysicsBody.velocity =
+            CGVector(dx: firstBubbleNewVelocityX, dy: firstBubbleNewVelocityY)
+        secondPhysicsBody.velocity =
+            CGVector(dx: secondBubbleNewVelocityX, dy: secondBubbleNewVelocityY)
+    }
+
 
     /// Bounces the projectile off wall by multiplying its horizontal velocity (dx)
     /// by `reverseDirectionMultiplier`.
@@ -201,7 +273,6 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
         // to a GameBubble in the last row of our grid.
         // PS5: Game over screen. Currently game continues on.
         remove(gameObject: projectile)
-        prepareToFire()
     }
 
     /// Snaps the `gameBubble` to the grid position indicated by `row` and `col`.
@@ -209,26 +280,24 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
         gameBubble.position = gameViewController.getBubblePosition(row: row, col: col)
         gameBubble.physicsBody?.isResting = true
         gameLogic.addToBubbleGridModel(gameBubble: gameBubble)
-        newlySnappedBubble = gameBubble
+        newlySnappedBubbles.append(gameBubble)
         postNotification(name: Constants.notifyNewlySnappedGameBubble,
                          userInfo: ["GameBubble": gameBubble])
     }
 
     /// Drops out the `gameBubble` from bottom of grid.
-    /// Currently this should never be called.
     private func dropOutFromBottom(_ gameBubble: GameBubble) {
-        assertionFailure("Should never be called.")
         remove(gameObject: gameBubble)
-        prepareToFire()
     }
 
     /// Returns true if the `touchLocation` is within the firing angle range.
     private func isWithinFiringAngleRange(_ touchLocation: CGPoint) -> Bool {
-        let offset = touchLocation - gameViewController.getCannonPosition()
-        let angle = Double(atan2(offset.x, -offset.y))
-
-        return angle > Constants.leftFireAngleBound &&
-               angle < Constants.rightFireAngleBound
+//        let offset = touchLocation - gameViewController.getCannonPosition()
+//        let angle = Double(atan2(offset.x, -offset.y))
+//
+//        return angle > Constants.leftFireAngleBound &&
+//               angle < Constants.rightFireAngleBound
+        return true
     }
 
 }
