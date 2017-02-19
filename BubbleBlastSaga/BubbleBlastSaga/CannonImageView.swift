@@ -39,7 +39,7 @@ class CannonImageView: UIImageView {
             }
             cannonImages.append(cannonImage)
         }
-        self.image = cannonImages.first
+        image = cannonImages.first
     }
 
     private func setUpCannonFireAnimation() {
@@ -49,6 +49,6 @@ class CannonImageView: UIImageView {
     }
 
     private func setUpCannonRotation() {
-        self.layer.anchorPoint = CGPoint(x: 0.5, y: 0.65)
+        layer.anchorPoint = CGPoint(x: 0.5, y: 0.65)
     }
 }

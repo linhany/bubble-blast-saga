@@ -87,10 +87,7 @@ class AnimationRenderer: Renderer {
     }
 
     private func animateFade(gameBubbleImage: UIImageView) {
-        UIView.perform(.delete, on: [gameBubbleImage], options: .curveEaseOut, animations: {
-        }, completion: { _ in
-            gameBubbleImage.removeFromSuperview()
-        })
+        gameBubbleImage.removeFromSuperview()
     }
 
     private func animateBounce(gameBubbleImage: UIImageView, to position: CGPoint, on view: UIView) {
