@@ -72,7 +72,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="4" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zr7-zw-X06" userLabel="Green Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                                        <rect key="frame" x="174" y="12" width="53.5" height="52.5"/>
+                                                        <rect key="frame" x="174" y="11.5" width="53.5" height="53"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="zr7-zw-X06" secondAttribute="height" multiplier="1:1" id="vhM-Hf-qbp"/>
                                                         </constraints>
@@ -150,7 +150,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="10" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="atN-aS-FlD" userLabel="Star Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                                        <rect key="frame" x="522.5" y="12" width="53.5" height="52.5"/>
+                                                        <rect key="frame" x="522.5" y="11.5" width="53.5" height="53"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="atN-aS-FlD" secondAttribute="height" multiplier="1:1" id="zzJ-DM-HtK"/>
                                                         </constraints>
@@ -269,7 +269,7 @@
                                                         <rect key="frame" x="612" y="30.5" width="138" height="46"/>
                                                         <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                                        <state key="normal" title="Play"/>
+                                                        <state key="normal" title="Start"/>
                                                         <variation key="widthClass=compact">
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         </variation>

@@ -12,6 +12,7 @@
 		A71DEFDA1E5B0380003064AE /* LevelSelect.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A71DEFD91E5B0380003064AE /* LevelSelect.storyboard */; };
 		A71DEFDC1E5B03A8003064AE /* LevelSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71DEFDB1E5B03A8003064AE /* LevelSelectViewController.swift */; };
 		A71DEFDE1E5B07C1003064AE /* LevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71DEFDD1E5B07C1003064AE /* LevelCell.swift */; };
+		A71DEFE01E5B3439003064AE /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71DEFDF1E5B3439003064AE /* Level.swift */; };
 		A745464A1E55D2B0005C8B67 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74546491E55D2B0005C8B67 /* RoundedButton.swift */; };
 		A77120FA1E542454007564A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77120F91E542454007564A2 /* AppDelegate.swift */; };
 		A77121011E542454007564A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77121001E542454007564A2 /* Assets.xcassets */; };
@@ -83,6 +84,7 @@
 		A71DEFD91E5B0380003064AE /* LevelSelect.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LevelSelect.storyboard; sourceTree = "<group>"; };
 		A71DEFDB1E5B03A8003064AE /* LevelSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectViewController.swift; sourceTree = "<group>"; };
 		A71DEFDD1E5B07C1003064AE /* LevelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelCell.swift; sourceTree = "<group>"; };
+		A71DEFDF1E5B3439003064AE /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		A74546491E55D2B0005C8B67 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		A77120F61E542454007564A2 /* BubbleBlastSaga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubbleBlastSaga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77120F91E542454007564A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			children = (
 				A771215A1E542B31007564A2 /* ModelManager.swift */,
 				A77121331E5424B2007564A2 /* StorageManager.swift */,
+				A71DEFDF1E5B3439003064AE /* Level.swift */,
 				A771214D1E542B31007564A2 /* BubbleType.swift */,
 				A77121541E542B31007564A2 /* GameBubble.swift */,
 				A771218A1E54BC30007564A2 /* BombBubble.swift */,
@@ -487,6 +490,7 @@
 				A77121771E542B31007564A2 /* PhysicsBody.swift in Sources */,
 				A77120FA1E542454007564A2 /* AppDelegate.swift in Sources */,
 				A771217A1E542B31007564A2 /* PhysicsWorld.swift in Sources */,
+				A71DEFE01E5B3439003064AE /* Level.swift in Sources */,
 				A771216B1E542B31007564A2 /* CollisionType.swift in Sources */,
 				A77121911E54BC71007564A2 /* IndestructibleBubble.swift in Sources */,
 				A77121891E544AC7007564A2 /* CannonImageView.swift in Sources */,

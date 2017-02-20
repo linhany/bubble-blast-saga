@@ -41,12 +41,20 @@ class LevelDesignViewController: UIViewController {
     /// To be changed during integration phase, whereby the app delegate
     /// will be made responsible for initialisation and passing it
     /// to the first view controller.
-    fileprivate let modelManager = ModelManager()
-    fileprivate let storageManager = StorageManager()
+    internal var modelManager: ModelManager?
+    internal var storageManager: StorageManager?
 
     override func viewDidLoad() {
+        guard let _ = modelManager,
+              let _ = storageManager else {
+            fatalError("Model/Storage manager reference not passed!")
+        }
         connectBubbleGridViewDataSourceAndDelegates()
         addObserverForBubbleGridViewUpdate()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        modelManager?.reloadGridState()
     }
 
     /// Hides the status bar in this view,
@@ -57,7 +65,7 @@ class LevelDesignViewController: UIViewController {
 
     @IBAction func backToLevelDesignViewController(segue: UIStoryboardSegue) {
         /// Force reload to update view.
-        modelManager.reloadGridState()
+        modelManager?.reloadGridState()
     }
 
     // MARK: - Lower bar user interactions
@@ -80,11 +88,21 @@ class LevelDesignViewController: UIViewController {
 
     /// Prepares for segue: load level popover.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let modelManager = modelManager,
+            let storageManager = storageManager else {
+                fatalError("Model/Storage manager reference not passed!")
+        }
         if segue.identifier == Constants.loadLevelsSegueIdentifier {
             guard let levelsTableVC = segue.destination as? LevelsTableViewController else {
                 return
             }
-            levelsTableVC.levelNames = storageManager.getLevelNamesFromDocumentDirectoryAsStrings()
+            // temp
+            let levelsNameAndImage = storageManager.getLevelNamesAndImagesFromDocumentDirectory()
+            var levelNames: [String] = []
+            for (name, _) in levelsNameAndImage {
+                levelNames.append(name)
+            }
+            levelsTableVC.levelNames = levelNames
             levelsTableVC.delegate = self
         } else if segue.identifier == Constants.startGameLevelSegueIndentifier {
             guard let gameVC = segue.destination as? GameViewController else {
@@ -217,9 +235,20 @@ class LevelDesignViewController: UIViewController {
     /// Saves the grid state to file with the `fileName`,
     /// shows feedback to user to inform if the save was successful.
     private func saveGridStateWithFeedbackToModel(fileName: String) {
+        guard let modelManager = modelManager,
+            let storageManager = storageManager else {
+                fatalError("Model/Storage manager reference not passed!")
+        }
         let gridState = modelManager.getGridState()
+        let level = Level(gridState: gridState, fileName: fileName)
+        UIGraphicsBeginImageContextWithOptions(bubbleGrid.frame.size, false, 0)
+        let rect = CGRect(x: -bubbleGrid.frame.origin.x, y: -bubbleGrid.frame.origin.y, width: view.bounds.size.width, height: view.bounds.size.height)
+        view.drawHierarchy(in: rect, afterScreenUpdates: true)
+        guard let levelPreviewImage = UIGraphicsGetImageFromCurrentImageContext() else {
+            fatalError("Cannot get image!")
+        }
         let isSaveSuccessful =
-            storageManager.saveGridState(gridState: gridState, toFile: fileName)
+            storageManager.saveLevel(level: level, levelPreviewImage: levelPreviewImage)
         if isSaveSuccessful {
             self.showFeedback(feedback:
                 Constants.feedbackLevelSavingSuccessful)
@@ -236,7 +265,7 @@ class LevelDesignViewController: UIViewController {
             guard isResetConfirmed else {
                 return
             }
-            self.modelManager.resetGridState()
+            self.modelManager?.resetGridState()
             self.showFeedback(feedback: Constants.feedbackLevelReset)
         }
 
@@ -286,6 +315,9 @@ class LevelDesignViewController: UIViewController {
     /// with a `bubbleType`.
     /// If the `bubbleType` is .empty, removes any bubble at that location.
     private func setBubble(at indexPath: IndexPath, with bubbleType: BubbleType) {
+        guard let modelManager = modelManager else {
+            fatalError("Model manager reference not passed!")
+        }
         let bubbleGridRow = indexPath.section
         let bubbleGridColumn = indexPath.row
         let newBubble = modelManager.buildBubble(withBubbleType: bubbleType)
@@ -336,6 +368,9 @@ class LevelDesignViewController: UIViewController {
     /// Returns the current bubble at the grid location, specified by `indexPath`.
     /// Returns nil if no bubble exists at that grid location.
     private func currentBubble(at indexPath: IndexPath) -> GameBubble? {
+        guard let modelManager = modelManager else {
+            fatalError("Model manager reference not passed!")
+        }
         let bubbleGridRow = indexPath.section
         let bubbleGridColumn = indexPath.row
         return modelManager.getBubbleAt(row: bubbleGridRow, column: bubbleGridColumn)
@@ -395,16 +430,21 @@ class LevelDesignViewController: UIViewController {
 extension LevelDesignViewController: LevelsTableViewDelegate {
 
     func loadLevel(fileName: String) {
-        guard let loaded = storageManager.loadGridState(fromFile: fileName) else {
+        guard let (level, _) = storageManager?.loadLevel(fromFile: fileName) else {
             showFeedback(feedback: Constants.feedbackLevelLoadUnsuccessful)
             return
         }
-        modelManager.loadGridState(gridState: loaded)
+        modelManager?.loadGridState(gridState: level.gridState)
         showFeedback(feedback: Constants.feedbackLevelLoadSuccessful)
     }
 
     func deleteLevel(fileIndex: Int) {
-        storageManager.removeFileInDocumentDirectoryAt(index: fileIndex)
+        guard let modelManager = modelManager,
+              let storageManager = storageManager else {
+                fatalError("Model/Storage manager reference not passed!")
+        }
+        // need to change, cos got images.
+//        storageManager.removeFileInDocumentDirectoryAt(index: fileIndex)
         showFeedback(feedback: Constants.feedbackLevelDelete)
     }
 }

@@ -6,57 +6,89 @@
 //  Copyright © 2017 nus.cs3217.a0139498j. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Handles persistency of game data.
 /// Uses object archiving to write grid state to file.
 struct StorageManager {
 
-    /// Saves the `gridState` represented as a 2D array of GameBubbles to file.
-    func saveGridState(gridState: [[GameBubble?]], toFile fileName: String) -> Bool {
+    init() {
+        let documentDirectory = getUrlForFileInDocumentDirectory()
+        let imageFolderPath = documentDirectory.appendingPathComponent("Image")
+        do {
+            try FileManager.default.createDirectory(atPath: imageFolderPath.path, withIntermediateDirectories: false, attributes: nil)
+        } catch {
+            // check if folder exists
+        }
+    }
+
+    func saveLevel(level: Level, levelPreviewImage image: UIImage) -> Bool {
         let documentDirectory = getUrlForFileInDocumentDirectory()
         let fileURL = documentDirectory.appendingPathComponent(
-            fileName + pListExtension)
+            level.fileName + pListExtension)
+        let imageURL = documentDirectory.appendingPathComponent(
+            level.fileName + imageExtension)
 
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWith: data)
 
-        archiver.encode(gridState, forKey: gridStateKey)
+        archiver.encode(level, forKey: levelKey)
         archiver.finishEncoding()
 
         let isSaveSuccessful = data.write(to: fileURL, atomically: true)
-        return isSaveSuccessful
+
+        guard let imageStored = UIImagePNGRepresentation(image),
+            isSaveSuccessful else {
+            return false
+        }
+        let imageData = NSMutableData(data: imageStored)
+        let isImageSaveSuccessful = imageData.write(to: imageURL, atomically: true)
+
+        return isSaveSuccessful && isImageSaveSuccessful
     }
 
-    /// Loads a 2D array representing bubble grid state from file with `fileName`.
-    func loadGridState(fromFile fileName: String) -> [[GameBubble?]]? {
+    func loadLevel(fromFile fileName: String) -> (Level, UIImage)? {
         let documentDirectory = getUrlForFileInDocumentDirectory()
         let fileURL = documentDirectory.appendingPathComponent(
             fileName + pListExtension)
+        let imageURL = documentDirectory.appendingPathComponent(
+            fileName + imageExtension)
 
         guard let data = NSData(contentsOf: fileURL) else {
             return nil
         }
         let unarchiver = NSKeyedUnarchiver(forReadingWith: data as Data)
 
-        let decoded = unarchiver.decodeObject(forKey: gridStateKey)
+        let decoded = unarchiver.decodeObject(forKey: levelKey)
         unarchiver.finishDecoding()
 
-        guard let gridState = decoded as? [[GameBubble?]] else {
+        guard let level = decoded as? Level else {
             return nil
         }
-        return gridState
+        guard let image = UIImage(contentsOfFile: imageURL.path) else {
+            assertionFailure("Image was not saved!")
+            return nil
+        }
+
+        return (level, image)
     }
 
-    /// Returns an array of strings, that are the filenames of saved levels
-    /// in the document directory.
-    func getLevelNamesFromDocumentDirectoryAsStrings() -> [String] {
+    func getLevelNamesAndImagesFromDocumentDirectory() -> [(String, UIImage)] {
+        let documentDirectory = getUrlForFileInDocumentDirectory()
         guard let directoryContents = getDirectoryContentUrls() else {
             fatalError("Unable to access document directory contents")
         }
-        var levels: [String] = []
-        for pList in directoryContents {
-            levels.append(pList.deletingPathExtension().lastPathComponent)
+
+        let pLists = directoryContents.filter{ $0.pathExtension == "pList" }
+        var levels: [(String, UIImage)] = []
+        for pList in pLists {
+            let name = pList.deletingPathExtension().lastPathComponent
+            let imageURL = documentDirectory.appendingPathComponent(
+                name + imageExtension)
+            guard let image = UIImage(contentsOfFile: imageURL.path) else {
+                fatalError("Image was not saved!")
+            }
+            levels.append((name, image))
         }
         return levels
     }
@@ -102,5 +134,6 @@ struct StorageManager {
 	*/
 	
     private let pListExtension = ".pList"
-    private let gridStateKey = "modelKeyString"
+    private let imageExtension = ".png"
+    private let levelKey = "levelKeyString"
 }

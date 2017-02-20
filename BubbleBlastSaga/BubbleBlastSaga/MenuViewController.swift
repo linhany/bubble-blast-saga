@@ -10,6 +10,9 @@ import UIKit
 
 class MenuViewController: UIViewController {
 
+    internal var modelManager: ModelManager?
+    internal var storageManager: StorageManager?
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -21,14 +24,18 @@ class MenuViewController: UIViewController {
         return true
     }
 
-    /*
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let levelSelectVC = segue.destination as? LevelSelectViewController {
+            levelSelectVC.modelManager = modelManager
+            levelSelectVC.storageManager = storageManager
+        } else if let levelDesignVC = segue.destination as? LevelDesignViewController {
+            levelDesignVC.modelManager = modelManager
+            levelDesignVC.storageManager = storageManager
+        }
+
     }
-    */
 
 }

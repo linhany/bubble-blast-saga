@@ -10,15 +10,17 @@ import UIKit
 
 class LevelSelectViewController: UIViewController {
 
+    internal var modelManager: ModelManager?
+    internal var storageManager: StorageManager?
+    internal var levelNamesAndImages: [(String, UIImage)] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        guard let modelManager = modelManager,
+              let storageManager = storageManager else {
+            fatalError("Model/Storage reference not passed.")
+        }
+        levelNamesAndImages = storageManager.getLevelNamesAndImagesFromDocumentDirectory()
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -40,11 +42,17 @@ class LevelSelectViewController: UIViewController {
 extension LevelSelectViewController: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 40
+        let noOfRows = levelNamesAndImages.count%3 == 0
+        ? levelNamesAndImages.count/3 : levelNamesAndImages.count/3 + 1
+        return noOfRows
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        let noOfRows = levelNamesAndImages.count%3 == 0
+            ? levelNamesAndImages.count/3 : levelNamesAndImages.count/3 + 1
+        let noOfItemsInLastRow = levelNamesAndImages.count%3 == 0
+            ? 3 : levelNamesAndImages.count%3
+        return section == noOfRows-1 ? noOfItemsInLastRow : 3
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -56,6 +64,12 @@ extension LevelSelectViewController: UICollectionViewDataSource {
             for: indexPath as IndexPath) as? LevelCell else {
                 fatalError("Cell not assigned the proper view subclass!")
         }
+        let row = indexPath.section
+        let col = indexPath.row
+        let index = row * 3 + col
+        let (name, image) = levelNamesAndImages[index]
+        cell.setTitle(name)
+        cell.setPreview(image)
         return cell
     }
 
@@ -77,9 +91,9 @@ extension LevelSelectViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         let edgeInset = UIEdgeInsets(top: 10.0,
-                                                left: 10.0,
-                                                bottom: 10.0,
-                                                right: 10.0)
+                                     left: 10.0,
+                                     bottom: 10.0,
+                                     right: 10.0)
         return edgeInset
     }
 
