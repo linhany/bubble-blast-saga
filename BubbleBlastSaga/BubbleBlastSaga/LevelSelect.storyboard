@@ -40,7 +40,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 </variation>
                                 <connections>
-                                    <segue destination="HbG-6X-JGz" kind="unwind" unwindAction="backToMenuViewControllerWithSegue:" id="vNk-9J-v0I"/>
+                                    <action selector="backButtonPressed:" destination="hN9-Sj-Smz" eventType="touchUpInside" id="ZxY-Md-sgP"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Level selection" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xtg-bz-FoL">
@@ -82,6 +82,8 @@
                     <connections>
                         <outlet property="levelsGrid" destination="PBC-tb-MsF" id="4Nb-pS-uPS"/>
                         <segue destination="PLr-ax-qeE" kind="showDetail" identifier="LevelSelectPlayGameSegue" id="Yad-kE-EEA"/>
+                        <segue destination="HbG-6X-JGz" kind="unwind" identifier="LevelSelectUnwindToMenuSegue" unwindAction="backToMenuViewControllerWithSegue:" id="Q7L-IV-PSz"/>
+                        <segue destination="HbG-6X-JGz" kind="unwind" identifier="LevelSelectUnwindToLevelDesignSegue" unwindAction="backToLevelDesignViewControllerWithSegue:" id="sxO-eG-6Sy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IY9-ED-nLD" userLabel="First Responder" sceneMemberID="firstResponder"/>

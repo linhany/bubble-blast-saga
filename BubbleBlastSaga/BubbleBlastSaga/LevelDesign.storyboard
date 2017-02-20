@@ -248,9 +248,7 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         </variation>
                                                         <connections>
-                                                            <segue destination="fa9-cs-5V8" kind="popoverPresentation" identifier="ShowLoadLevelsSegue" popoverAnchorView="xlo-Jo-Fql" id="VKC-iH-NO5">
-                                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                            </segue>
+                                                            <segue destination="dis-wU-adL" kind="showDetail" identifier="LevelDesignToLevelSelectSegue" id="51i-Rw-dKi"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdY-lx-mIV" userLabel="Save" customClass="RoundedButton" customModule="BubbleBlastSaga" customModuleProvider="target">
@@ -402,6 +400,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TQl-cZ-b8X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-236" y="489"/>
+        </scene>
+        <!--LevelSelect-->
+        <scene sceneID="C4h-OR-PeO">
+            <objects>
+                <viewControllerPlaceholder storyboardName="LevelSelect" id="dis-wU-adL" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nX2-G8-ExY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="188" y="429"/>
         </scene>
     </scenes>
     <resources>

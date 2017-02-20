@@ -90,18 +90,13 @@ class LevelDesignViewController: UIViewController {
             let storageManager = storageManager else {
                 fatalError("Model/Storage manager reference not passed!")
         }
-        if segue.identifier == Constants.loadLevelsSegueIdentifier {
-            guard let levelsTableVC = segue.destination as? LevelsTableViewController else {
-                return
+        if segue.identifier == Constants.levelDesignToLevelSelectSegueIdentifier {
+            guard let levelSelectVC = segue.destination as? LevelSelectViewController else {
+                fatalError("Level design to level select segue failed!")
             }
-            // temp
-            let levelsNameAndImage = storageManager.getLevelNamesAndImagesFromDocumentDirectory()
-            var levelNames: [String] = []
-            for (name, _) in levelsNameAndImage {
-                levelNames.append(name)
-            }
-            levelsTableVC.levelNames = levelNames
-            levelsTableVC.delegate = self
+            levelSelectVC.modelManager = modelManager
+            levelSelectVC.storageManager = storageManager
+            levelSelectVC.unwindSegueIdentifier = Constants.levelSelectUnwindToLevelDesignSegueIdentifier
         } else if segue.identifier == Constants.startGameLevelSegueIndentifier {
             guard let gameVC = segue.destination as? GameViewController else {
                 return

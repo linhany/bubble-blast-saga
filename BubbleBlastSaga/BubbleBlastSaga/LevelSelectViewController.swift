@@ -14,7 +14,7 @@ class LevelSelectViewController: UIViewController {
     internal var modelManager: ModelManager?
     internal var storageManager: StorageManager?
     internal var levelNamesAndImages: [(String, UIImage)] = []
-    internal var fromSegueIdentifier: String?
+    internal var unwindSegueIdentifier: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +27,14 @@ class LevelSelectViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        guard let unwindSegueIdentifier = unwindSegueIdentifier else {
+            assertionFailure("Unwind segue identifier not assigned!")
+            return
+        }
+        performSegue(withIdentifier: unwindSegueIdentifier, sender: self)
     }
 
     @IBAction func backToLevelSelectViewController(segue: UIStoryboardSegue) {
@@ -94,13 +102,17 @@ extension LevelSelectViewController: UICollectionViewDelegateFlowLayout {
             return
         }
         modelManager?.loadGridState(gridState: level.gridState)
-        guard let fromSegueIdentifier = fromSegueIdentifier else {
-            assertionFailure("From segue identifier not assigned!")
+        guard let unwindSegueIdentifier = unwindSegueIdentifier else {
+            assertionFailure("Unwind segue identifier not assigned!")
             return
         }
-        switch fromSegueIdentifier {
-        case Constants.menuToLevelSelectSegueIdentifier:
+
+        switch unwindSegueIdentifier {
+        case Constants.levelSelectUnwindToMenuSegueIdentifier:
             performSegue(withIdentifier: Constants.levelSelectPlayGameSegueIndentifier,
+                         sender: self)
+        case Constants.levelSelectUnwindToLevelDesignSegueIdentifier:
+            performSegue(withIdentifier: Constants.levelSelectUnwindToLevelDesignSegueIdentifier,
                          sender: self)
         default: assertionFailure("Should not reach here!")
         }

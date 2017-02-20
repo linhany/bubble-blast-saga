@@ -31,7 +31,7 @@ class MenuViewController: UIViewController {
         if let levelSelectVC = segue.destination as? LevelSelectViewController {
             levelSelectVC.modelManager = modelManager
             levelSelectVC.storageManager = storageManager
-            levelSelectVC.fromSegueIdentifier = Constants.menuToLevelSelectSegueIdentifier
+            levelSelectVC.unwindSegueIdentifier = Constants.levelSelectUnwindToMenuSegueIdentifier
         } else if let levelDesignVC = segue.destination as? LevelDesignViewController {
             levelDesignVC.modelManager = modelManager
             levelDesignVC.storageManager = storageManager
