@@ -59,7 +59,7 @@
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                         </variation>
                                         <connections>
-                                            <segue destination="nCm-No-RAI" kind="showDetail" id="TrS-5O-HJB"/>
+                                            <segue destination="nCm-No-RAI" kind="showDetail" identifier="MenuToLevelSelectSegue" id="TrS-5O-HJB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nyv-xY-4pd" customClass="RoundedButton" customModule="BubbleBlastSaga" customModuleProvider="target">
@@ -73,7 +73,7 @@
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
                                         </variation>
                                         <connections>
-                                            <segue destination="fay-52-QYu" kind="showDetail" id="bn5-jL-KTc"/>
+                                            <segue destination="fay-52-QYu" kind="showDetail" identifier="MenuToLevelDesignSegue" id="bn5-jL-KTc"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwg-6B-oJk" customClass="RoundedButton" customModule="BubbleBlastSaga" customModuleProvider="target">

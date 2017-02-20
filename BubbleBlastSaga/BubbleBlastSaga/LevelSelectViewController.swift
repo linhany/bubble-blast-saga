@@ -10,9 +10,11 @@ import UIKit
 
 class LevelSelectViewController: UIViewController {
 
+    @IBOutlet var levelsGrid: UICollectionView!
     internal var modelManager: ModelManager?
     internal var storageManager: StorageManager?
     internal var levelNamesAndImages: [(String, UIImage)] = []
+    internal var fromSegueIdentifier: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,16 +29,21 @@ class LevelSelectViewController: UIViewController {
         return true
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func backToLevelSelectViewController(segue: UIStoryboardSegue) {
     }
-    */
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.levelSelectPlayGameSegueIndentifier {
+            guard let gameVC = segue.destination as? GameViewController else {
+                return
+            }
+            guard let modelManagerCopy = modelManager?.copy() as? ModelManager else {
+                fatalError("Copying failed!")
+            }
+            gameVC.modelManager = modelManagerCopy
+            gameVC.unwindSegueIdentifier = Constants.gameUnwindToLevelSelectSegueIdentifier
+        }
+    }
 }
 
 extension LevelSelectViewController: UICollectionViewDataSource {
@@ -76,6 +83,28 @@ extension LevelSelectViewController: UICollectionViewDataSource {
 }
 
 extension LevelSelectViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let row = indexPath.section
+        let col = indexPath.row
+        let index = row * 3 + col
+        let (name, _) = levelNamesAndImages[index]
+        guard let (level, _) = storageManager?.loadLevel(fromFile: name) else {
+            assertionFailure("Loading should be successful!")
+            return
+        }
+        modelManager?.loadGridState(gridState: level.gridState)
+        guard let fromSegueIdentifier = fromSegueIdentifier else {
+            assertionFailure("From segue identifier not assigned!")
+            return
+        }
+        switch fromSegueIdentifier {
+        case Constants.menuToLevelSelectSegueIdentifier:
+            performSegue(withIdentifier: Constants.levelSelectPlayGameSegueIndentifier,
+                         sender: self)
+        default: assertionFailure("Should not reach here!")
+        }
+    }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

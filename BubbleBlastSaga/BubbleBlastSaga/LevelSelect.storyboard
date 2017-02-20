@@ -9,6 +9,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--GameLevel-->
+        <scene sceneID="Ndf-aP-Jfu">
+            <objects>
+                <viewControllerPlaceholder storyboardName="GameLevel" id="PLr-ax-qeE" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0c1-75-em5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-499" y="-352"/>
+        </scene>
         <!--Level Select View Controller-->
         <scene sceneID="lIK-h8-z7a">
             <objects>
@@ -71,6 +79,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="levelsGrid" destination="PBC-tb-MsF" id="4Nb-pS-uPS"/>
+                        <segue destination="PLr-ax-qeE" kind="showDetail" identifier="LevelSelectPlayGameSegue" id="Yad-kE-EEA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IY9-ED-nLD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HbG-6X-JGz" userLabel="Exit" sceneMemberID="exit"/>

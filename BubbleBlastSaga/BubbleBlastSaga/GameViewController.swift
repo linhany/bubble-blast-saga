@@ -14,6 +14,8 @@ class GameViewController: UIViewController {
     @IBOutlet private var bubbleGrid: UICollectionView!
     @IBOutlet private var cannonArea: UIView!
     internal var modelManager: ModelManager? = nil
+    internal var unwindSegueIdentifier: String?
+
     internal var gameView: GameView? = nil
 
     override func viewDidAppear(_ animated: Bool) {
@@ -41,6 +43,11 @@ class GameViewController: UIViewController {
 
     @IBAction func backButtonPressed(_ sender: UIButton) {
         stopGame()
+        guard let unwindSegueIdentifier = unwindSegueIdentifier else {
+            assertionFailure("Unwind segue identifier not set up!")
+            return
+        }
+        performSegue(withIdentifier: unwindSegueIdentifier, sender: self)
     }
 
     @IBAction func retryButtonPressed(_ sender: UIButton) {

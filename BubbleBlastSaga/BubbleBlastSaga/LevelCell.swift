@@ -42,4 +42,5 @@ class LevelCell: UICollectionViewCell {
         backgroundView = imageView
         self.imageView = imageView
     }
+
 }

@@ -64,8 +64,6 @@ class LevelDesignViewController: UIViewController {
     }
 
     @IBAction func backToLevelDesignViewController(segue: UIStoryboardSegue) {
-        /// Force reload to update view.
-        modelManager?.reloadGridState()
     }
 
     // MARK: - Lower bar user interactions
@@ -112,6 +110,7 @@ class LevelDesignViewController: UIViewController {
                 fatalError("Copying failed!")
             }
             gameVC.modelManager = modelManagerCopy
+            gameVC.unwindSegueIdentifier = Constants.gameUnwindToLevelDesignSegueIdentifier
         }
     }
 

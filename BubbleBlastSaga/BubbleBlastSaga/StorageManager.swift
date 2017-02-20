@@ -12,16 +12,6 @@ import UIKit
 /// Uses object archiving to write grid state to file.
 struct StorageManager {
 
-    init() {
-        let documentDirectory = getUrlForFileInDocumentDirectory()
-        let imageFolderPath = documentDirectory.appendingPathComponent("Image")
-        do {
-            try FileManager.default.createDirectory(atPath: imageFolderPath.path, withIntermediateDirectories: false, attributes: nil)
-        } catch {
-            // check if folder exists
-        }
-    }
-
     func saveLevel(level: Level, levelPreviewImage image: UIImage) -> Bool {
         let documentDirectory = getUrlForFileInDocumentDirectory()
         let fileURL = documentDirectory.appendingPathComponent(
@@ -93,16 +83,17 @@ struct StorageManager {
         return levels
     }
 
-    /// Deletes a file specified by the `index` of it in the directory,
-    /// with the first file in the directory as zero indexed.
-    func removeFileInDocumentDirectoryAt(index: Int) {
-        guard let directoryContents = getDirectoryContentUrls() else {
-            fatalError("Unable to access document directory contents")
-        }
+    func deleteLevel(withFileName fileName: String) {
+        let documentDirectory = getUrlForFileInDocumentDirectory()
+        let fileURL = documentDirectory.appendingPathComponent(
+            fileName + pListExtension)
+        let imageURL = documentDirectory.appendingPathComponent(
+            fileName + imageExtension)
         do {
-            try FileManager.default.removeItem(at: directoryContents[index])
+            try FileManager.default.removeItem(atPath: fileURL.path)
+            try FileManager.default.removeItem(atPath: imageURL.path)
         } catch {
-            assertionFailure("File cannot be missing!")
+            assertionFailure("Files cannot be missing!")
         }
     }
 
