@@ -22,9 +22,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="c3y-YN-DEj" userLabel="Background">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                            </imageView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYn-wj-zNG" userLabel="Cannon Area">
                                 <rect key="frame" x="0.0" y="870.5" width="768" height="153.5"/>
                                 <subviews>
@@ -35,9 +32,9 @@
                                         <rect key="frame" x="318" y="53.5" width="133" height="100"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VmT-S0-0yd" userLabel="Back" customClass="RoundedButton" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="94.5" width="138" height="46"/>
+                                        <rect key="frame" x="15" y="93.5" width="138" height="46"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                        <state key="normal" title="BACK">
+                                        <state key="normal" title="Back">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <variation key="widthClass=compact">
@@ -45,13 +42,13 @@
                                         </variation>
                                         <connections>
                                             <action selector="backButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xji-lf-gmU"/>
-                                            <segue destination="Z3k-1l-vLa" kind="unwind" unwindAction="backToLevelDesignViewControllerWithSegue:" id="LQl-Fg-KFh"/>
+                                            <segue destination="Z3k-1l-vLa" kind="unwind" identifier="" unwindAction="backToLevelDesignViewControllerWithSegue:" id="LQl-Fg-KFh"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZT-xI-x26" userLabel="Retry" customClass="RoundedButton" customModule="BubbleBlastSaga" customModuleProvider="target">
                                         <rect key="frame" x="615" y="94" width="138" height="46"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                        <state key="normal" title="RETRY">
+                                        <state key="normal" title="Retry">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <variation key="widthClass=compact">
@@ -104,18 +101,14 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="fYn-wj-zNG" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.15" id="2WJ-6i-5gd"/>
                             <constraint firstItem="7J8-sB-Zfu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="F6a-WQ-yrq"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="c3y-YN-DEj" secondAttribute="bottom" id="F71-ni-Vsq"/>
                             <constraint firstAttribute="trailing" secondItem="7J8-sB-Zfu" secondAttribute="trailing" id="MYQ-1r-8Sk"/>
                             <constraint firstItem="fYn-wj-zNG" firstAttribute="top" secondItem="7J8-sB-Zfu" secondAttribute="bottom" id="O7s-4O-I8G"/>
                             <constraint firstAttribute="trailing" secondItem="fYn-wj-zNG" secondAttribute="trailing" id="SfY-wV-DNu"/>
                             <constraint firstAttribute="bottom" secondItem="fYn-wj-zNG" secondAttribute="bottom" id="eWd-nZ-4Xf"/>
-                            <constraint firstItem="c3y-YN-DEj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jYn-Pk-pUQ"/>
-                            <constraint firstItem="c3y-YN-DEj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="kyy-7j-JOn"/>
-                            <constraint firstAttribute="trailing" secondItem="c3y-YN-DEj" secondAttribute="trailing" id="l0g-yC-fqR"/>
                             <constraint firstItem="7J8-sB-Zfu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="lzz-Oh-jqi"/>
                             <constraint firstItem="fYn-wj-zNG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="u8q-iW-MZg"/>
                         </constraints>
@@ -133,7 +126,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background" width="512" height="683"/>
         <image name="cannon-base" width="133" height="139"/>
     </resources>
 </document>

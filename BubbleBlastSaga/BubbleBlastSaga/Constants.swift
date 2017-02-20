@@ -27,6 +27,7 @@ struct Constants {
     static let noOfNormalBubbleTypes = 7
 
     static let bubbleGridCellReuseIdentifier = "bubbleGridCell"
+    static let levelCellReuseIdentifier = "levelCell"
     static let loadLevelsCellIdentifier = "LevelCell"
     static let loadLevelsSegueIdentifier = "ShowLoadLevelsSegue"
     static let startGameLevelSegueIndentifier = "StartGameLevelSegue"
