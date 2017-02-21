@@ -152,9 +152,11 @@ class LevelDesignViewController: UIViewController {
         guard let indexPath = bubbleGrid.indexPathForItem(at: sender.location(in: bubbleGrid)) else {
             return
         }
-
-        setBubble(at: indexPath, with: .empty)
-        animateButtonCorrespondingToBubbleType(type: .empty)
+        // Prevent long press dragging from deleting.
+        if sender.state == .began {
+            setBubble(at: indexPath, with: .empty)
+            animateButtonCorrespondingToBubbleType(type: .empty)
+        }
     }
 
     // MARK: - Helper functions
