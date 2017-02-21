@@ -61,20 +61,28 @@ class GameLogic {
     }
 
     func handleNewlySnappedBubble(_ newBubble: GameBubble) {
-        guard let (row, col) = gameViewController.getBubbleRowAndCol(bubble: newBubble),
-              let neighbors = modelManager.getNeighboursOfBubbleAt(row: row, column: col) else {
-            assertionFailure("GameBubble must be in grid!")
-            return
-        }
-
-        for neighbor in neighbors {
-            if let _ = neighbor as? NormalBubble {
-                continue
-            }
-            activate(bubble: neighbor, with: newBubble)
-        }
+        handleSurroundingSpecialBubbles(with: newBubble)
         removeConnectedBubblesOfSameColor(as: newBubble)
         removeUnattachedBubbles()
+    }
+
+    func handleSurroundingSpecialBubbles(with bubble: GameBubble) {
+        handleSurroundingSpecialBubblesOfType(.star, with: bubble)
+        handleSurroundingSpecialBubblesOfType(.lightning, with: bubble)
+        handleSurroundingSpecialBubblesOfType(.bomb, with: bubble)
+    }
+
+    func handleSurroundingSpecialBubblesOfType(_ bubbleType: BubbleType, with bubble: GameBubble) {
+        guard let (row, col) = gameViewController.getBubbleRowAndCol(bubble: bubble),
+              let neighbors = modelManager.getNeighboursOfBubbleAt(row: row, column: col) else {
+                assertionFailure("GameBubble must be in grid!")
+                return
+        }
+        for neighbor in neighbors {
+            if neighbor.type == bubbleType {
+                activate(bubble: neighbor, with: bubble)
+            }
+        }
     }
 
     /// Activates a bubble, by removing it, and unleashing any special effect it has.
