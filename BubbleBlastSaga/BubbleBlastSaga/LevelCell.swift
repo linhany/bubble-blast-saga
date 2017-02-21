@@ -14,6 +14,12 @@ class LevelCell: UICollectionViewCell {
 
     override func layoutSubviews() {
         layer.cornerRadius = layer.frame.size.width/16
+        layer.borderColor = UIColor.red.cgColor
+    }
+
+    override func prepareForReuse() {
+        textLabel?.text = nil
+        imageView?.image = nil
     }
 
     func setTitle(_ title: String) {
@@ -24,6 +30,14 @@ class LevelCell: UICollectionViewCell {
     func setPreview(_ image: UIImage) {
         initImageViewProperties()
         imageView?.image = image
+    }
+
+    func showRedBorder() {
+        layer.borderWidth = 5
+    }
+
+    func hideBorder() {
+        layer.borderWidth = 0
     }
 
     private func initTextLabelProperties() {

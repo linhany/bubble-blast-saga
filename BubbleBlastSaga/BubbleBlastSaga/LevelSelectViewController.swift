@@ -11,10 +11,13 @@ import UIKit
 class LevelSelectViewController: UIViewController {
 
     @IBOutlet var levelsGrid: UICollectionView!
+    @IBOutlet var headerText: UITextField!
     internal var modelManager: ModelManager?
     internal var storageManager: StorageManager?
     internal var levelNamesAndImages: [(String, UIImage)] = []
     internal var unwindSegueIdentifier: String?
+    fileprivate var isToBeDeleted = Set<IndexPath>()
+    fileprivate var isDeleteModeOn = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +26,7 @@ class LevelSelectViewController: UIViewController {
             fatalError("Model/Storage reference not passed.")
         }
         levelNamesAndImages = storageManager.getLevelNamesAndImagesFromDocumentDirectory()
+        isDeleteModeOn = false
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -35,6 +39,34 @@ class LevelSelectViewController: UIViewController {
             return
         }
         performSegue(withIdentifier: unwindSegueIdentifier, sender: self)
+    }
+
+
+    @IBAction func deleteButtonPressed(_ sender: UIButton) {
+        if isDeleteModeOn {
+            guard let storageManager = storageManager else {
+                fatalError("Storage reference not passed!")
+            }
+            for indexPath in isToBeDeleted {
+                let index = indexPathToArrayIndex(indexPath)
+                let (name, _) = levelNamesAndImages[index]
+                storageManager.deleteLevel(withFileName: name)
+            }
+            levelNamesAndImages = storageManager.getLevelNamesAndImagesFromDocumentDirectory()
+            levelsGrid.reloadData()
+        }
+        isToBeDeleted.removeAll()
+        isDeleteModeOn = !isDeleteModeOn
+        isDeleteModeOn
+            ? sender.setTitle("Confirm", for: .normal)
+            : sender.setTitle("Delete", for: .normal)
+        if isDeleteModeOn {
+            headerText.text = "Deletion is permanent! Mark levels to delete"
+            headerText.textColor = UIColor.red
+        } else {
+            headerText.text = "Level selection"
+            headerText.textColor = UIColor.white
+        }
     }
 
     @IBAction func backToLevelSelectViewController(segue: UIStoryboardSegue) {
@@ -51,6 +83,12 @@ class LevelSelectViewController: UIViewController {
             gameVC.modelManager = modelManagerCopy
             gameVC.unwindSegueIdentifier = Constants.gameUnwindToLevelSelectSegueIdentifier
         }
+    }
+
+    fileprivate func indexPathToArrayIndex(_ indexPath: IndexPath) -> Int {
+        let row = indexPath.section
+        let col = indexPath.row
+        return row * 3 + col
     }
 }
 
@@ -85,6 +123,11 @@ extension LevelSelectViewController: UICollectionViewDataSource {
         let (name, image) = levelNamesAndImages[index]
         cell.setTitle(name)
         cell.setPreview(image)
+        if isToBeDeleted.contains(indexPath) {
+            cell.showRedBorder()
+        } else {
+            cell.hideBorder()
+        }
         return cell
     }
 
@@ -96,6 +139,15 @@ extension LevelSelectViewController: UICollectionViewDelegateFlowLayout {
         let row = indexPath.section
         let col = indexPath.row
         let index = row * 3 + col
+        if isDeleteModeOn {
+            if isToBeDeleted.contains(indexPath) {
+                isToBeDeleted.remove(indexPath)
+            } else {
+                isToBeDeleted.insert(indexPath)
+            }
+            levelsGrid.reloadItems(at: [indexPath])
+            return
+        }
         let (name, _) = levelNamesAndImages[index]
         guard let (level, _) = storageManager?.loadLevel(fromFile: name) else {
             assertionFailure("Loading should be successful!")
