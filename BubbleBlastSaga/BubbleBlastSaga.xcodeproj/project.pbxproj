@@ -58,6 +58,7 @@
 		A771218D1E54BC3B007564A2 /* LightningBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771218C1E54BC3B007564A2 /* LightningBubble.swift */; };
 		A771218F1E54BC60007564A2 /* StarBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771218E1E54BC60007564A2 /* StarBubble.swift */; };
 		A77121911E54BC71007564A2 /* IndestructibleBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121901E54BC71007564A2 /* IndestructibleBubble.swift */; };
+		A78044131E5CA2C200652BBE /* RandomBubbleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78044121E5CA2C200652BBE /* RandomBubbleHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		A771218C1E54BC3B007564A2 /* LightningBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningBubble.swift; sourceTree = "<group>"; };
 		A771218E1E54BC60007564A2 /* StarBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarBubble.swift; sourceTree = "<group>"; };
 		A77121901E54BC71007564A2 /* IndestructibleBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndestructibleBubble.swift; sourceTree = "<group>"; };
+		A78044121E5CA2C200652BBE /* RandomBubbleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomBubbleHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +257,7 @@
 				A771214B1E542B31007564A2 /* AnimationRenderer.swift */,
 				A77121551E542B31007564A2 /* GameLevelScene.swift */,
 				A77121561E542B31007564A2 /* GameLogic.swift */,
+				A78044121E5CA2C200652BBE /* RandomBubbleHelper.swift */,
 				A77121641E542B31007564A2 /* TraversalHelper.swift */,
 			);
 			name = BubbleGameEngine;
@@ -455,6 +458,7 @@
 			files = (
 				A77121781E542B31007564A2 /* PhysicsBodyOwner.swift in Sources */,
 				A77121711E542B31007564A2 /* GameObject.swift in Sources */,
+				A78044131E5CA2C200652BBE /* RandomBubbleHelper.swift in Sources */,
 				A77121361E5424B2007564A2 /* BubbleGridViewDataSource.swift in Sources */,
 				A77121791E542B31007564A2 /* PhysicsBodyType.swift in Sources */,
 				A745464A1E55D2B0005C8B67 /* RoundedButton.swift in Sources */,

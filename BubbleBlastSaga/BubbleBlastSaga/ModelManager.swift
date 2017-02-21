@@ -159,19 +159,23 @@ class ModelManager: NSObject {
         }
     }
 
-    /// Returns a random normal bubble.
-    func buildRandomNormalBubble() -> GameBubble {
-        let colorInt = Int(arc4random_uniform(UInt32(Constants.noOfNormalBubbleTypes)))
-        guard let color = NormalBubbleColor(rawValue: colorInt) else {
-            fatalError("Random function is wrong!")
-        }
-        return NormalBubble(color: color)
-    }
-
     func isBubbleTypeInGrid(_ bubbleType: BubbleType) -> Bool {
         let bubbleTypeRawValue = bubbleType.rawValue
-        if let bubbleType = bubbleTypesInGrid[bubbleTypeRawValue] {
-            return bubbleType > 0
+        if let bubbleTypeCount = bubbleTypesInGrid[bubbleTypeRawValue] {
+            return bubbleTypeCount > 0
+        }
+        return false
+    }
+
+    func isAnyNormalBubblesInGrid() -> Bool {
+        let (start, end) = BubbleType.getNormalBubblesRawValueRange()
+        for rawValue in start...end {
+            guard let bubbleType = BubbleType(rawValue: rawValue) else {
+                fatalError("Raw values are given wrongly!")
+            }
+            if isBubbleTypeInGrid(bubbleType) {
+                return true
+            }
         }
         return false
     }

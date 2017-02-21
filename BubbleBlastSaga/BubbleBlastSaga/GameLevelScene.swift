@@ -23,8 +23,9 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
     /// The `GameLogic` for our Bubble Game.
     private let gameLogic: GameLogic
 
-    /// The Queue of `GameBubble`s for the player to shoot.
-    private var projectileQueue = Queue<GameBubble>()
+    private var randomBubbleHelper: RandomBubbleHelper
+
+    private var projectileQueue: Queue<GameBubble>
 
     /// The newly snapped bubbles in the grid.
     private var newlySnappedBubbles: [GameBubble] = []
@@ -33,11 +34,12 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
 
     init(modelManager: ModelManager,
          gameViewController: GameViewController,
-         gameProjectileQueue: Queue<GameBubble>) {
+         randomBubbleHelper: RandomBubbleHelper) {
         self.gameLogic = GameLogic(modelManager: modelManager,
                                    gameViewController: gameViewController)
         self.gameViewController = gameViewController
-        self.projectileQueue = gameProjectileQueue
+        self.randomBubbleHelper = randomBubbleHelper
+        self.projectileQueue = Queue<GameBubble>()
         super.init()
         physicsBody = PhysicsBody(edgeLoopFrom: gameViewController.view.frame)
         physicsWorld.contactDelegate = self
@@ -46,6 +48,9 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
     }
 
     override func update() {
+        guard isGameOngoing() else {
+            return
+        }
         // Skip updating unless there is a newly snapped bubble in the grid.
         if newlySnappedBubbles.isEmpty {
             return
@@ -54,15 +59,21 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
             gameLogic.handleNewlySnappedBubble(newBubble)
         }
         newlySnappedBubbles.removeAll()
+        modifyProjectileQueueIfNeeded()
     }
 
-    override func checkGameState() {
+    func isGameOngoing() -> Bool {
+        print("checking game state")
         if isGameLost {
             gameViewController.showGameLoseScreen(message: Constants.endGameLoseText)
+            return false
         }
         if gameLogic.isGameWon() {
+            print("game is won..")
             gameViewController.showGameLoseScreen(message: Constants.endGameWinText)
+            return false
         }
+        return true
     }
 
     override func handleTouch(at touchLocation: CGPoint) {
@@ -89,30 +100,42 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
 
     // MARK: - Handling projectiles.
 
+    /// Should only be called on initialisation.
     func setUpProjectiles() {
-        let nextProjectiles = getNextProjectilesInQueue()
-        guard nextProjectiles.count == 2 else {
-            assertionFailure("Should have 2 next projectiles.")
+        guard isGameOngoing() else {
             return
         }
-        let bubbleWidth = gameViewController.getBubbleWidth()
-        let firstProjectile = nextProjectiles[0]
-        add(gameObject: firstProjectile)
-        firstProjectile.size = CGSize(width: bubbleWidth, height: bubbleWidth)
-        firstProjectile.position = gameViewController.getCannonPosition()
+        guard let firstProjectile =
+            randomBubbleHelper.nextBubble(isAccountingForBubblesGenerated: true),
+              let secondProjectile =
+            randomBubbleHelper.nextBubble(isAccountingForBubblesGenerated: true) else {
+            assertionFailure("Should have at least two bubbles.")
+            return
+        }
 
-        let secondProjectile = nextProjectiles[1]
-        add(gameObject: secondProjectile)
-        secondProjectile.size = CGSize(width: bubbleWidth, height: bubbleWidth)
-        secondProjectile.position = gameViewController.getNextBubblePosition()
+        showAtCannonPosition(firstProjectile)
+        projectileQueue.enqueue(firstProjectile)
+
+        showAtNextBubblePosition(secondProjectile)
+        projectileQueue.enqueue(secondProjectile)
     }
 
-    func getNextProjectile() -> GameBubble? {
-        // which bubble colors are still in the grid?
-        // what if there is only special bubbles left. game is over if theres only special bubbles left?.. YES?
-        // how to show upcoming bubble?
+    private func showAtCannonPosition(_ gameBubble: GameBubble) {
+        let bubbleWidth = gameViewController.getBubbleWidth()
+        add(gameObject: gameBubble)
+        gameBubble.size = CGSize(width: bubbleWidth, height: bubbleWidth)
+        gameBubble.position = gameViewController.getCannonPosition()
+    }
 
-        // dequeue the next projectile, show the peek().
+    private func showAtNextBubblePosition(_ gameBubble: GameBubble) {
+        let bubbleWidth = gameViewController.getBubbleWidth()
+        add(gameObject: gameBubble)
+        gameBubble.size = CGSize(width: bubbleWidth, height: bubbleWidth)
+        gameBubble.position = gameViewController.getNextBubblePosition()
+    }
+
+
+    func getNextProjectile() -> GameBubble? {
         guard let projectileToFire = try? projectileQueue.dequeue() else {
             assertionFailure("Queue cannot be empty! Game should be over.")
             return nil
@@ -120,38 +143,68 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
         return projectileToFire
     }
 
-    func showNextProjectiles() {
-        let nextProjectiles = getNextProjectilesInQueue()
-        if nextProjectiles.isEmpty {
-            // game is over
+    func modifyProjectileQueueIfNeeded() {
+        guard isGameOngoing() else {
             return
         }
-        let firstProjectile = nextProjectiles[0]
-        firstProjectile.position = gameViewController.getCannonPosition()
-        postNotification(name: Constants.notifyLoadingCannonGameBubble,
-                         userInfo: ["GameBubble": firstProjectile])
-        if nextProjectiles.count == 2 {
-            let nextProjectileToShow = nextProjectiles[1]
-            let bubbleWidth = gameViewController.getBubbleWidth()
-            // show next projectile as well.
-            add(gameObject: nextProjectileToShow)
-            nextProjectileToShow.position = gameViewController.getNextBubblePosition()
-            nextProjectileToShow.size = CGSize(width: bubbleWidth, height: bubbleWidth)
+        guard var firstProjectile = try? projectileQueue.dequeue() else {
+            assertionFailure("Queue cannot be empty! Game should be over.")
+            return
         }
+        firstProjectile = swapIfNotInGridAnymore(firstProjectile, isCannonAreaBubble: true)
+        projectileQueue.enqueue(firstProjectile)
+
+        guard var secondProjectile = try? projectileQueue.dequeue() else {
+            // First projectile is the last projectile.
+            return
+        }
+        secondProjectile = swapIfNotInGridAnymore(secondProjectile, isCannonAreaBubble: false)
+        projectileQueue.enqueue(secondProjectile)
     }
 
-    /// Currently returns next 2 projectiles.
-    func getNextProjectilesInQueue() -> [GameBubble] {
-        var nextProjectiles: [GameBubble] = []
-        let projectileArray = projectileQueue.toArray()
-        if let firstProjectile = projectileArray.first {
-            nextProjectiles.append(firstProjectile)
+    private func swapIfNotInGridAnymore(_ gameBubble: GameBubble,
+                                        isCannonAreaBubble: Bool) -> GameBubble {
+        let isGameBubbleTypeInGrid = gameLogic.isBubbleTypeInGrid(gameBubble.type)
+
+        if !isGameBubbleTypeInGrid {
+            print("Swapping projectile..?")
+            remove(gameObject: gameBubble)
+
+            guard let replacedProjectile =
+                randomBubbleHelper.nextBubble(isAccountingForBubblesGenerated: false) else {
+                    fatalError("Should never return nil when not accounting for count")
+            }
+            isCannonAreaBubble
+                ? showAtCannonPosition(replacedProjectile) : showAtNextBubblePosition(replacedProjectile)
+            return replacedProjectile
         }
-        if projectileArray.count >= 2 {
-            let secondProjectile = projectileArray[1]
-            nextProjectiles.append(secondProjectile)
+        return gameBubble
+    }
+
+    /// Called after first projectile is shot.
+    func showNextProjectiles() {
+        // called after projectile shot.
+        // should be only one projectile left in queue
+        // dequeue, check if its in grid.
+        // if not, regenerate and then swap..?
+        guard let nextProjectile = try? projectileQueue.dequeue() else {
+            assertionFailure("Queue cannot be empty! Game should be over.")
+            return
         }
-        return nextProjectiles
+        projectileQueue.enqueue(nextProjectile)
+
+        // Move to Cannon position.
+        nextProjectile.position = gameViewController.getCannonPosition()
+        postNotification(name: Constants.notifyLoadingCannonGameBubble,
+                         userInfo: ["GameBubble": nextProjectile])
+
+        guard let secondNextProjectile =
+            randomBubbleHelper.nextBubble(isAccountingForBubblesGenerated: true) else {
+            // Current projectile is the last.
+            return
+        }
+        showAtNextBubblePosition(secondNextProjectile)
+        projectileQueue.enqueue(secondNextProjectile)
     }
 
     // MARK - PhysicsContactDelegate Protocol

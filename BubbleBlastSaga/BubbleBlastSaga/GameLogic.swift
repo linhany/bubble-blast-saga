@@ -62,16 +62,7 @@ class GameLogic {
 
     /// Game is won if all normal bubbles are cleared from grid.
     func isGameWon() -> Bool {
-        let (start, end) = BubbleType.getNormalBubblesRawValueRange()
-        for rawValue in start...end {
-            guard let bubbleType = BubbleType(rawValue: rawValue) else {
-                fatalError("Raw values are given wrongly!")
-            }
-            if modelManager.isBubbleTypeInGrid(bubbleType) {
-                return false
-            }
-        }
-        return true
+        return !modelManager.isAnyNormalBubblesInGrid()
     }
     
     func handleNewlySnappedBubble(_ newBubble: GameBubble) {
@@ -97,6 +88,10 @@ class GameLogic {
                 activate(bubble: neighbor, with: bubble)
             }
         }
+    }
+
+    func isBubbleTypeInGrid(_ bubbleType: BubbleType) -> Bool {
+        return modelManager.isBubbleTypeInGrid(bubbleType)
     }
 
     /// Activates a bubble, by removing it, and unleashing any special effect it has.

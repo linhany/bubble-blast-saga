@@ -43,12 +43,17 @@ class GameViewController: UIViewController {
         guard let modelManager = modelManager else {
             fatalError("Model Manager reference was not passed!")
         }
+        // TODO: dont need to copy here? alr copied before passing.
         guard let modelManagerCopy = modelManager.copy() as? ModelManager else {
             fatalError("Copying failed!")
         }
+        let randomBubbleHelper =
+            RandomBubbleHelper(bubbleTypeRawValueRange: BubbleType.getNormalBubblesRawValueRange(),
+                               noOfBubbles: Int.max,
+                               modelManager: modelManagerCopy)
         let scene = GameLevelScene(modelManager: modelManagerCopy,
                                    gameViewController: self,
-                                   gameProjectileQueue: initialiseQueue())
+                                   randomBubbleHelper: randomBubbleHelper)
         guard let gameView = view as? GameView else {
             fatalError("GameView class not subclassed properly!")
         }
@@ -202,30 +207,6 @@ class GameViewController: UIViewController {
             fatalError("ERROR")
         }
         return cell.center
-    }
-
-    private func makeFixtureData() {
-        guard let modelManager = modelManager else {
-            fatalError("Model Manager reference was not passed!")
-        }
-        for row in 0..<Constants.noOfRowsInGameGrid-2 {
-            let columns = row % 2 == 0
-                ? Constants.noOfColumnsInEvenRowOfGameGrid : Constants.noOfColumnsInOddRowOfGameGrid
-            for col in 0..<columns {
-                modelManager.setBubbleAt(row: row, column: col, with: modelManager.buildRandomNormalBubble())
-            }
-        }
-    }
-
-    private func initialiseQueue() -> Queue<GameBubble> {
-        guard let modelManager = modelManager else {
-            fatalError("Model Manager reference was not passed!")
-        }
-        var projectileQueue = Queue<GameBubble>()
-        for _ in 0..<1000 {
-            projectileQueue.enqueue(modelManager.buildRandomNormalBubble())
-        }
-        return projectileQueue
     }
 
     override func didReceiveMemoryWarning() {

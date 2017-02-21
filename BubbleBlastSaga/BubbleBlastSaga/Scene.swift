@@ -35,7 +35,6 @@ class Scene {
     func run() {
         update()
         simulatePhysics()
-        checkGameState()
     }
 
     /// Adds a `gameObject` onto this `Scene`.
@@ -65,9 +64,6 @@ class Scene {
 
     /// Override to update the `Scene` with game specific behavior.
     func update() {
-    }
-
-    func checkGameState() {
     }
 
     /// Override to respond to user touch, if needed.
