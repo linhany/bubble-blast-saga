@@ -25,7 +25,7 @@ class BubbleGridViewDataSource: NSObject {
 extension BubbleGridViewDataSource: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Constants.noOfRowsInGameGrid
+        return Constants.noOfRowsInGameGrid-1
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

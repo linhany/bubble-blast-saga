@@ -33,6 +33,7 @@ class MenuViewController: UIViewController {
             levelSelectVC.storageManager = storageManager
             levelSelectVC.unwindSegueIdentifier = Constants.levelSelectUnwindToMenuSegueIdentifier
         } else if let levelDesignVC = segue.destination as? LevelDesignViewController {
+            modelManager?.resetGridState()
             levelDesignVC.modelManager = modelManager
             levelDesignVC.storageManager = storageManager
         }

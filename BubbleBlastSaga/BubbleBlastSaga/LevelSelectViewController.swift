@@ -57,13 +57,15 @@ class LevelSelectViewController: UIViewController {
         }
         isToBeDeleted.removeAll()
         isDeleteModeOn = !isDeleteModeOn
-        isDeleteModeOn
-            ? sender.setTitle("Confirm", for: .normal)
-            : sender.setTitle("Delete", for: .normal)
         if isDeleteModeOn {
+            // refactor into view?
+            sender.setTitle("Confirm", for: .normal)
+            sender.setTitleColor(UIColor.red, for: .normal)
             headerText.text = "Deletion is permanent! Mark levels to delete"
             headerText.textColor = UIColor.red
         } else {
+            sender.setTitle("Delete", for: .normal)
+            sender.setTitleColor(UIColor.white, for: .normal)
             headerText.text = "Level selection"
             headerText.textColor = UIColor.white
         }

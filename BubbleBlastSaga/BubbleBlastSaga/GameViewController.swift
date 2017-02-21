@@ -9,7 +9,7 @@
 import UIKit
 
 class GameViewController: UIViewController {
-
+    @IBOutlet var boundsLine: UIImageView!
     @IBOutlet private var cannonImage: CannonImageView!
     @IBOutlet private var bubbleGrid: UICollectionView!
     @IBOutlet private var cannonArea: UIView!
@@ -18,9 +18,21 @@ class GameViewController: UIViewController {
 
     internal var gameView: GameView? = nil
 
+    override func viewDidLoad() {
+        alignBoundsLine()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         bubbleGrid.isUserInteractionEnabled = false
         presentGameScene()
+    }
+
+    func alignBoundsLine() {
+        let bubbleGridSize = bubbleGrid.collectionViewLayout.collectionViewContentSize
+        let targetOriginX = CGFloat(0.0)
+        let targetOriginY = bubbleGridSize.height
+
+        boundsLine.frame.origin = CGPoint(x: targetOriginX, y: targetOriginY)
     }
 
     func presentGameScene() {

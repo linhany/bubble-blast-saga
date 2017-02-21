@@ -22,17 +22,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dashed-line" translatesAutoresizingMaskIntoConstraints="NO" id="YbY-vB-Xx7" userLabel="Bounds Line">
+                                <rect key="frame" x="0.0" y="802" width="768" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYn-wj-zNG" userLabel="Cannon Area">
                                 <rect key="frame" x="0.0" y="871" width="768" height="153"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GSK-Bv-mHZ" userLabel="cannon" customClass="CannonImageView" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                        <rect key="frame" x="317" y="1" width="133" height="153"/>
+                                        <rect key="frame" x="317" y="0.0" width="133" height="153"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cannon-base" translatesAutoresizingMaskIntoConstraints="NO" id="iwo-Pq-fit">
-                                        <rect key="frame" x="318" y="54" width="133" height="100"/>
+                                        <rect key="frame" x="318" y="53" width="133" height="100"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VmT-S0-0yd" userLabel="Back" customClass="RoundedButton" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="94" width="138" height="46"/>
+                                        <rect key="frame" x="15" y="93" width="138" height="46"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <state key="normal" title="Back">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,7 +49,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZT-xI-x26" userLabel="Retry" customClass="RoundedButton" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                        <rect key="frame" x="615" y="95" width="138" height="46"/>
+                                        <rect key="frame" x="615" y="93" width="138" height="46"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <state key="normal" title="Restart">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,6 +117,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="boundsLine" destination="YbY-vB-Xx7" id="35Q-ZN-D2t"/>
                         <outlet property="bubbleGrid" destination="7J8-sB-Zfu" id="ObC-7m-3WR"/>
                         <outlet property="cannonArea" destination="fYn-wj-zNG" id="EmM-Sf-Ryg"/>
                         <outlet property="cannonImage" destination="GSK-Bv-mHZ" id="0gE-kJ-3Yy"/>
@@ -128,5 +133,6 @@
     </scenes>
     <resources>
         <image name="cannon-base" width="133" height="139"/>
+        <image name="dashed-line" width="1938" height="18"/>
     </resources>
 </document>
