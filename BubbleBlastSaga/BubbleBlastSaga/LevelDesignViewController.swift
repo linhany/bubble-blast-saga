@@ -421,24 +421,24 @@ class LevelDesignViewController: UIViewController {
 
 // MARK: - LevelsTableViewDelegate
 /// The delegate protocol implementation for LevelsTableViewController.
-extension LevelDesignViewController: LevelsTableViewDelegate {
-
-    func loadLevel(fileName: String) {
-        guard let (level, _) = storageManager?.loadLevel(fromFile: fileName) else {
-            showFeedback(feedback: Constants.feedbackLevelLoadUnsuccessful)
-            return
-        }
-        modelManager?.loadGridState(gridState: level.gridState)
-        showFeedback(feedback: Constants.feedbackLevelLoadSuccessful)
-    }
-
-    func deleteLevel(fileIndex: Int) {
-        guard let modelManager = modelManager,
-              let storageManager = storageManager else {
-                fatalError("Model/Storage manager reference not passed!")
-        }
-        // need to change, cos got images.
-//        storageManager.removeFileInDocumentDirectoryAt(index: fileIndex)
-        showFeedback(feedback: Constants.feedbackLevelDelete)
-    }
-}
+//extension LevelDesignViewController: LevelsTableViewDelegate {
+//
+//    func loadLevel(fileName: String) {
+//        guard let (level, _) = storageManager?.loadLevel(fromFile: fileName) else {
+//            showFeedback(feedback: Constants.feedbackLevelLoadUnsuccessful)
+//            return
+//        }
+//        modelManager?.loadGridState(gridState: level.gridState)
+//        showFeedback(feedback: Constants.feedbackLevelLoadSuccessful)
+//    }
+//
+//    func deleteLevel(fileIndex: Int) {
+//        guard let modelManager = modelManager,
+//              let storageManager = storageManager else {
+//                fatalError("Model/Storage manager reference not passed!")
+//        }
+//        // need to change, cos got images.
+////        storageManager.removeFileInDocumentDirectoryAt(index: fileIndex)
+//        showFeedback(feedback: Constants.feedbackLevelDelete)
+//    }
+//}

@@ -80,6 +80,7 @@ class AnimationRenderer: Renderer {
             withDuration: Constants.fallingBubbleAnimationDuration,
             animations: {
                 gameBubbleImage.center.y += view.frame.size.height
+                gameBubbleImage.alpha = 0
         },
             completion: { _ in
                 gameBubbleImage.removeFromSuperview()

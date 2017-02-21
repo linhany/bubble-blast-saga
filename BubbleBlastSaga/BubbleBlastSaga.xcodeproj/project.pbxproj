@@ -22,7 +22,6 @@
 		A77121361E5424B2007564A2 /* BubbleGridViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121281E5424B2007564A2 /* BubbleGridViewDataSource.swift */; };
 		A77121371E5424B2007564A2 /* BubbleGridViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121291E5424B2007564A2 /* BubbleGridViewDelegate.swift */; };
 		A771213B1E5424B2007564A2 /* LevelDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771212D1E5424B2007564A2 /* LevelDesignViewController.swift */; };
-		A771213C1E5424B2007564A2 /* LevelsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771212E1E5424B2007564A2 /* LevelsTableViewController.swift */; };
 		A77121401E5424B2007564A2 /* PaletteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121321E5424B2007564A2 /* PaletteButton.swift */; };
 		A77121411E5424B2007564A2 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121331E5424B2007564A2 /* StorageManager.swift */; };
 		A77121421E5424B2007564A2 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121341E5424B2007564A2 /* UIAlertControllerExtension.swift */; };
@@ -100,7 +99,6 @@
 		A77121281E5424B2007564A2 /* BubbleGridViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleGridViewDataSource.swift; sourceTree = "<group>"; };
 		A77121291E5424B2007564A2 /* BubbleGridViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleGridViewDelegate.swift; sourceTree = "<group>"; };
 		A771212D1E5424B2007564A2 /* LevelDesignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesignViewController.swift; sourceTree = "<group>"; };
-		A771212E1E5424B2007564A2 /* LevelsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsTableViewController.swift; sourceTree = "<group>"; };
 		A77121321E5424B2007564A2 /* PaletteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteButton.swift; sourceTree = "<group>"; };
 		A77121331E5424B2007564A2 /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		A77121341E5424B2007564A2 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
@@ -278,7 +276,6 @@
 				A71DEFD11E5AD4AE003064AE /* MenuViewController.swift */,
 				A71DEFDB1E5B03A8003064AE /* LevelSelectViewController.swift */,
 				A771212D1E5424B2007564A2 /* LevelDesignViewController.swift */,
-				A771212E1E5424B2007564A2 /* LevelsTableViewController.swift */,
 				A77121591E542B31007564A2 /* GameViewController.swift */,
 				A77121281E5424B2007564A2 /* BubbleGridViewDataSource.swift */,
 				A77121291E5424B2007564A2 /* BubbleGridViewDelegate.swift */,
@@ -471,7 +468,6 @@
 				A771217D1E542B31007564A2 /* Scene.swift in Sources */,
 				A771218B1E54BC30007564A2 /* BombBubble.swift in Sources */,
 				A771218F1E54BC60007564A2 /* StarBubble.swift in Sources */,
-				A771213C1E5424B2007564A2 /* LevelsTableViewController.swift in Sources */,
 				A77121741E542B31007564A2 /* ModelManager.swift in Sources */,
 				A771217B1E542B31007564A2 /* Queue.swift in Sources */,
 				A77121371E5424B2007564A2 /* BubbleGridViewDelegate.swift in Sources */,

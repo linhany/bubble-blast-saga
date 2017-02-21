@@ -72,7 +72,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="4" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zr7-zw-X06" userLabel="Green Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                                        <rect key="frame" x="174" y="11.5" width="53.5" height="53"/>
+                                                        <rect key="frame" x="174" y="12" width="53.5" height="52.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="zr7-zw-X06" secondAttribute="height" multiplier="1:1" id="vhM-Hf-qbp"/>
                                                         </constraints>
@@ -150,7 +150,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="10" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="atN-aS-FlD" userLabel="Star Bubble" customClass="PaletteButton" customModule="BubbleBlastSaga" customModuleProvider="target">
-                                                        <rect key="frame" x="522.5" y="11.5" width="53.5" height="53"/>
+                                                        <rect key="frame" x="522.5" y="12" width="53.5" height="52.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="atN-aS-FlD" secondAttribute="height" multiplier="1:1" id="zzJ-DM-HtK"/>
                                                         </constraints>
@@ -362,36 +362,6 @@
                 </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="25.78125" y="40.4296875"/>
-        </scene>
-        <!--Levels Table View Controller-->
-        <scene sceneID="78Q-mw-gxV">
-            <objects>
-                <tableViewController modalPresentationStyle="currentContext" id="fa9-cs-5V8" customClass="LevelsTableViewController" customModule="BubbleBlastSaga" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="NC0-pi-YH1">
-                        <rect key="frame" x="0.0" y="0.0" width="758" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LevelCell" id="Srk-6R-WhG">
-                                <rect key="frame" x="0.0" y="28" width="758" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Srk-6R-WhG" id="9Ex-yd-HsV">
-                                    <rect key="frame" x="0.0" y="0.0" width="758" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="fa9-cs-5V8" id="e6c-UF-BqP"/>
-                            <outlet property="delegate" destination="fa9-cs-5V8" id="igH-1s-bwh"/>
-                        </connections>
-                    </tableView>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="758" height="1024"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QKj-Pg-pAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1094" y="49"/>
         </scene>
         <!--GameLevel-->
         <scene sceneID="enu-tM-b8Q">
