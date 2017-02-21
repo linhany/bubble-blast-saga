@@ -37,12 +37,16 @@ class GameView: UIView {
     /// The game loop.
     /// Runs the `scene` for `noOfRunsBeforeRendering` times before redrawing the `scene`.
     @objc private func gameLoop() {
+        for _ in 0..<Constants.noOfRunsBeforeRendering {
+            // Return if game is over.
+            guard let scene = scene else {
+                return
+            }
+            scene.run()
+        }
         guard let scene = scene,
               let renderer = renderer else {
             return
-        }
-        for _ in 0..<Constants.noOfRunsBeforeRendering {
-            scene.run()
         }
         renderer.redraw(scene: scene, on: self)
     }
@@ -56,6 +60,10 @@ class GameView: UIView {
         updater.invalidate()
         renderer.reset()
         scene.reset()
+        self.updater = nil
+        self.renderer = nil
+        self.scene = nil
+        print("EVERYTHING RESET!")
     }
 
     /// Passes touches on this view onto the `scene`.

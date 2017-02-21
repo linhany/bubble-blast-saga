@@ -58,11 +58,17 @@ class PhysicsWorld {
         physicsBodies.remove(at: foundIndexToRemove)
     }
 
-    static func reset() {
+    static func resetWorld() {
         for physicsBody in physicsBodies {
             remove(physicsBody: physicsBody)
         }
         physicsBodies.removeAll()
+    }
+
+    func reset() {
+        PhysicsWorld.resetWorld()
+        collisions.removeAll()
+        physicsBodiesToCheckAgainst.removeAll()
     }
 
     /// Advances the `PhysicsWorld`.
@@ -119,6 +125,9 @@ class PhysicsWorld {
 
     /// Calls the `PhysicsContactDelegate` to handle collisions detected.
     private func resolveCollisions() {
+        if collisions.isEmpty {
+            return
+        }
         guard let contactDelegate = contactDelegate else {
             assertionFailure("Contact delegate not set up!")
             return

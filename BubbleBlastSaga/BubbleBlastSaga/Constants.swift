@@ -40,6 +40,9 @@ struct Constants {
     static let menuToLevelDesignSegueIdentifier = "MenuToLevelDesignSegue"
     static let levelDesignToLevelSelectSegueIdentifier = "LevelDesignToLevelSelectSegue"
 
+    static let endGameLoseText = "YOU LOST! :("
+    static let endGameWinText = "YOU WON! :)"
+
     static let redBubbleIdentifier = "bubble-red"
     static let orangeBubbleIdentifier = "bubble-orange"
     static let blueBubbleIdentifier = "bubble-blue"

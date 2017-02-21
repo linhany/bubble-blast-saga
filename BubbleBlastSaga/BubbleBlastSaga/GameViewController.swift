@@ -10,19 +10,23 @@ import UIKit
 
 class GameViewController: UIViewController {
     @IBOutlet var boundsLine: UIImageView!
+    @IBOutlet var endGameText: UITextField!
+    @IBOutlet var restartButton: RoundedButton!
+    @IBOutlet var backButton: RoundedButton!
     @IBOutlet private var cannonImage: CannonImageView!
     @IBOutlet private var bubbleGrid: UICollectionView!
     @IBOutlet private var cannonArea: UIView!
     internal var modelManager: ModelManager? = nil
     internal var unwindSegueIdentifier: String?
-
     internal var gameView: GameView? = nil
 
     override func viewDidLoad() {
+        clearEndGameScreen()
         alignBoundsLine()
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        endGameText.isUserInteractionEnabled = false
         bubbleGrid.isUserInteractionEnabled = false
         presentGameScene()
     }
@@ -53,6 +57,10 @@ class GameViewController: UIViewController {
         self.gameView = gameView
     }
 
+    func clearEndGameScreen() {
+        endGameText.text = ""
+    }
+
     @IBAction func backButtonPressed(_ sender: UIButton) {
         stopGame()
         guard let unwindSegueIdentifier = unwindSegueIdentifier else {
@@ -63,7 +71,20 @@ class GameViewController: UIViewController {
     }
 
     @IBAction func retryButtonPressed(_ sender: UIButton) {
+        clearEndGameScreen()
         retryGame()
+    }
+
+    func showGameWinScreen() {
+
+    }
+
+    func showGameLoseScreen(message: String) {
+        stopGame()
+        UIView.animate(withDuration: 0.5,
+                       animations: {
+                        self.endGameText.text = message
+        })
     }
 
     func stopGame() {

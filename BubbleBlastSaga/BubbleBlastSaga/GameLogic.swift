@@ -60,6 +60,20 @@ class GameLogic {
                             getBubbleHelper: modelManager.getBubbleAt)
     }
 
+    /// Game is won if all normal bubbles are cleared from grid.
+    func isGameWon() -> Bool {
+        let (start, end) = BubbleType.getNormalBubblesRawValueRange()
+        for rawValue in start...end {
+            guard let bubbleType = BubbleType(rawValue: rawValue) else {
+                fatalError("Raw values are given wrongly!")
+            }
+            if modelManager.isBubbleTypeInGrid(bubbleType) {
+                return false
+            }
+        }
+        return true
+    }
+    
     func handleNewlySnappedBubble(_ newBubble: GameBubble) {
         handleSurroundingSpecialBubbles(with: newBubble)
         removeConnectedBubblesOfSameColor(as: newBubble)

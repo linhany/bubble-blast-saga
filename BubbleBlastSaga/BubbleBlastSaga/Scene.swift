@@ -35,6 +35,7 @@ class Scene {
     func run() {
         update()
         simulatePhysics()
+        checkGameState()
     }
 
     /// Adds a `gameObject` onto this `Scene`.
@@ -66,13 +67,16 @@ class Scene {
     func update() {
     }
 
+    func checkGameState() {
+    }
+
     /// Override to respond to user touch, if needed.
     func handleTouch(at touchLocation: CGPoint) {
     }
 
     func reset() {
         gameObjects = []
-        PhysicsWorld.reset()
+        physicsWorld.reset()
         physicsWorld = PhysicsWorld()
     }
 

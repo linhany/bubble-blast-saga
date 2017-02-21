@@ -14,12 +14,17 @@ class ModelManager: NSObject {
     /// 2D array representing state of bubble grid in offset layout.
     fileprivate var gridState: [[GameBubble?]]
 
+    /// Use RawValue of `BubbleType` as the hashable key, number of bubbles of that
+    /// type as value.
+    fileprivate(set) var bubbleTypesInGrid: [Int: Int]
+
     /// Notification Center to notify view when model is updated.
     private let nc = NotificationCenter.default
 
-    /// Initialisation sets up a fixed size 2D array that models the game grid.
+    /// Initialisation sets up a fixed size empty 2D array that models the game grid.
     required override init() {
         gridState = []
+        bubbleTypesInGrid = [:]
         super.init()
         for row in 0..<Constants.noOfRowsInGameGrid {
             gridState.append([])
@@ -60,12 +65,17 @@ class ModelManager: NSObject {
         guard isInGrid(row: row, column: column) else {
             return
         }
-
+        if let bubbleCurrentlyInGrid = getBubbleAt(row: row, column: column) {
+            decrementTrackedBubbleType(bubbleCurrentlyInGrid.type)
+        }
         gridState[row][column] = bubble
         nc.post(name: Notification.Name(rawValue: Constants.notifyBubbleGridUpdated),
                 object: nil,
                 userInfo: [Constants.notifyBubbleType: bubble?.type ?? BubbleType.empty,
                            Constants.notifyPosition: (row, column)])
+        if let bubble = bubble {
+            incrementTrackedBubbleType(bubble.type)
+        }
     }
 
     /// Removes bubble at a location in grid state specified by `row` and `column`.
@@ -158,6 +168,14 @@ class ModelManager: NSObject {
         return NormalBubble(color: color)
     }
 
+    func isBubbleTypeInGrid(_ bubbleType: BubbleType) -> Bool {
+        let bubbleTypeRawValue = bubbleType.rawValue
+        if let bubbleType = bubbleTypesInGrid[bubbleTypeRawValue] {
+            return bubbleType > 0
+        }
+        return false
+    }
+
     /// Checks if the parameter `gridState` is valid by iterating through every row
     /// and checking if its dimensions fit the game constants.
     private func isValidGridState(_ gridState: [[GameBubble?]]) -> Bool {
@@ -173,6 +191,30 @@ class ModelManager: NSObject {
             }
         }
         return true
+    }
+
+    private func incrementTrackedBubbleType(_ bubbleType: BubbleType) {
+        if bubbleType == .empty {
+            return
+        }
+        let bubbleTypeRawValue = bubbleType.rawValue
+        if let _ = bubbleTypesInGrid[bubbleTypeRawValue] {
+            bubbleTypesInGrid[bubbleTypeRawValue]? += 1
+        } else {
+            bubbleTypesInGrid[bubbleTypeRawValue] = 1
+        }
+    }
+
+    private func decrementTrackedBubbleType(_ bubbleType: BubbleType) {
+        if bubbleType == .empty {
+            return
+        }
+        let bubbleTypeRawValue = bubbleType.rawValue
+        guard let _ = bubbleTypesInGrid[bubbleTypeRawValue] else {
+            assertionFailure("Bubble type must be tracked in grid!")
+            return
+        }
+        bubbleTypesInGrid[bubbleTypeRawValue]? -= 1
     }
 
     /// Checks if a specified `row` and `column` position is inside the grid.
@@ -196,6 +238,7 @@ extension ModelManager: NSCopying {
     func copy(with zone: NSZone? = nil) -> Any {
         let theCopy = type(of: self).init()
         theCopy.gridState = self.gridState
+        theCopy.bubbleTypesInGrid = self.bubbleTypesInGrid
         return theCopy
     }
 }

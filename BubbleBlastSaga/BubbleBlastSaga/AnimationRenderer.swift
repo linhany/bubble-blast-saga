@@ -81,7 +81,7 @@ class AnimationRenderer: Renderer {
             animations: {
                 gameBubbleImage.center.y += view.frame.size.height
                 gameBubbleImage.alpha = 0
-        },
+            },
             completion: { _ in
                 gameBubbleImage.removeFromSuperview()
         })
@@ -106,7 +106,7 @@ class AnimationRenderer: Renderer {
             withDuration: Constants.loadingBubbleAnimationDuration,
             animations: {
                 gameBubbleImage.center = position
-        },
+            },
             completion: { _ in
         })
     }

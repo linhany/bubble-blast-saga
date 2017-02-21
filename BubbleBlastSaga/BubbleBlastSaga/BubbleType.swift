@@ -29,4 +29,8 @@ enum BubbleType: Int {
     case indestructible = 11
 
     case empty = 12
+
+    static func getNormalBubblesRawValueRange() -> (Int, Int) {
+        return (1, 7)
+    }
 }

@@ -29,6 +29,8 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
     /// The newly snapped bubbles in the grid.
     private var newlySnappedBubbles: [GameBubble] = []
 
+    private var isGameLost = false
+
     init(modelManager: ModelManager,
          gameViewController: GameViewController,
          gameProjectileQueue: Queue<GameBubble>) {
@@ -52,6 +54,15 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
             gameLogic.handleNewlySnappedBubble(newBubble)
         }
         newlySnappedBubbles.removeAll()
+    }
+
+    override func checkGameState() {
+        if isGameLost {
+            gameViewController.showGameLoseScreen(message: Constants.endGameLoseText)
+        }
+        if gameLogic.isGameWon() {
+            gameViewController.showGameLoseScreen(message: Constants.endGameWinText)
+        }
     }
 
     override func handleTouch(at touchLocation: CGPoint) {
@@ -273,6 +284,7 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
         // to a GameBubble in the last row of our grid.
         // PS5: Game over screen. Currently game continues on.
         remove(gameObject: projectile)
+        isGameLost = true
     }
 
     /// Snaps the `gameBubble` to the grid position indicated by `row` and `col`.
@@ -292,12 +304,11 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
 
     /// Returns true if the `touchLocation` is within the firing angle range.
     private func isWithinFiringAngleRange(_ touchLocation: CGPoint) -> Bool {
-//        let offset = touchLocation - gameViewController.getCannonPosition()
-//        let angle = Double(atan2(offset.x, -offset.y))
-//
-//        return angle > Constants.leftFireAngleBound &&
-//               angle < Constants.rightFireAngleBound
-        return true
+        let offset = touchLocation - gameViewController.getCannonPosition()
+        let angle = Double(atan2(offset.x, -offset.y))
+
+        return angle > Constants.leftFireAngleBound &&
+               angle < Constants.rightFireAngleBound
     }
 
 }
