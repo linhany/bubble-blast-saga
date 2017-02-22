@@ -81,11 +81,10 @@ class LevelDesignViewController: UIViewController {
         presentResetLevelAlert()
     }
 
-    /// Prepares for segue: load level popover.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let modelManager = modelManager,
-            let storageManager = storageManager else {
-                fatalError("Model/Storage manager reference not passed!")
+              let storageManager = storageManager else {
+            fatalError("Model/Storage manager reference not passed!")
         }
         if segue.identifier == Constants.levelDesignToLevelSelectSegueIdentifier {
             guard let levelSelectVC = segue.destination as? LevelSelectViewController else {
@@ -94,9 +93,9 @@ class LevelDesignViewController: UIViewController {
             levelSelectVC.modelManager = modelManager
             levelSelectVC.storageManager = storageManager
             levelSelectVC.unwindSegueIdentifier = Constants.levelSelectUnwindToLevelDesignSegueIdentifier
-        } else if segue.identifier == Constants.startGameLevelSegueIndentifier {
+        } else if segue.identifier == Constants.startGameLevelSegueIdentifier {
             guard let gameVC = segue.destination as? GameViewController else {
-                return
+                fatalError("Level design to game level segue failed!")
             }
             guard let modelManagerCopy = modelManager.copy() as? ModelManager else {
                 fatalError("Copying failed!")
@@ -219,16 +218,19 @@ class LevelDesignViewController: UIViewController {
 
     /// Checks if `userInput` for a level name is valid.
     /// A valid input is one that contains more than one
-    /// non-whitespace character, and at most 25 characters.
+    /// non-whitespace character, and is within the
+    /// `levelNameCharacterCountLimit` value as defined in Constants file.
     private func isUserInputLevelNameValid(userInput: String) -> Bool {
-        let hasAtLeastOneNonWhitespaceCharacter = userInput.trimmingCharacters(in: .whitespaces)
-                != Constants.emptyString
-        let isAtMostTwentyFiveCharacters = userInput.characters.count <= 25
-        return hasAtLeastOneNonWhitespaceCharacter && isAtMostTwentyFiveCharacters
+        let hasAtLeastOneNonWhitespaceCharacter =
+                userInput.trimmingCharacters(in: .whitespaces) != Constants.emptyString
+        let isWithinCharacterCountLimit =
+                userInput.characters.count <= Constants.levelNameCharacterCountLimit
+        return hasAtLeastOneNonWhitespaceCharacter && isWithinCharacterCountLimit
     }
 
-    /// Saves the grid state to file with the `fileName`,
-    /// shows feedback to user to inform if the save was successful.
+    /// Saves the `Level` with `fileName` to file,
+    /// along with an image of the `bubbleGrid` for level selection preview.
+    /// Shows feedback to user to inform if the save was successful.
     private func saveGridStateWithFeedbackToModel(fileName: String) {
         guard let modelManager = modelManager,
               let storageManager = storageManager else {
@@ -236,19 +238,25 @@ class LevelDesignViewController: UIViewController {
         }
         let gridState = modelManager.getGridState()
         let level = Level(gridState: gridState, fileName: fileName)
+        let levelPreviewImage = takeScreenshotOfBubbleGrid()
+        let isSaveSuccessful =
+            storageManager.saveLevel(level: level, levelPreviewImage: levelPreviewImage)
+        isSaveSuccessful
+                ? showFeedback(feedback: Constants.feedbackLevelSavingSuccessful)
+                : showFeedback(feedback: Constants.feedbackLevelSavingUnsuccessful)
+    }
+
+    private func takeScreenshotOfBubbleGrid() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(bubbleGrid.frame.size, false, 0)
-        let rect = CGRect(x: -bubbleGrid.frame.origin.x, y: -bubbleGrid.frame.origin.y, width: view.bounds.size.width, height: view.bounds.size.height)
+        let rect = CGRect(x: -bubbleGrid.frame.origin.x,
+                y: -bubbleGrid.frame.origin.y,
+                width: view.bounds.size.width,
+                height: view.bounds.size.height)
         view.drawHierarchy(in: rect, afterScreenUpdates: true)
         guard let levelPreviewImage = UIGraphicsGetImageFromCurrentImageContext() else {
             fatalError("Cannot get image!")
         }
-        let isSaveSuccessful =
-            storageManager.saveLevel(level: level, levelPreviewImage: levelPreviewImage)
-        if isSaveSuccessful {
-            showFeedback(feedback: Constants.feedbackLevelSavingSuccessful)
-        } else {
-            showFeedback(feedback: Constants.feedbackLevelSavingUnsuccessful)
-        }
+        return levelPreviewImage
     }
 
     /// Presents a reset level alert to the user.
@@ -278,7 +286,7 @@ class LevelDesignViewController: UIViewController {
     }
 
     /// Marks the currently selected button by user in palette
-    /// with a white border around the item, with an animation
+    /// with a black border around the item, with an animation
     /// to indicate the selection.
     private func markCurrentlySelectedButton(as button: UIButton) {
         clearAllPaletteButtonsMarkings()

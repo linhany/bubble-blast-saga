@@ -206,7 +206,7 @@ class GameViewController: UIViewController {
     }
 
     private func clearEndGameScreen() {
-        endGameText.text = ""
+        endGameText.text = Constants.emptyString
     }
 
     private func performUnwindSegue() {

@@ -31,8 +31,8 @@ struct Constants {
     static let levelCellReuseIdentifier = "levelCell"
     static let loadLevelsCellIdentifier = "LevelCell"
     static let loadLevelsSegueIdentifier = "ShowLoadLevelsSegue"
-    static let startGameLevelSegueIndentifier = "StartGameLevelSegue"
-    static let levelSelectPlayGameSegueIndentifier = "LevelSelectPlayGameSegue"
+    static let startGameLevelSegueIdentifier = "StartGameLevelSegue"
+    static let levelSelectPlayGameSegueIdentifier = "LevelSelectPlayGameSegue"
     static let gameUnwindToLevelDesignSegueIdentifier = "GameUnwindToLevelDesignSegue"
     static let gameUnwindToLevelSelectSegueIdentifier = "GameUnwindToLevelSelectSegue"
     static let levelSelectUnwindToLevelDesignSegueIdentifier = "LevelSelectUnwindToLevelDesignSegue"
@@ -81,9 +81,17 @@ struct Constants {
     static let feedbackLevelDelete = "LEVEL DELETED!"
     static let feedbackTimer = 1.5
 
+    static let levelSelectionNoOfLevelsInARow = 3
+    static let levelSelectionCellSizeProportion = 3.28
+    static let levelSelectionCellInset = 10.0
+    static let levelSelectionDeleteButtonTitle = "Delete"
+    static let levelSelectionDeleteModeDeleteButtonTitle = "Confirm"
+    static let levelSelectionHeaderText = "Level selection"
+    static let levelSelectionDeleteModeHeaderText = "Deletion is permanent! Mark levels to delete"
+
     static let emptyString = ""
 
-    static let loadLevelTableHeader = "Levels"
+    static let levelNameCharacterCountLimit = 25
 
     static let alertSaveLevelTitle = "Save Level"
     static let alertSaveLevelMessage = "Level names must be between 1 to 25 characters."
