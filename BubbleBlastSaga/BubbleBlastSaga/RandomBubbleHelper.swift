@@ -48,8 +48,6 @@ struct RandomBubbleHelper {
               let newBubble = modelManager.buildBubble(withBubbleType: newBubbleType) else {
             fatalError("Error with building bubble.")
         }
-        print("Generated new bubble that is in grid: ")
-        print(newBubble.type)
         return newBubble
     }
 

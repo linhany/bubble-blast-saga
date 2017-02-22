@@ -215,7 +215,7 @@ class GameLogic {
             assertionFailure("Game Bubble must have a position!")
             return
         }
-        guard let (row, col) = gameViewController.getBubbleGridRowAndCol(position: position) else {
+        guard let (row, col) = gameViewController.getBubbleGridRowAndColFromPosition(position: position) else {
             assertionFailure("Game Bubble position must be on grid!")
             return
         }
@@ -228,7 +228,7 @@ class GameLogic {
             assertionFailure("Game Bubble must have a position!")
             return
         }
-        guard let (row, col) = gameViewController.getBubbleGridRowAndCol(position: position) else {
+        guard let (row, col) = gameViewController.getBubbleGridRowAndColFromPosition(position: position) else {
             assertionFailure("Game Bubble position must be on grid!")
             return
         }

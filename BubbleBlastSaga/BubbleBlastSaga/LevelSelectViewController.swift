@@ -19,6 +19,10 @@ class LevelSelectViewController: UIViewController {
     fileprivate var isToBeDeleted = Set<IndexPath>()
     fileprivate var isDeleteModeOn = false
 
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let modelManager = modelManager,
@@ -29,10 +33,6 @@ class LevelSelectViewController: UIViewController {
         isDeleteModeOn = false
     }
 
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-
     @IBAction func backButtonPressed(_ sender: UIButton) {
         guard let unwindSegueIdentifier = unwindSegueIdentifier else {
             assertionFailure("Unwind segue identifier not assigned!")
@@ -40,7 +40,6 @@ class LevelSelectViewController: UIViewController {
         }
         performSegue(withIdentifier: unwindSegueIdentifier, sender: self)
     }
-
 
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
         if isDeleteModeOn {

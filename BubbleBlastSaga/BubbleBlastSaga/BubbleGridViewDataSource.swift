@@ -49,7 +49,8 @@ extension BubbleGridViewDataSource: UICollectionViewDataSource {
             fatalError("Cell not assigned the proper view subclass!")
         }
         let width = collectionView.bounds.width
-        cell.initImageView(gridWidth: width, isBorderHidden: false)
+        // Shows border only if this collectionView is in level designer.
+        cell.initImageView(gridWidth: width, isBorderShown: isInLevelDesigner)
         return cell
     }
 

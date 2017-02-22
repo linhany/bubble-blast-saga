@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// The controller responsible for the level design view.
+/// The Controller responsible for the level design view.
 /// This view comprises of a bubble grid, a palette and
 /// START, SAVE, LOAD, RESET buttons.
 /// Responds to user interactions through buttons and gestures
@@ -37,12 +37,15 @@ class LevelDesignViewController: UIViewController {
     /// The timer used in showing user feedback.
     private var timer: Timer?
 
-    /// Initialisation of components.
-    /// To be changed during integration phase, whereby the app delegate
-    /// will be made responsible for initialisation and passing it
-    /// to the first view controller.
+    /// Variables to be assigned by the ViewController performing segue to this class.
     internal var modelManager: ModelManager?
     internal var storageManager: StorageManager?
+
+    /// Hides the status bar in this view,
+    /// as our collection view covers the top of the screen.
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     override func viewDidLoad() {
         guard let _ = modelManager,
@@ -55,12 +58,6 @@ class LevelDesignViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         modelManager?.reloadGridState()
-    }
-
-    /// Hides the status bar in this view,
-    /// as our collection view covers the top of the screen.
-    override var prefersStatusBarHidden: Bool {
-        return true
     }
 
     @IBAction func backToLevelDesignViewController(segue: UIStoryboardSegue) {

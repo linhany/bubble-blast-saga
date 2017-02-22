@@ -107,7 +107,7 @@ class GameLevelScene: Scene {
 
     /// Returns the direction for projectile launching as a normalized CGPoint.
     private func getProjectileDirection(touchLocation: CGPoint) -> CGPoint {
-        let offset = touchLocation - gameViewController.getCannonPosition()
+        let offset = touchLocation - gameViewController.getCannonProjectilePosition()
         let direction = offset.normalized()
         return direction
     }
@@ -157,7 +157,7 @@ class GameLevelScene: Scene {
         }
 
         // Move to Cannon position.
-        nextProjectile.position = gameViewController.getCannonPosition()
+        nextProjectile.position = gameViewController.getCannonProjectilePosition()
         postNotification(name: Constants.notifyLoadingCannonGameBubble,
                 userInfo: ["GameBubble": nextProjectile])
 
@@ -219,7 +219,7 @@ class GameLevelScene: Scene {
         let bubbleWidth = gameViewController.getBubbleWidth()
         add(gameObject: gameBubble)
         gameBubble.size = CGSize(width: bubbleWidth, height: bubbleWidth)
-        gameBubble.position = gameViewController.getCannonPosition()
+        gameBubble.position = gameViewController.getCannonProjectilePosition()
     }
 
     /// Adds the `gameBubble` at the next projectile position in the game scene.
@@ -227,12 +227,12 @@ class GameLevelScene: Scene {
         let bubbleWidth = gameViewController.getBubbleWidth()
         add(gameObject: gameBubble)
         gameBubble.size = CGSize(width: bubbleWidth, height: bubbleWidth)
-        gameBubble.position = gameViewController.getNextBubblePosition()
+        gameBubble.position = gameViewController.getNextProjectilePosition()
     }
 
     /// Returns true if the `touchLocation` is within the firing angle range.
     private func isWithinFiringAngleRange(_ touchLocation: CGPoint) -> Bool {
-        let offset = touchLocation - gameViewController.getCannonPosition()
+        let offset = touchLocation - gameViewController.getCannonProjectilePosition()
         let angle = Double(atan2(offset.x, -offset.y))
 
         return angle > Constants.leftFireAngleBound &&
@@ -256,7 +256,7 @@ extension GameLevelScene: GameLogicDelegate {
                 }
                 add(gameObject: gameBubble)
                 let width = gameViewController.getBubbleWidth()
-                gameBubble.position = gameViewController.getBubblePosition(row: row, col: col)
+                gameBubble.position = gameViewController.getBubblePositionFromRowAndCol(row: row, col: col)
                 gameBubble.size = CGSize(width: width, height: width)
                 addCircularPhysicsBody(gameBubble: gameBubble)
             }
@@ -317,7 +317,7 @@ extension GameLevelScene: PhysicsContactDelegate {
                                        (position.x - radius, position.y)]
         for (x, y) in possiblePositionsToSnap {
             if let (row, col) =
-            gameViewController.getBubbleGridRowAndCol(position: CGPoint(x: x, y: y)) {
+            gameViewController.getBubbleGridRowAndColFromPosition(position: CGPoint(x: x, y: y)) {
                 snapToGrid(projectile, row: row, col: col)
                 return
             }
@@ -390,7 +390,7 @@ extension GameLevelScene: PhysicsContactDelegate {
 
     /// Snaps the `gameBubble` to the grid position indicated by `row` and `col`.
     private func snapToGrid(_ gameBubble: GameBubble, row: Int, col: Int) {
-        gameBubble.position = gameViewController.getBubblePosition(row: row, col: col)
+        gameBubble.position = gameViewController.getBubblePositionFromRowAndCol(row: row, col: col)
         gameBubble.physicsBody?.isResting = true
         newlySnappedBubbles.append(gameBubble)
         postNotification(name: Constants.notifyNewlySnappedGameBubble,

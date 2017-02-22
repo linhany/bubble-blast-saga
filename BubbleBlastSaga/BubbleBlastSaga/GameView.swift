@@ -63,7 +63,6 @@ class GameView: UIView {
         self.updater = nil
         self.renderer = nil
         self.scene = nil
-        print("EVERYTHING RESET!")
     }
 
     /// Passes touches on this view onto the `scene`.

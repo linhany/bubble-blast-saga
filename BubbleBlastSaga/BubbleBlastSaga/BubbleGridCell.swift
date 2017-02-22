@@ -13,20 +13,20 @@ class BubbleGridCell: UICollectionViewCell {
 
     /// The UIImageView that represents a game bubble being at that location.
     private var imageView: UIImageView?
-    private var isBorderHidden = false
+    private var isBorderShown = true
 
     override func layoutSubviews() {
         layer.cornerRadius = frame.size.width / 2
         layer.borderColor = UIColor.lightGray.cgColor
-        layer.borderWidth = isBorderHidden ? 0 : 1
+        layer.borderWidth = isBorderShown ? 1 : 0
     }
 
     /// Initializer for image view size.
-    func initImageView(gridWidth: CGFloat, isBorderHidden: Bool) {
+    func initImageView(gridWidth: CGFloat, isBorderShown: Bool) {
         let size = Int(gridWidth / CGFloat(Constants.noOfColumnsInEvenRowOfGameGrid))
         imageView =
             UIImageView(frame: CGRect(x: 0, y: 0, width: size, height: size))
-        self.isBorderHidden = isBorderHidden
+        self.isBorderShown = isBorderShown
     }
 
     /// Returns true if imageView for this cell is empty.

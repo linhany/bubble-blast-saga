@@ -8,53 +8,165 @@
 
 import UIKit
 
+/// The Controller responsible for starting `GameLevelScene` through the `GameView`,
+/// and handling user interactions for views that are not `GameObject`s in the scene,
+/// e.g. cannon, navigation buttons, end game screen.
+/// Also exposes some functions that deal with positions of `GameObject`s in the scene.
 class GameViewController: UIViewController {
 
-    @IBOutlet var boundsLine: UIImageView!
-    @IBOutlet var endGameText: UITextField!
-    @IBOutlet var restartButton: RoundedButton!
-    @IBOutlet var backButton: RoundedButton!
+    /// Outlets to storyboard elements.
+    @IBOutlet private var boundsLine: UIImageView!
+    @IBOutlet private var endGameText: UITextField!
+    @IBOutlet private var restartButton: RoundedButton!
+    @IBOutlet private var backButton: RoundedButton!
     @IBOutlet private var cannonImage: CannonImageView!
     @IBOutlet private var bubbleGrid: UICollectionView!
     @IBOutlet private var cannonArea: UIView!
+
+    /// Collection view required implementations.
+    private var bubbleGridViewDataSource: BubbleGridViewDataSource?
+    private var bubbleGridViewDelegate: BubbleGridViewDelegate?
+
+    /// The `GameView` which presents the `GameLevelScene`.
+    private var gameView: GameView? = nil
+
+    /// Variables to be assigned by the ViewController performing segue to this class.
     internal var modelManager: ModelManager? = nil
     internal var unwindSegueIdentifier: String?
-    internal var gameView: GameView? = nil
+
+    // MARK - Overrides.
+
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     override func viewDidLoad() {
+        connectBubbleGridViewDataSourceAndDelegates()
         clearEndGameScreen()
         alignBoundsLine()
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        endGameText.isUserInteractionEnabled = false
-        bubbleGrid.isUserInteractionEnabled = false
-        presentGameScene()
+        disableUserInteractionOnUnusedViews()
+        startGame()
     }
 
-    func alignBoundsLine() {
-        let bubbleGridSize = bubbleGrid.collectionViewLayout.collectionViewContentSize
-        let targetOriginX = CGFloat(0.0)
-        let targetOriginY = bubbleGridSize.height
-
-        boundsLine.frame.origin = CGPoint(x: targetOriginX, y: targetOriginY)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        animateCannonRotate(towards: touch.location(in: view))
     }
 
-    func presentGameScene() {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        animateCannonRotate(towards: touch.location(in: view))
+    }
+
+    // MARK - GameViewController provided API.
+
+    func animateCannonFire() {
+        cannonImage.startAnimating()
+    }
+
+    /// Stops the game and displays the `message`.
+    func showEndGameScreen(message: String) {
+        stopGame()
+        self.endGameText.text = message
+    }
+
+    /// Returns the width of a bubble in the `bubbleGrid`.
+    func getBubbleWidth() -> CGFloat {
+        return view.frame.width/CGFloat(Constants.noOfColumnsInEvenRowOfGameGrid)
+    }
+
+    /// Returns the radius of a bubble in the `bubbleGrid`.
+    func getBubbleRadius() -> CGFloat {
+        return getBubbleWidth()/2
+    }
+
+    /// Returns the position of a bubble projectile loaded into the cannon.
+    func getCannonProjectilePosition() -> CGPoint {
+        return cannonArea.center
+    }
+
+    /// Returns the position of the next bubble projectile shown to user.
+    func getNextProjectilePosition() -> CGPoint {
+        let origin = cannonArea.frame.origin
+        let x = origin.x + getBubbleRadius()
+        let y = origin.y
+        return CGPoint(x: x, y: y)
+    }
+
+    /// Returns the row and column of a bubble in `bubbleGrid`.
+    /// Returns nil if the bubble does not have a position, or if the bubble's
+    /// position does not fit it into the `bubbleGrid`.
+    func getBubbleRowAndCol(bubble: GameBubble) -> (Int, Int)? {
+        guard let position = bubble.position else {
+            assertionFailure("Target bubble does not have a position!")
+            return nil
+        }
+        return getBubbleGridRowAndColFromPosition(position: position)
+    }
+
+    /// Returns the `IndexPath` of a bubble in `bubbleGrid`.
+    /// Returns nil if the bubble does not have a position, or if the bubble's
+    /// position does not fit it into the `bubbleGrid`.
+    func getBubbleIndexPath(bubble: GameBubble) -> IndexPath? {
+        guard let position = bubble.position else {
+            assertionFailure("Target bubble does not have a position!")
+            return nil
+        }
+        return positionToIndexPath(position: position)
+    }
+
+    /// Takes in a `row` and `column` of bubbleGrid, and returns the rightful
+    /// `position` of a bubble located there.
+    /// The `position` returned is the center point of bubble.
+    /// Returns nil if the `row` and `column` given is not within the bubbleGrid.
+    func getBubblePositionFromRowAndCol(row: Int, col: Int) -> CGPoint? {
+        return rowAndColToPosition(row: row, col: col)
+    }
+
+    /// Takes in a `position` and returns the `row` and `column` that this `position`
+    /// falls under for the bubbleGrid.
+    /// Returns nil if `position` does lie within the grid.
+    func getBubbleGridRowAndColFromPosition(position: CGPoint) -> (Int, Int)? {
+        return positionToRowAndCol(position: position)
+    }
+
+    // MARK - Storyboard button actions.
+
+    @IBAction private func backButtonPressed(_ sender: UIButton) {
+        stopGame()
+        performUnwindSegue()
+    }
+
+    @IBAction private func retryButtonPressed(_ sender: UIButton) {
+        clearEndGameScreen()
+        retryGame()
+    }
+
+    // MARK - Private helpers.
+
+    /// Starts the game by presenting the `GameLevelScene` with `GameView`.
+    private func startGame() {
         guard let modelManager = modelManager else {
             fatalError("Model Manager reference was not passed!")
         }
-        // Copy for reset functionality.
+        // Copy for retry functionality.
         guard let modelManagerCopy = modelManager.copy() as? ModelManager else {
             fatalError("Copying failed!")
         }
         let randomBubbleHelper =
-            RandomBubbleHelper(bubbleTypeRawValueRange: BubbleType.getNormalBubblesRawValueRange(),
-                               noOfBubbles: Int.max,
-                               modelManager: modelManagerCopy)
+                RandomBubbleHelper(bubbleTypeRawValueRange: BubbleType.getNormalBubblesRawValueRange(),
+                        noOfBubbles: Int.max,
+                        modelManager: modelManagerCopy)
         let scene = GameLevelScene(modelManager: modelManagerCopy,
-                                   gameViewController: self,
-                                   randomBubbleHelper: randomBubbleHelper)
+                gameViewController: self,
+                randomBubbleHelper: randomBubbleHelper)
         guard let gameView = view as? GameView else {
             fatalError("GameView class not subclassed properly!")
         }
@@ -63,12 +175,41 @@ class GameViewController: UIViewController {
         self.gameView = gameView
     }
 
-    func clearEndGameScreen() {
+    private func retryGame() {
+        stopGame()
+        startGame()
+    }
+
+    private func stopGame() {
+        guard let gameView = gameView else {
+            return
+        }
+        gameView.stopPresenting()
+    }
+
+    private func animateCannonRotate(towards position: CGPoint) {
+        let offset = position - getCannonProjectilePosition()
+        cannonImage.rotateCannon(offset: offset)
+    }
+
+    private func disableUserInteractionOnUnusedViews() {
+        endGameText.isUserInteractionEnabled = false
+        bubbleGrid.isUserInteractionEnabled = false
+    }
+
+    private func alignBoundsLine() {
+        let bubbleGridSize = bubbleGrid.collectionViewLayout.collectionViewContentSize
+        let targetOriginX = CGFloat(0.0)
+        let targetOriginY = bubbleGridSize.height
+
+        boundsLine.frame.origin = CGPoint(x: targetOriginX, y: targetOriginY)
+    }
+
+    private func clearEndGameScreen() {
         endGameText.text = ""
     }
 
-    @IBAction func backButtonPressed(_ sender: UIButton) {
-        stopGame()
+    private func performUnwindSegue() {
         guard let unwindSegueIdentifier = unwindSegueIdentifier else {
             assertionFailure("Unwind segue identifier not set up!")
             return
@@ -76,214 +217,56 @@ class GameViewController: UIViewController {
         performSegue(withIdentifier: unwindSegueIdentifier, sender: self)
     }
 
-    @IBAction func retryButtonPressed(_ sender: UIButton) {
-        clearEndGameScreen()
-        retryGame()
+    private func connectBubbleGridViewDataSourceAndDelegates() {
+        bubbleGridViewDataSource =
+                BubbleGridViewDataSource(collectionView: bubbleGrid, isInLevelDesigner: false)
+        bubbleGridViewDelegate =
+                BubbleGridViewDelegate(collectionView: bubbleGrid)
     }
 
-    func showEndGameScreen(message: String) {
-        stopGame()
-        UIView.animate(withDuration: 0.5,
-                       animations: {
-                        self.endGameText.text = message
-        })
-    }
+    // MARK - Index Path, Row/Column, Position helpers
+    /// Note: Some of the following helper functions use the
+    /// `bubbleGrid` to easily convert from one to the other.
+    /// Nil will be returned in these functions if caller provides
+    /// parameters that are outside the bubbleGrid.
 
-    func stopGame() {
-        guard let gameView = gameView else {
-            return
-        }
-        gameView.stopPresenting()
-    }
-
-    func retryGame() {
-        guard let gameView = gameView else {
-            return
-        }
-        gameView.stopPresenting()
-        presentGameScene()
-    }
-
-    func animateCannonFire() {
-        cannonImage.startAnimating()
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
-            return
-        }
-        let touchLocation = touch.location(in: view)
-        let offset = touchLocation - getCannonPosition()
-        cannonImage.rotateCannon(offset: offset)
-    }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
-            return
-        }
-        let touchLocation = touch.location(in: view)
-        let offset = touchLocation - getCannonPosition()
-        cannonImage.rotateCannon(offset: offset)
-    }
-
-    func getBubbleWidth() -> CGFloat {
-        return view.frame.width/CGFloat(Constants.noOfColumnsInEvenRowOfGameGrid)
-    }
-
-    func getBubbleRadius() -> CGFloat {
-        return getBubbleWidth()/2
-    }
-
-    func getCannonPosition() -> CGPoint {
-        return cannonArea.center
-    }
-
-    func getNextBubblePosition() -> CGPoint {
-        let origin = cannonArea.frame.origin
-        let x = origin.x + getBubbleRadius()
-        let y = origin.y
-        return CGPoint(x: x, y: y)
-    }
-
-    func getBubbleRowAndCol(bubble: GameBubble) -> (Int, Int)? {
-        guard let position = bubble.position else {
-            assertionFailure("Target bubble does not have a position!")
+    private func indexPathToPosition(indexPath: IndexPath) -> CGPoint? {
+        guard let cell = bubbleGrid.cellForItem(at: indexPath) else {
             return nil
         }
-        return getBubbleGridRowAndCol(position: position)
+        let position = cell.center
+        return position
     }
 
-    func getBubbleIndexPath(bubble: GameBubble) -> IndexPath? {
-        guard let position = bubble.position else {
-            assertionFailure("Target bubble does not have a position!")
-            return nil
-        }
-        return getBubbleGridIndexPath(position: position)
+    private func indexPathToRowAndCol(indexPath: IndexPath) -> (Int, Int) {
+        let row = indexPath.section
+        let col = indexPath.row
+        return (row, col)
     }
 
-    func getBubblePosition(row: Int, col: Int) -> CGPoint {
-        return rowAndColToCGPoint(row: row, col: col)
-    }
-
-    func getBubbleGridRowAndCol(position: CGPoint) -> (Int, Int)? {
-        return rowAndColFromPoint(point: position)
-    }
-
-    private func getBubbleGridIndexPath(position: CGPoint) -> IndexPath? {
-        return indexPathFromPoint(point: position)
-    }
-
-    private func rowAndColFromPoint(point: CGPoint) -> (Int, Int)? {
-        if point.y > bubbleGrid.frame.size.height {
-            return nil
-        }
-        guard let indexPath = indexPathFromPoint(point: point) else {
-            return nil
-        }
-        return rowAndColFromIndexPath(indexPath: indexPath)
-    }
-
-    private func rowAndColFromIndexPath(indexPath: IndexPath) -> (Int, Int) {
-        return (indexPath.section, indexPath.row)
-    }
-
-    private func indexPathFromPoint(point: CGPoint) -> IndexPath? {
-        return bubbleGrid.indexPathForItem(at: point)
-    }
-
-    private func rowAndColToCGPoint(row: Int, col: Int) -> CGPoint {
+    private func rowAndColToIndexPath(row: Int, col: Int) -> IndexPath {
         let indexPath = IndexPath(row: col, section: row)
-        guard let cell = bubbleGrid.cellForItem(at: indexPath) else {
-            fatalError("ERROR")
+        return indexPath
+    }
+
+    private func rowAndColToPosition(row: Int, col: Int) -> CGPoint? {
+        let indexPath = IndexPath(row: col, section: row)
+        return indexPathToPosition(indexPath: indexPath)
+    }
+
+    private func positionToIndexPath(position: CGPoint) -> IndexPath? {
+        guard let indexPath = bubbleGrid.indexPathForItem(at: position) else {
+            return nil
         }
-        return cell.center
+        return indexPath
     }
 
-    private func indexPathToCGPoint(indexPath: IndexPath) -> CGPoint {
-        guard let cell = bubbleGrid.cellForItem(at: indexPath) else {
-            fatalError("ERROR")
+    private func positionToRowAndCol(position: CGPoint) -> (Int, Int)? {
+        guard let indexPath = positionToIndexPath(position: position) else {
+            return nil
         }
-        return cell.center
+
+        return indexPathToRowAndCol(indexPath: indexPath)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-
-}
-
-extension GameViewController: UICollectionViewDataSource {
-
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Constants.noOfRowsInGameGrid
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let sectionIsEven = section % 2 == 0
-        return sectionIsEven
-            ? Constants.noOfColumnsInEvenRowOfGameGrid
-            : Constants.noOfColumnsInOddRowOfGameGrid
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier:
-            Constants.bubbleGridCellReuseIdentifier,
-            for: indexPath as IndexPath) as? BubbleGridCell else {
-            fatalError("Cell not assigned the proper view subclass!")
-        }
-        let width = collectionView.bounds.width
-        cell.initImageView(gridWidth: width, isBorderHidden: true)
-
-        return cell
-    }
-
-}
-
-extension GameViewController: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-
-        let diameterOfGameCell =
-            Int(collectionView.frame.size.width) / Constants.noOfColumnsInEvenRowOfGameGrid
-        let radiusOfGameCell = CGFloat(diameterOfGameCell / 2)
-
-        // This offset was obtained through trial and error
-        // in attempting to pack the grid cells closely together.
-        let offsetForRowSpacing = CGFloat(-(diameterOfGameCell / 8))
-
-        let evenSectionEdgeInset = UIEdgeInsets(top: 0.0,
-                                                left: 0.0,
-                                                bottom: 0.0,
-                                                right: 0.0)
-        let oddSectionEdgeInset = UIEdgeInsets(top: offsetForRowSpacing,
-                                               left: radiusOfGameCell,
-                                               bottom: offsetForRowSpacing,
-                                               right: radiusOfGameCell)
-        let sectionIsEven = section % 2 == 0
-        return sectionIsEven ? evenSectionEdgeInset : oddSectionEdgeInset
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let numberOfItemsPerRow = Constants.noOfColumnsInEvenRowOfGameGrid
-        let size = Int(collectionView.bounds.width / CGFloat(numberOfItemsPerRow))
-        return CGSize(width: size, height: size)
-    }
 }

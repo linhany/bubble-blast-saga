@@ -10,18 +10,16 @@ import UIKit
 
 class MenuViewController: UIViewController {
 
+    /// As the first ViewController,
+    /// these variables to be assigned by the AppDelegate.
     internal var modelManager: ModelManager?
     internal var storageManager: StorageManager?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 
     @IBAction func backToMenuViewController(segue: UIStoryboardSegue) {
-    }
-
-    override var prefersStatusBarHidden: Bool {
-        return true
     }
 
     // MARK: - Navigation
