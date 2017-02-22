@@ -10,6 +10,7 @@
 struct Constants {
 
     static let noOfRowsInGameGrid = 14
+    static let noOfRowsInGameGridInLevelDesigner = noOfRowsInGameGrid-1
     static let noOfColumnsInEvenRowOfGameGrid = 12
     static let noOfColumnsInOddRowOfGameGrid = noOfColumnsInEvenRowOfGameGrid - 1
 

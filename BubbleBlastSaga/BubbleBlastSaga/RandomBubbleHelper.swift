@@ -30,7 +30,7 @@ struct RandomBubbleHelper {
         return randomizeNextBubbleInRange()
     }
 
-    /// Randomizes the next bubble in the raw value range.
+    /// Randomizes the next bubble in the bubbleTypeRawValueRange.
     /// Retries until the bubble obtained is present in the gridState of modelManager.
     private func randomizeNextBubbleInRange() -> GameBubble {
         let (start, end) = bubbleTypeRawValueRange

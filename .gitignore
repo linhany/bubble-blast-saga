@@ -68,3 +68,7 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+BubbleBlastSaga/.idea/BubbleBlastSaga.iml
+BubbleBlastSaga/.idea/modules.xml
+BubbleBlastSaga/.idea/workspace.xml
+BubbleBlastSaga/.idea/xcode.xml

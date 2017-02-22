@@ -15,17 +15,23 @@ import UIKit
 /// just a config class to set up the grid structure.
 class BubbleGridViewDataSource: NSObject {
 
-    init(collectionView: UICollectionView) {
+    fileprivate var isInLevelDesigner: Bool
+
+    init(collectionView: UICollectionView, isInLevelDesigner: Bool) {
+        self.isInLevelDesigner = isInLevelDesigner
         super.init()
         collectionView.dataSource = self
     }
+
 }
 
 // MARK: - UICollectionViewDataSource
 extension BubbleGridViewDataSource: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Constants.noOfRowsInGameGrid-1
+        return isInLevelDesigner
+                ? Constants.noOfRowsInGameGridInLevelDesigner
+                : Constants.noOfRowsInGameGrid
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

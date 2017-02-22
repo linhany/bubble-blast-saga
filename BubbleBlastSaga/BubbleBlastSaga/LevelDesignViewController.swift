@@ -163,7 +163,7 @@ class LevelDesignViewController: UIViewController {
 
     private func connectBubbleGridViewDataSourceAndDelegates() {
         bubbleGridViewDataSource =
-            BubbleGridViewDataSource(collectionView: bubbleGrid)
+            BubbleGridViewDataSource(collectionView: bubbleGrid, isInLevelDesigner: true)
         bubbleGridViewDelegate =
             BubbleGridViewDelegate(collectionView: bubbleGrid)
     }
@@ -357,14 +357,7 @@ class LevelDesignViewController: UIViewController {
         }
         // If we are now at the empty bubble, loop it back
         // to the first bubble.
-		
-		/**
-		
-		Tutor: magic number, coding style - 2.
-		
-		*/
-		
-        guard let firstBubbleType = BubbleType(rawValue: 1) else {
+        guard let firstBubbleType = BubbleType(rawValue: BubbleType.getFirstBubbleTypeRawValue()) else {
             return nil
         }
         if nextBubbleType == .empty {
@@ -432,27 +425,3 @@ class LevelDesignViewController: UIViewController {
         timer?.invalidate()
     }
 }
-
-// MARK: - LevelsTableViewDelegate
-/// The delegate protocol implementation for LevelsTableViewController.
-//extension LevelDesignViewController: LevelsTableViewDelegate {
-//
-//    func loadLevel(fileName: String) {
-//        guard let (level, _) = storageManager?.loadLevel(fromFile: fileName) else {
-//            showFeedback(feedback: Constants.feedbackLevelLoadUnsuccessful)
-//            return
-//        }
-//        modelManager?.loadGridState(gridState: level.gridState)
-//        showFeedback(feedback: Constants.feedbackLevelLoadSuccessful)
-//    }
-//
-//    func deleteLevel(fileIndex: Int) {
-//        guard let modelManager = modelManager,
-//              let storageManager = storageManager else {
-//                fatalError("Model/Storage manager reference not passed!")
-//        }
-//        // need to change, cos got images.
-////        storageManager.removeFileInDocumentDirectoryAt(index: fileIndex)
-//        showFeedback(feedback: Constants.feedbackLevelDelete)
-//    }
-//}

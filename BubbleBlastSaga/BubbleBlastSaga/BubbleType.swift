@@ -30,6 +30,10 @@ enum BubbleType: Int {
 
     case empty = 12
 
+    static func getFirstBubbleTypeRawValue() -> Int {
+        return 1
+    }
+
     static func getNormalBubblesRawValueRange() -> (Int, Int) {
         return (1, 7)
     }

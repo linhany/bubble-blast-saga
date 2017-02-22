@@ -9,6 +9,7 @@
 import UIKit
 
 class GameViewController: UIViewController {
+
     @IBOutlet var boundsLine: UIImageView!
     @IBOutlet var endGameText: UITextField!
     @IBOutlet var restartButton: RoundedButton!
@@ -43,7 +44,7 @@ class GameViewController: UIViewController {
         guard let modelManager = modelManager else {
             fatalError("Model Manager reference was not passed!")
         }
-        // TODO: dont need to copy here? alr copied before passing.
+        // Copy for reset functionality.
         guard let modelManagerCopy = modelManager.copy() as? ModelManager else {
             fatalError("Copying failed!")
         }
@@ -80,11 +81,7 @@ class GameViewController: UIViewController {
         retryGame()
     }
 
-    func showGameWinScreen() {
-
-    }
-
-    func showGameLoseScreen(message: String) {
+    func showEndGameScreen(message: String) {
         stopGame()
         UIView.animate(withDuration: 0.5,
                        animations: {

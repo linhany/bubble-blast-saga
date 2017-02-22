@@ -84,11 +84,11 @@ class GameLevelScene: Scene {
 
     private func isGameOngoing() -> Bool {
         if isGameLost {
-            gameViewController.showGameLoseScreen(message: Constants.endGameLoseText)
+            gameViewController.showEndGameScreen(message: Constants.endGameLoseText)
             return false
         }
         if gameLogic.isGameWon() {
-            gameViewController.showGameLoseScreen(message: Constants.endGameWinText)
+            gameViewController.showEndGameScreen(message: Constants.endGameWinText)
             return false
         }
         return true
