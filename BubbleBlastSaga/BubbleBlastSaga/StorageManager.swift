@@ -12,6 +12,10 @@ import UIKit
 /// Uses object archiving to write grid state to file.
 struct StorageManager {
 
+    private let pListExtension = ".pList"
+    private let imageExtension = ".png"
+    private let levelKey = "levelKeyString"
+
     func saveLevel(level: Level, levelPreviewImage image: UIImage) -> Bool {
         let documentDirectory = getUrlForFileInDocumentDirectory()
         let fileURL = documentDirectory.appendingPathComponent(
@@ -118,13 +122,4 @@ struct StorageManager {
         return directoryContents
     }
 
-	/**
-	
-	Tutor: put the constant on top next time
-	
-	*/
-	
-    private let pListExtension = ".pList"
-    private let imageExtension = ".png"
-    private let levelKey = "levelKeyString"
 }

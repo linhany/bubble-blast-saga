@@ -14,6 +14,7 @@ import Foundation
 /// of the same color.
 class NormalBubble: GameBubble {
 
+    private let colorKeyString = "color"
     private let color: NormalBubbleColor
 
     init(color: NormalBubbleColor) {
@@ -47,13 +48,13 @@ class NormalBubble: GameBubble {
 
     override func encode(with aCoder: NSCoder) {
         // This tells the archiver how to encode the object
-        aCoder.encode(color.rawValue, forKey: Keys.Color.rawValue)
+        aCoder.encode(color.rawValue, forKey: colorKeyString)
         super.encode(with: aCoder)
     }
 
     required init?(coder aDecoder: NSCoder) {
         // This tells the unarchiver how to decode the object
-        let int = aDecoder.decodeInteger(forKey: Keys.Color.rawValue)
+        let int = aDecoder.decodeInteger(forKey: colorKeyString)
         guard let colorToAssign = NormalBubbleColor(rawValue: int) else {
             return nil
         }
@@ -61,7 +62,4 @@ class NormalBubble: GameBubble {
         super.init(coder: aDecoder)
     }
 
-    enum Keys: String {
-        case Color = "color"
-    }
 }

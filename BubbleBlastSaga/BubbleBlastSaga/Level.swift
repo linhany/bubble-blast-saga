@@ -9,8 +9,11 @@
 import UIKit
 
 class Level: NSObject, NSCoding {
-    let gridState: [[GameBubble?]]
-    let fileName: String
+    private let fileNameKey = "FileNameKey"
+    private let gridStateKey = "GridStateKey"
+    internal let gridState: [[GameBubble?]]
+    internal let fileName: String
+
     init(gridState: [[GameBubble?]], fileName: String) {
         self.gridState = gridState
         self.fileName = fileName
@@ -32,6 +35,4 @@ class Level: NSObject, NSCoding {
         self.fileName = fileName
     }
 
-    let fileNameKey = "FileNameKey"
-    let gridStateKey = "GridStateKey"
 }

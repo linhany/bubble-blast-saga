@@ -14,9 +14,10 @@ class ModelManager: NSObject {
     /// 2D array representing state of bubble grid in offset layout.
     fileprivate var gridState: [[GameBubble?]]
 
-    /// Use RawValue of `BubbleType` as the hashable key, number of bubbles of that
+    /// Keeps track of the `BubbleType`s present in `gridState`.
+    /// Uses rawValue of `BubbleType` as the hashable key, number of bubbles of that
     /// type as value.
-    fileprivate(set) var bubbleTypesInGrid: [Int: Int]
+    fileprivate var bubbleTypesInGrid: [Int: Int]
 
     /// Notification Center to notify view when model is updated.
     private let nc = NotificationCenter.default
@@ -113,9 +114,6 @@ class ModelManager: NSObject {
         for (rowOffset, columnOffset) in neighbourOffsets {
             let neighbourRow = row + rowOffset
             let neighbourColumn = column + columnOffset
-            guard isInGrid(row: neighbourRow, column: neighbourColumn) else {
-                continue
-            }
             guard let neighbour = getBubbleAt(row: neighbourRow, column: neighbourColumn) else {
                 continue
             }
@@ -166,7 +164,6 @@ class ModelManager: NSObject {
         case .lightning: return LightningBubble()
         case .star: return StarBubble()
         case .indestructible: return IndestructibleBubble()
-
         case .empty: return nil
         }
     }
