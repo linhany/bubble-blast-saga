@@ -12,10 +12,15 @@ import UIKit
 class Circle: PhysicsBodyType {
     /// The `center` of the circular body is the physicsBody's` position`.
     var center: CGPoint {
-        guard let center = physicsBody?.position else {
-            fatalError("Physics body not set up properly!")
+        get {
+            guard let center = physicsBody?.position else {
+                fatalError("Physics body not set up properly!")
+            }
+            return center
         }
-        return center
+        set(newCenter) {
+            physicsBody?.position = newCenter
+        }
     }
     /// The `radius` of the circular body.
     var radius: CGFloat

@@ -66,6 +66,7 @@ class GameLogic {
     }
     
     func handleNewlySnappedBubble(_ newBubble: GameBubble) {
+        addToBubbleGridModel(gameBubble: newBubble)
         handleSurroundingSpecialBubbles(with: newBubble)
         removeConnectedBubblesOfSameColor(as: newBubble)
         removeUnattachedBubbles()
