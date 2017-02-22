@@ -13,7 +13,7 @@ struct Constants {
     static let noOfColumnsInEvenRowOfGameGrid = 12
     static let noOfColumnsInOddRowOfGameGrid = noOfColumnsInEvenRowOfGameGrid - 1
 
-    static let noOfRunsBeforeRendering = 20
+    static let noOfRunsBeforeRendering = 10
 
     static let gameBubbleCollisionAdjustedPercentage = 0.85
     static let gameLoopFramesPerSecond = 60
@@ -70,10 +70,11 @@ struct Constants {
     static let fallingBubbleAnimationDuration = 1.5
 
     static let feedbackLevelSavingCancelled = "SAVING CANCELLED!"
-    static let feedbackLevelNameRequired = "LEVEL NAME REQUIRED!"
+    static let feedbackLevelNameRequired = "LEVEL NAME IS NOT VALID!"
     static let feedbackLevelSavingSuccessful = "LEVEL SAVED!"
     static let feedbackLevelSavingUnsuccessful = "LEVEL WAS NOT SAVED!"
     static let feedbackLevelReset = "LEVEL RESET!"
+    static let feedbackLevelResetAlreadyEmpty = "LEVEL IS ALREADY EMPTY!"
     static let feedbackLevelLoadSuccessful = "LEVEL LOADED!"
     static let feedbackLevelLoadUnsuccessful = "LEVEL WAS NOT LOADED!"
     static let feedbackLevelDelete = "LEVEL DELETED!"
@@ -84,7 +85,7 @@ struct Constants {
     static let loadLevelTableHeader = "Levels"
 
     static let alertSaveLevelTitle = "Save Level"
-    static let alertSaveLevelMessage = "Give your level a cool name!"
+    static let alertSaveLevelMessage = "Level names must be between 1 to 25 characters."
     static let alertSaveLevelTextPlaceholder = "Your level name here.."
     static let alertResetLevelTitle = "Reset Level"
     static let alertDeleteLevelTitle = "Delete Level"

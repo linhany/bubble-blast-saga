@@ -130,6 +130,18 @@ class ModelManager: NSObject {
         return gridState
     }
 
+    /// Returns true if grid state is empty.
+    func isGridStateEmpty() -> Bool {
+        for row in 0..<gridState.count {
+            for column in 0..<gridState[row].count {
+                if gridState[row][column] != nil {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
     /// Resets the grid state by removing all bubbles present.
     func resetGridState() {
         for row in 0..<gridState.count {

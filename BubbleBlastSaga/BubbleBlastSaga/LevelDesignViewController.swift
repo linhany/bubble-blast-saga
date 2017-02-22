@@ -221,19 +221,21 @@ class LevelDesignViewController: UIViewController {
     }
 
     /// Checks if `userInput` for a level name is valid.
-    /// A valid input is one that contains one or more
-    /// non-whitespace characters.
+    /// A valid input is one that contains more than one
+    /// non-whitespace character, and at most 25 characters.
     private func isUserInputLevelNameValid(userInput: String) -> Bool {
-        return userInput.trimmingCharacters(in: .whitespaces)
-            != Constants.emptyString
+        let hasAtLeastOneNonWhitespaceCharacter = userInput.trimmingCharacters(in: .whitespaces)
+                != Constants.emptyString
+        let isAtMostTwentyFiveCharacters = userInput.characters.count <= 25
+        return hasAtLeastOneNonWhitespaceCharacter && isAtMostTwentyFiveCharacters
     }
 
     /// Saves the grid state to file with the `fileName`,
     /// shows feedback to user to inform if the save was successful.
     private func saveGridStateWithFeedbackToModel(fileName: String) {
         guard let modelManager = modelManager,
-            let storageManager = storageManager else {
-                fatalError("Model/Storage manager reference not passed!")
+              let storageManager = storageManager else {
+            fatalError("Model/Storage manager reference not passed!")
         }
         let gridState = modelManager.getGridState()
         let level = Level(gridState: gridState, fileName: fileName)
@@ -246,10 +248,9 @@ class LevelDesignViewController: UIViewController {
         let isSaveSuccessful =
             storageManager.saveLevel(level: level, levelPreviewImage: levelPreviewImage)
         if isSaveSuccessful {
-            self.showFeedback(feedback:
-                Constants.feedbackLevelSavingSuccessful)
+            showFeedback(feedback: Constants.feedbackLevelSavingSuccessful)
         } else {
-            self.showFeedback(feedback: Constants.feedbackLevelSavingUnsuccessful)
+            showFeedback(feedback: Constants.feedbackLevelSavingUnsuccessful)
         }
     }
 
@@ -261,11 +262,22 @@ class LevelDesignViewController: UIViewController {
             guard isResetConfirmed else {
                 return
             }
-            self.modelManager?.resetGridState()
-            self.showFeedback(feedback: Constants.feedbackLevelReset)
+            self.resetGridStateWithFeedback()
         }
 
         self.present(uiAlert, animated: true, completion: nil)
+    }
+
+    private func resetGridStateWithFeedback() {
+        guard let modelManager = modelManager else {
+            fatalError("Model manager reference not passed!")
+        }
+        if modelManager.isGridStateEmpty() {
+            showFeedback(feedback: Constants.feedbackLevelResetAlreadyEmpty)
+            return
+        }
+        modelManager.resetGridState()
+        showFeedback(feedback: Constants.feedbackLevelReset)
     }
 
     /// Marks the currently selected button by user in palette

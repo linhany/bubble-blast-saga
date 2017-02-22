@@ -92,8 +92,8 @@ class GameLevelScene: Scene, PhysicsContactDelegate, GameLogicDelegate {
         // Get the direction of where to shoot
         let offset = touchLocation - gameViewController.getCannonPosition()
         let direction = offset.normalized()
-        gameProjectile.physicsBody?.velocity = CGVector(dx: direction.x,
-                                                        dy: direction.y)
+        gameProjectile.physicsBody?.velocity = CGVector(dx: direction.x*2,
+                                                        dy: direction.y*2)
         gameViewController.animateCannonFire()
         showNextProjectiles()
     }

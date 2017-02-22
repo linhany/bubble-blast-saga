@@ -22,12 +22,7 @@ extension UIAlertController {
 
         let confirmAction = UIAlertAction(title: Constants.alertConfirmTitle,
                                           style: .default) { (_: UIAlertAction) in
-			/**
-			
-			Tutor: should use .first instead of [0], coding style - 2.
-			
-			*/
-            guard let text = alertController.textFields?[0].text else {
+            guard let text = alertController.textFields?.first?.text else {
                 return
             }
             closure(true, text)
