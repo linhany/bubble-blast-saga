@@ -6,28 +6,35 @@
 //  Copyright © 2017 nus.cs3217.a0139498j. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct RandomBubbleHelper {
 
-    let bubbleTypeRawValueRange: (Int, Int)
-    var noOfBubbles: Int
-    let modelManager: ModelManager
+    private let bubbleTypeRawValueRange: (Int, Int)
+    private let originalNoOfBubbles: Int
+    private var remainingNoOfBubbles: Int
+    private let modelManager: ModelManager
 
     init(bubbleTypeRawValueRange: (Int, Int),
          noOfBubbles: Int,
          modelManager: ModelManager) {
         self.bubbleTypeRawValueRange = bubbleTypeRawValueRange
-        self.noOfBubbles = noOfBubbles
+        self.originalNoOfBubbles = noOfBubbles
+        self.remainingNoOfBubbles = noOfBubbles
         self.modelManager = modelManager
     }
 
     mutating func nextBubble(isAccountingForBubblesGenerated: Bool) -> GameBubble? {
         if isAccountingForBubblesGenerated {
-            noOfBubbles -= 1
-            return noOfBubbles > 0 ? randomizeNextBubbleInRange() : nil
+            remainingNoOfBubbles -= 1
+            return remainingNoOfBubbles >= 0 ? randomizeNextBubbleInRange() : nil
         }
         return randomizeNextBubbleInRange()
+    }
+
+    /// Returns the count of bubbles generated so far.
+    func bubblesGenerated() -> Int {
+        return originalNoOfBubbles - remainingNoOfBubbles
     }
 
     /// Randomizes the next bubble in the bubbleTypeRawValueRange.

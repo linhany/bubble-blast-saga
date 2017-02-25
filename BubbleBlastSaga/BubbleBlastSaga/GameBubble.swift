@@ -22,6 +22,10 @@ class GameBubble: GameObject, NSCoding {
         fatalError("Must override this")
     }
 
+    func score() -> Int {
+        fatalError("Must override this")
+    }
+
     override init() {
         super.init()
         assignImageString()

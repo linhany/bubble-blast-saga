@@ -17,9 +17,12 @@ class GameViewController: UIViewController {
     /// Outlets to storyboard elements.
     @IBOutlet private var boundsLine: UIImageView!
     @IBOutlet private var endGameText: UITextField!
+    @IBOutlet private var remainingCountText: UITextField!
     @IBOutlet private var restartButton: RoundedButton!
     @IBOutlet private var backButton: RoundedButton!
     @IBOutlet private var cannonImage: CannonImageView!
+    @IBOutlet private var gameScoreText: UITextField!
+    @IBOutlet private var timerText: UITextField!
     @IBOutlet private var bubbleGrid: UICollectionView!
     @IBOutlet private var cannonArea: UIView!
 
@@ -29,10 +32,13 @@ class GameViewController: UIViewController {
 
     /// The `GameView` which presents the `GameLevelScene`.
     private var gameView: GameView? = nil
+    private var randomBubbleHelper: RandomBubbleHelper? = nil
 
     /// Variables to be assigned by the ViewController performing segue to this class.
     internal var modelManager: ModelManager? = nil
     internal var unwindSegueIdentifier: String?
+
+    private var timer: Timer?
 
     // MARK - Overrides.
 
@@ -42,12 +48,12 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         connectBubbleGridViewDataSourceAndDelegates()
-        clearEndGameScreen()
+        clearScreen()
         alignBoundsLine()
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        disableUserInteractionOnUnusedViews()
+        disableUserInteractionOnViews()
         startGame()
     }
 
@@ -67,19 +73,52 @@ class GameViewController: UIViewController {
 
     // MARK - GameViewController provided API.
 
-    func animateCannonFire() {
+    func fireCannon() {
         cannonImage.startAnimating()
+        updateRemainingCountText()
+    }
+
+    func updateGameScore(_ score: Int) {
+        gameScoreText.text = String(score)
     }
 
     /// Stops the game and displays the `message`.
     func endGame(message: String) {
-        // Delay to show animations before ending.
-        Timer.scheduledTimer(timeInterval: Constants.burstingBubbleAnimationDuration,
-                             target: self,
-                             selector: #selector(self.stopGame),
-                             userInfo: nil,
-                             repeats: false)
-        self.endGameText.text = message
+        stopGame()
+        addBonusScore()
+        endGameText.text = message
+    }
+
+    /// Only eligible for bonus score in limited shots or timed mode.
+    private func addBonusScore() {
+        if GameConfig.isCannonShotsLimited {
+            guard let bubbleLeft = remainingCountText?.text,
+                  let bubbleLeftValue = Int(bubbleLeft) else {
+                fatalError("Must have count!")
+            }
+            guard let currentGameScore = gameScoreText?.text,
+                  var currentGameScoreValue = Int(currentGameScore) else {
+                fatalError("Must have a current game score.")
+            }
+            let bubbleLeftBonus = bubbleLeftValue * GameConfig.bubblesLeftBonus
+            print(bubbleLeftBonus)
+            currentGameScoreValue += bubbleLeftBonus
+            updateGameScore(currentGameScoreValue)
+        }
+        if GameConfig.isTimed {
+            guard let timeLeft = timerText?.text,
+                  let timeLeftValue = Int(timeLeft) else {
+                fatalError("Must have time!")
+            }
+            guard let currentGameScore = gameScoreText?.text,
+                  var currentGameScoreValue = Int(currentGameScore) else {
+                fatalError("Must have a current game score.")
+            }
+            let timeLeftBonus = timeLeftValue * Int(GameConfig.timeLeftBonus)
+            print(timeLeftBonus)
+            currentGameScoreValue += timeLeftBonus
+            updateGameScore(currentGameScoreValue)
+        }
     }
 
     /// Returns the width of a bubble in the `bubbleGrid`.
@@ -150,7 +189,7 @@ class GameViewController: UIViewController {
     }
 
     @IBAction private func retryButtonPressed(_ sender: UIButton) {
-        clearEndGameScreen()
+        clearScreen()
         retryGame()
     }
 
@@ -165,19 +204,64 @@ class GameViewController: UIViewController {
         guard let modelManagerCopy = modelManager.copy() as? ModelManager else {
             fatalError("Copying failed!")
         }
+        let noOfBubbles = initCannonShotCount()
+
         let randomBubbleHelper =
                 RandomBubbleHelper(bubbleTypeRawValueRange: BubbleType.getNormalBubblesRawValueRange(),
-                        noOfBubbles: Int.max,
+                        noOfBubbles: noOfBubbles,
                         modelManager: modelManagerCopy)
         let scene = GameLevelScene(modelManager: modelManagerCopy,
-                gameViewController: self,
-                randomBubbleHelper: randomBubbleHelper)
+                                   gameViewController: self,
+                                   randomBubbleHelper: randomBubbleHelper)
         guard let gameView = view as? GameView else {
             fatalError("GameView class not subclassed properly!")
         }
 
         gameView.present(scene, with: AnimationRenderer())
         self.gameView = gameView
+        self.randomBubbleHelper = randomBubbleHelper
+        initGameTimer()
+    }
+
+    private func initGameTimer() {
+        if GameConfig.isTimed {
+            timerText.text = String(GameConfig.timeLimit)
+            timer = Timer.scheduledTimer(timeInterval: 1.0,
+                                 target: self,
+                                 selector: #selector(self.updateTimeLimit),
+                                 userInfo: nil,
+                                 repeats: true)
+        }
+    }
+
+    @objc private func updateTimeLimit() {
+        guard let timeLeft = timerText?.text else {
+            assertionFailure("Must have time.")
+            return
+        }
+
+        guard var timeLeftValue = Int(timeLeft) else {
+            assertionFailure("Must be Int!")
+            return
+        }
+
+        timeLeftValue -= 1
+        timerText.text = String(timeLeftValue)
+        if timeLeftValue <= 0 {
+            endGame(message: "Time Limit!")
+            timer?.invalidate()
+        }
+    }
+
+    private func initCannonShotCount() -> Int {
+        var noOfBubbles = Int.max
+        if GameConfig.isCannonShotsLimited {
+            noOfBubbles = GameConfig.cannonShots
+            remainingCountText.text = String(noOfBubbles)
+        } else {
+            remainingCountText.text = Constants.infinity
+        }
+        return noOfBubbles
     }
 
     private func retryGame() {
@@ -190,6 +274,7 @@ class GameViewController: UIViewController {
             return
         }
         gameView.stopPresenting()
+        timer?.invalidate()
     }
 
     private func animateCannonRotate(towards position: CGPoint) {
@@ -197,8 +282,9 @@ class GameViewController: UIViewController {
         cannonImage.rotateCannon(offset: offset)
     }
 
-    private func disableUserInteractionOnUnusedViews() {
+    private func disableUserInteractionOnViews() {
         endGameText.isUserInteractionEnabled = false
+        remainingCountText.isUserInteractionEnabled = false
         bubbleGrid.isUserInteractionEnabled = false
     }
 
@@ -210,8 +296,21 @@ class GameViewController: UIViewController {
         boundsLine.frame.origin = CGPoint(x: targetOriginX, y: targetOriginY)
     }
 
-    private func clearEndGameScreen() {
+    private func updateRemainingCountText() {
+        guard let text = remainingCountText.text,
+                text != Constants.infinity else {
+            return
+        }
+        guard let textIntValue = Int(text) else {
+            assertionFailure("Must have an integer value.")
+            return
+        }
+        remainingCountText.text = String(textIntValue - 1)
+    }
+
+    private func clearScreen() {
         endGameText.text = Constants.emptyString
+        gameScoreText.text = String(0)
     }
 
     private func performUnwindSegue() {

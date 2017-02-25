@@ -14,6 +14,12 @@ struct Constants {
     static let noOfColumnsInEvenRowOfGameGrid = 12
     static let noOfColumnsInOddRowOfGameGrid = noOfColumnsInEvenRowOfGameGrid - 1
 
+    static let normalBubbleScore = 10
+    static let lightningBubbleScore = 5
+    static let bombBubbleScore = 0
+    static let starBubbleScore = 7
+    static let indestructibleBubbleScore = 15
+
     static let noOfRunsBeforeRendering = 10
 
     static let gameBubbleCollisionAdjustedPercentage = 0.85
@@ -69,6 +75,7 @@ struct Constants {
     static let notifyRemoveClusteredGameBubble = "Game bubble clustered!"
     static let notifyRemoveLightningBubble = "Lightning bubble zapped!"
     static let notifyRemoveBombBubble = "Bomb bubble exploded!"
+    static let notifyBubbleCountDecrease = "Bubble generated! Count decreased."
 
     static let loadingBubbleAnimationDuration = 0.2
     static let fallingBubbleAnimationDuration = 1.5
@@ -96,6 +103,7 @@ struct Constants {
     static let levelSelectionDeleteModeHeaderText = "Deletion is permanent! Mark levels to delete"
 
     static let emptyString = ""
+    static let infinity = "∞"
 
     static let levelNameCharacterCountLimit = 25
 

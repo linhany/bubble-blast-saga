@@ -46,6 +46,10 @@ class NormalBubble: GameBubble {
         }
     }
 
+    override func score() -> Int {
+        return Constants.normalBubbleScore
+    }
+
     override func encode(with aCoder: NSCoder) {
         // This tells the archiver how to encode the object
         aCoder.encode(color.rawValue, forKey: colorKeyString)

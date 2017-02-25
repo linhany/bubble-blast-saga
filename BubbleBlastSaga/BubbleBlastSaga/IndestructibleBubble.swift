@@ -16,4 +16,8 @@ class IndestructibleBubble: GameBubble {
     override func assignImageString() {
         imageString = Constants.indestructibleBubbleIdentifier
     }
+
+    override func score() -> Int {
+        return Constants.indestructibleBubbleScore
+    }
 }

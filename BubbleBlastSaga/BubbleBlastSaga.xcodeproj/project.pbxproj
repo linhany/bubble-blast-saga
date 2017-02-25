@@ -62,6 +62,7 @@
 		A78044131E5CA2C200652BBE /* RandomBubbleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78044121E5CA2C200652BBE /* RandomBubbleHelper.swift */; };
 		BE46976BA4EB658E87D283E5 /* LightningImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4694E049EAD79353EB15C6 /* LightningImageView.swift */; };
 		BE4697B869365E5F1CD68A26 /* BombImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4694D651BDFD820F019B32 /* BombImageView.swift */; };
+		BE469A2AEB8AE80FF69D5519 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4698C45193C13D0974D82D /* GameConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,7 @@
 		A78044121E5CA2C200652BBE /* RandomBubbleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomBubbleHelper.swift; sourceTree = "<group>"; };
 		BE4694D651BDFD820F019B32 /* BombImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombImageView.swift; sourceTree = "<group>"; };
 		BE4694E049EAD79353EB15C6 /* LightningImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningImageView.swift; sourceTree = "<group>"; };
+		BE4698C45193C13D0974D82D /* GameConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +277,7 @@
 				A77121341E5424B2007564A2 /* UIAlertControllerExtension.swift */,
 				A77121521E542B31007564A2 /* Constants.swift */,
 				A77121611E542B31007564A2 /* Queue.swift */,
+				BE4698C45193C13D0974D82D /* GameConfig.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				A77121761E542B31007564A2 /* NormalBubbleColor.swift in Sources */,
 				BE46976BA4EB658E87D283E5 /* LightningImageView.swift in Sources */,
 				BE4697B869365E5F1CD68A26 /* BombImageView.swift in Sources */,
+				BE469A2AEB8AE80FF69D5519 /* GameConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

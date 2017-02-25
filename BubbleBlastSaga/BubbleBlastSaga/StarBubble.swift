@@ -16,4 +16,8 @@ class StarBubble: GameBubble {
     override func assignImageString() {
         imageString = Constants.starBubbleIdentifier
     }
+
+    override func score() -> Int {
+        return Constants.starBubbleScore
+    }
 }

@@ -16,4 +16,8 @@ class LightningBubble: GameBubble {
     override func assignImageString() {
         imageString = Constants.lightningBubbleIdentifier
     }
+
+    override func score() -> Int {
+        return Constants.lightningBubbleScore
+    }
 }

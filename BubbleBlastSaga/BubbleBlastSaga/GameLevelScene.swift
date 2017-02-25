@@ -36,6 +36,9 @@ class GameLevelScene: Scene {
     /// Boolean variable to keep track of whether game is lost.
     fileprivate var isGameLost = false
 
+    /// Integer to track the `gameScore`.
+    fileprivate var gameScore = 0
+
     init(modelManager: ModelManager,
          gameViewController: GameViewController,
          randomBubbleHelper: RandomBubbleHelper) {
@@ -54,7 +57,6 @@ class GameLevelScene: Scene {
     // MARK - Override functions.
 
     override func update() {
-        // Skip updating unless game is still ongoing and there is a newly snapped bubble.
         guard isGameOngoing(), !newlySnappedBubbles.isEmpty else {
             return
         }
@@ -70,25 +72,23 @@ class GameLevelScene: Scene {
             return
         }
         guard let gameProjectile = getNextProjectile() else {
-            assertionFailure("Projectile was not set up!")
             return
         }
         addCircularPhysicsBody(gameBubble: gameProjectile)
         let direction = getProjectileDirection(touchLocation: touchLocation)
         addVelocity(toProjectile: gameProjectile, inDirection: direction)
-        gameViewController.animateCannonFire()
+        gameViewController.fireCannon()
         showNextProjectilesInScene()
     }
 
     // MARK - Private helper functions.
 
     private func isGameOngoing() -> Bool {
-        if isGameLost {
-            gameViewController.endGame(message: Constants.endGameLoseText)
-            return false
-        }
         if gameLogic.isGameWon() {
             gameViewController.endGame(message: Constants.endGameWinText)
+            return false
+        } else if isGameLost {
+            gameViewController.endGame(message: Constants.endGameLoseText)
             return false
         }
         return true
@@ -143,7 +143,7 @@ class GameLevelScene: Scene {
     /// Dequeue the next projectile from `projectileQueue`.
     private func getNextProjectile() -> GameBubble? {
         guard let projectileToFire = try? projectileQueue.dequeue() else {
-            assertionFailure("Queue cannot be empty! Game should be over.")
+            isGameLost = true
             return nil
         }
         return projectileToFire
@@ -152,7 +152,6 @@ class GameLevelScene: Scene {
     /// Shows the next two projectiles in scene after a projectile has been fired.
     private func showNextProjectilesInScene() {
         guard let nextProjectile = try? projectileQueue.peek() else {
-            assertionFailure("Queue cannot be empty! Game should be over.")
             return
         }
 
@@ -175,20 +174,17 @@ class GameLevelScene: Scene {
     /// Since the next two projectiles are already shown and might be of this newly cleared
     /// color, we swap these two projectiles out if needed to another color that is still in
     /// the grid.
-    /// This should be called only if the game is still ongoing.
     private func modifyProjectileQueueIfNeeded() {
         guard isGameOngoing() else {
             return
         }
         guard var firstProjectile = try? projectileQueue.dequeue() else {
-            assertionFailure("Queue cannot be empty! Game should be over.")
             return
         }
         firstProjectile = swapIfNotInGridAnymore(firstProjectile, isCannonAreaBubble: true)
         projectileQueue.enqueue(firstProjectile)
 
         guard var secondProjectile = try? projectileQueue.dequeue() else {
-            // First projectile is the last projectile.
             return
         }
         secondProjectile = swapIfNotInGridAnymore(secondProjectile, isCannonAreaBubble: false)
@@ -245,6 +241,8 @@ class GameLevelScene: Scene {
 extension GameLevelScene: GameLogicDelegate {
 
     func removeGameBubbleFromScene(_ gameBubble: GameBubble) {
+        gameScore += gameBubble.score()
+        gameViewController.updateGameScore(gameScore)
         remove(gameObject: gameBubble)
     }
 
