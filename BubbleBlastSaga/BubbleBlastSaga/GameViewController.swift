@@ -16,12 +16,12 @@ class GameViewController: UIViewController {
 
     /// Outlets to storyboard elements.
     @IBOutlet private var boundsLine: UIImageView!
-    @IBOutlet private var endGameText: UITextField!
-    @IBOutlet private var remainingCountText: UITextField!
     @IBOutlet private var restartButton: RoundedButton!
     @IBOutlet private var backButton: RoundedButton!
     @IBOutlet private var cannonImage: CannonImageView!
+    @IBOutlet private var endGameScreen: UIStackView!
     @IBOutlet private var gameScoreText: UITextField!
+    @IBOutlet private var remainingCountText: UITextField!
     @IBOutlet private var timerText: UITextField!
     @IBOutlet private var bubbleGrid: UICollectionView!
     @IBOutlet private var cannonArea: UIView!
@@ -32,13 +32,14 @@ class GameViewController: UIViewController {
 
     /// The `GameView` which presents the `GameLevelScene`.
     private var gameView: GameView? = nil
-    private var randomBubbleHelper: RandomBubbleHelper? = nil
 
     /// Variables to be assigned by the ViewController performing segue to this class.
     internal var modelManager: ModelManager? = nil
     internal var unwindSegueIdentifier: String?
 
     private var timer: Timer?
+    private var shotsFired = 0
+    private var playTime = 0
 
     // MARK - Overrides.
 
@@ -76,6 +77,7 @@ class GameViewController: UIViewController {
     func fireCannon() {
         cannonImage.startAnimating()
         updateRemainingCountText()
+        incrementShotsFiredCount()
     }
 
     func updateGameScore(_ score: Int) {
@@ -85,40 +87,116 @@ class GameViewController: UIViewController {
     /// Stops the game and displays the `message`.
     func endGame(message: String) {
         stopGame()
-        addBonusScore()
-        endGameText.text = message
-    }
+        var endGameMessages: [String] = []
+        endGameMessages.append(message)
+        endGameMessages.append(getGamePlayScoreMessage())
+        endGameMessages.append(getShotsFiredMessage())
+        endGameMessages.append(getPlayTimeMessage())
 
-    /// Only eligible for bonus score in limited shots or timed mode.
-    private func addBonusScore() {
         if GameConfig.isCannonShotsLimited {
-            guard let bubbleLeft = remainingCountText?.text,
-                  let bubbleLeftValue = Int(bubbleLeft) else {
-                fatalError("Must have count!")
+            let shotsLeftMessages = handleShotsLeftBonus()
+            for message in shotsLeftMessages {
+                endGameMessages.append(message)
             }
-            guard let currentGameScore = gameScoreText?.text,
-                  var currentGameScoreValue = Int(currentGameScore) else {
-                fatalError("Must have a current game score.")
-            }
-            let bubbleLeftBonus = bubbleLeftValue * GameConfig.bubblesLeftBonus
-            print(bubbleLeftBonus)
-            currentGameScoreValue += bubbleLeftBonus
-            updateGameScore(currentGameScoreValue)
         }
         if GameConfig.isTimed {
-            guard let timeLeft = timerText?.text,
-                  let timeLeftValue = Int(timeLeft) else {
-                fatalError("Must have time!")
+            let timeLeftMessages = handleTimeLeftBonus()
+            for message in timeLeftMessages {
+                endGameMessages.append(message)
             }
-            guard let currentGameScore = gameScoreText?.text,
-                  var currentGameScoreValue = Int(currentGameScore) else {
-                fatalError("Must have a current game score.")
-            }
-            let timeLeftBonus = timeLeftValue * Int(GameConfig.timeLeftBonus)
-            print(timeLeftBonus)
-            currentGameScoreValue += timeLeftBonus
-            updateGameScore(currentGameScoreValue)
         }
+        if message == Constants.endGameWinText {
+            let winMessage = handleWinBonus()
+            endGameMessages.append(winMessage)
+        }
+        showEndGameScreen(endGameStats: endGameMessages)
+    }
+
+    private func getGamePlayScoreMessage() -> String {
+        guard let currentGameScore = gameScoreText?.text else {
+            fatalError("Must have a current game score.")
+        }
+        return "Gameplay Score: " + currentGameScore
+    }
+
+    private func handleShotsLeftBonus() -> [String] {
+        var messages: [String] = []
+        guard let shotsLeft = remainingCountText.text,
+              let shotsLeftValue = Int(shotsLeft) else {
+            fatalError("Must have shots left count")
+        }
+        guard let currentGameScore = gameScoreText?.text,
+              var currentGameScoreValue = Int(currentGameScore) else {
+            fatalError("Must have a current game score.")
+        }
+        let shotsLeftBonus = shotsLeftValue * GameConfig.bubblesLeftBonus
+        currentGameScoreValue += shotsLeftBonus
+        updateGameScore(currentGameScoreValue)
+        var message = "Shots Left: " + shotsLeft
+        messages.append(message)
+        message = "Shots Left Bonus: +" + String(shotsLeftBonus)
+        messages.append(message)
+        return messages
+    }
+
+    private func handleTimeLeftBonus() -> [String] {
+        var messages: [String] = []
+        guard let timeLeft = timerText?.text,
+              let timeLeftValue = Int(timeLeft) else {
+            fatalError("Must have time!")
+        }
+        guard let currentGameScore = gameScoreText?.text,
+              var currentGameScoreValue = Int(currentGameScore) else {
+            fatalError("Must have a current game score.")
+        }
+        let timeLeftBonus = timeLeftValue * Int(GameConfig.timeLeftBonus)
+        currentGameScoreValue += timeLeftBonus
+        updateGameScore(currentGameScoreValue)
+
+        var message = "Time Left: " + timeLeft + " seconds"
+        messages.append(message)
+        message = "Time Left Bonus: +" + String(timeLeftBonus)
+        messages.append(message)
+        return messages
+    }
+
+    private func getShotsFiredMessage() -> String {
+        let message = "Bubbles Fired: " + String(shotsFired)
+        return message
+    }
+
+    private func getPlayTimeMessage() -> String {
+        let message = "Play Time: " + String(playTime) + " seconds"
+        return message
+    }
+
+    private func handleWinBonus() -> String {
+        guard let currentGameScore = gameScoreText?.text,
+              let currentGameScoreValue = Int(currentGameScore) else {
+            fatalError("Must have a current game score.")
+        }
+        let newGameScoreValue = currentGameScoreValue * Constants.winBonusMultiplier
+        gameScoreText.text = String(newGameScoreValue)
+        return "Win Bonus: x2"
+    }
+
+    private func showEndGameScreen(endGameStats: [String]) {
+        guard let currentGameScore = gameScoreText?.text else {
+            fatalError("Must have a current game score.")
+        }
+        var endGameStats = endGameStats
+        endGameStats.append("Final Score: " + currentGameScore)
+        for endGameStat in endGameStats {
+            let textField = UITextField()
+            textField.text = endGameStat
+            textField.textAlignment = .center
+            textField.textColor = UIColor.white
+            textField.font = UIFont(name: textField.font!.fontName, size: 30)
+            endGameScreen.addArrangedSubview(textField)
+        }
+        gameScoreText.isHidden = true
+        remainingCountText.isHidden = true
+        timerText.isHidden = true
     }
 
     /// Returns the width of a bubble in the `bubbleGrid`.
@@ -219,22 +297,30 @@ class GameViewController: UIViewController {
 
         gameView.present(scene, with: AnimationRenderer())
         self.gameView = gameView
-        self.randomBubbleHelper = randomBubbleHelper
+        self.shotsFired = 0
+        self.playTime = 0
         initGameTimer()
     }
 
     private func initGameTimer() {
         if GameConfig.isTimed {
             timerText.text = String(GameConfig.timeLimit)
-            timer = Timer.scheduledTimer(timeInterval: 1.0,
-                                 target: self,
-                                 selector: #selector(self.updateTimeLimit),
-                                 userInfo: nil,
-                                 repeats: true)
+        }
+        timer = Timer.scheduledTimer(timeInterval: 1.0,
+                                     target: self,
+                                     selector: #selector(self.updateTime),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+
+    @objc private func updateTime() {
+        playTime += 1
+        if GameConfig.isTimed {
+            updateTimeLimit()
         }
     }
 
-    @objc private func updateTimeLimit() {
+    private func updateTimeLimit() {
         guard let timeLeft = timerText?.text else {
             assertionFailure("Must have time.")
             return
@@ -283,9 +369,11 @@ class GameViewController: UIViewController {
     }
 
     private func disableUserInteractionOnViews() {
-        endGameText.isUserInteractionEnabled = false
+        endGameScreen.isUserInteractionEnabled = false
         remainingCountText.isUserInteractionEnabled = false
         bubbleGrid.isUserInteractionEnabled = false
+        gameScoreText.isUserInteractionEnabled = false
+        timerText.isUserInteractionEnabled = false
     }
 
     private func alignBoundsLine() {
@@ -309,8 +397,13 @@ class GameViewController: UIViewController {
     }
 
     private func clearScreen() {
-        endGameText.text = Constants.emptyString
+        for subview in endGameScreen.subviews {
+            subview.removeFromSuperview()
+        }
         gameScoreText.text = String(0)
+        gameScoreText.isHidden = false
+        remainingCountText.isHidden = false
+        timerText.isHidden = false
     }
 
     private func performUnwindSegue() {
@@ -326,6 +419,10 @@ class GameViewController: UIViewController {
                 BubbleGridViewDataSource(collectionView: bubbleGrid, isInLevelDesigner: false)
         bubbleGridViewDelegate =
                 BubbleGridViewDelegate(collectionView: bubbleGrid)
+    }
+
+    private func incrementShotsFiredCount() {
+        shotsFired += 1
     }
 
     // MARK - Index Path, Row/Column, Position helpers

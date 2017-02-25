@@ -19,6 +19,7 @@ struct Constants {
     static let bombBubbleScore = 0
     static let starBubbleScore = 7
     static let indestructibleBubbleScore = 15
+    static let winBonusMultiplier = 2
 
     static let noOfRunsBeforeRendering = 10
 
