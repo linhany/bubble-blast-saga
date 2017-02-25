@@ -9,7 +9,7 @@
 import UIKit
 
 /// `Renderer` is responsible for drawing `GameObject`s on the `view`.
-/// To be rendered, a `GameObject` should have an associated 
+/// To be rendered, a `GameObject` should have an associated
 /// `imageString`, `position` and `size`.
 class Renderer {
 
@@ -42,6 +42,14 @@ class Renderer {
     /// Override to provide custom removal animations.
     func removeImage(_ image: UIImageView, for gameObject: GameObject, on view: UIView) {
         image.removeFromSuperview()
+    }
+
+    /// Creates an imageView for `imageString`.
+    /// Override to use a custom `UIImageView` to render game objects.
+    func makeImageView(imageString: String) -> UIImageView {
+        let image = UIImage(named: imageString)
+        let imageView = UIImageView(image: image)
+        return imageView
     }
 
     /// Override to guarantee that untracking is called at the right time.
@@ -137,8 +145,7 @@ class Renderer {
               let size = gameObject.size else {
             return
         }
-        let image = UIImage(named: imageString)
-        let imageView = UIImageView(image: image)
+        let imageView = makeImageView(imageString: imageString)
         imageView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         imageView.center = position
         view.insertSubview(imageView, at: 1)

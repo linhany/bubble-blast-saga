@@ -72,8 +72,13 @@ class GameViewController: UIViewController {
     }
 
     /// Stops the game and displays the `message`.
-    func showEndGameScreen(message: String) {
-        stopGame()
+    func endGame(message: String) {
+        // Delay to show animations before ending.
+        Timer.scheduledTimer(timeInterval: Constants.burstingBubbleAnimationDuration,
+                             target: self,
+                             selector: #selector(self.stopGame),
+                             userInfo: nil,
+                             repeats: false)
         self.endGameText.text = message
     }
 
@@ -180,7 +185,7 @@ class GameViewController: UIViewController {
         startGame()
     }
 
-    private func stopGame() {
+    @objc private func stopGame() {
         guard let gameView = gameView else {
             return
         }

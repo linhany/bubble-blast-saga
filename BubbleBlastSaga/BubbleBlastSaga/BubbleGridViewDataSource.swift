@@ -44,7 +44,8 @@ extension BubbleGridViewDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.bubbleGridCellReuseIdentifier,
+        guard let cell =
+            collectionView.dequeueReusableCell(withReuseIdentifier: Constants.bubbleGridCellReuseIdentifier,
             for: indexPath as IndexPath) as? BubbleGridCell else {
             fatalError("Cell not assigned the proper view subclass!")
         }

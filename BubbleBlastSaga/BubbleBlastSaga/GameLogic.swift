@@ -64,7 +64,7 @@ class GameLogic {
     func isGameWon() -> Bool {
         return !modelManager.isAnyNormalBubblesInGrid()
     }
-    
+
     func handleNewlySnappedBubble(_ newBubble: GameBubble) {
         addToBubbleGridModel(gameBubble: newBubble)
         handleSurroundingSpecialBubbles(with: newBubble)
@@ -106,7 +106,6 @@ class GameLogic {
         case .star:
             activateAllBubblesWithSameType(as: activatorBubble, with: bubble)
         case .indestructible: return
-            // TODO: CHANGE ANIMATION DEPENDING ON ACTIVATORBUBBLE.
         default: removeClusteredGameBubbles([bubble])
         }
     }
@@ -119,9 +118,7 @@ class GameLogic {
         guard let bubblesToBomb = getAdjacentBubbles(of: bombBubble) else {
             return
         }
-        // Bomb itself too.
-        // TODO: CHANGE ANIMATION
-        removeClusteredGameBubbles([bombBubble])
+        removeBombBubble(gameBubble: bombBubble)
         for bubble in bubblesToBomb {
             activate(bubble: bubble, with: bombBubble)
         }
@@ -135,9 +132,7 @@ class GameLogic {
         guard let bubblesToZap = getBubblesOnSameRow(as: lightningBubble) else {
             return
         }
-        // Zap itself too.
-        // TODO: CHANGE ANIMATION
-        removeClusteredGameBubbles([lightningBubble])
+        removeLightningBubble(gameBubble: lightningBubble)
         for bubble in bubblesToZap {
             activate(bubble: bubble, with: lightningBubble)
         }
@@ -293,6 +288,20 @@ class GameLogic {
                     object: nil,
                     userInfo: ["GameBubble": gameBubble])
         }
+    }
+
+    private func removeLightningBubble(gameBubble: GameBubble) {
+        removeGameBubble(gameBubble)
+        nc.post(name: Notification.Name(Constants.notifyRemoveLightningBubble),
+                object: nil,
+                userInfo: ["GameBubble": gameBubble])
+    }
+
+    private func removeBombBubble(gameBubble: GameBubble) {
+        removeGameBubble(gameBubble)
+        nc.post(name: Notification.Name(Constants.notifyRemoveBombBubble),
+                object: nil,
+                userInfo: ["GameBubble": gameBubble])
     }
 
     /// Removes `gameBubble` from the model and delegates removal of it from the game scene.

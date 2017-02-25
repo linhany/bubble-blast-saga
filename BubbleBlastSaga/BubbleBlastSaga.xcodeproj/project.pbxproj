@@ -13,6 +13,7 @@
 		A71DEFDC1E5B03A8003064AE /* LevelSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71DEFDB1E5B03A8003064AE /* LevelSelectViewController.swift */; };
 		A71DEFDE1E5B07C1003064AE /* LevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71DEFDD1E5B07C1003064AE /* LevelCell.swift */; };
 		A71DEFE01E5B3439003064AE /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71DEFDF1E5B3439003064AE /* Level.swift */; };
+		A731D6561E6169F700A687BB /* BubbleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731D6551E6169F700A687BB /* BubbleImageView.swift */; };
 		A745464A1E55D2B0005C8B67 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74546491E55D2B0005C8B67 /* RoundedButton.swift */; };
 		A77120FA1E542454007564A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77120F91E542454007564A2 /* AppDelegate.swift */; };
 		A77121011E542454007564A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77121001E542454007564A2 /* Assets.xcassets */; };
@@ -59,6 +60,8 @@
 		A771218F1E54BC60007564A2 /* StarBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771218E1E54BC60007564A2 /* StarBubble.swift */; };
 		A77121911E54BC71007564A2 /* IndestructibleBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121901E54BC71007564A2 /* IndestructibleBubble.swift */; };
 		A78044131E5CA2C200652BBE /* RandomBubbleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78044121E5CA2C200652BBE /* RandomBubbleHelper.swift */; };
+		BE46976BA4EB658E87D283E5 /* LightningImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4694E049EAD79353EB15C6 /* LightningImageView.swift */; };
+		BE4697B869365E5F1CD68A26 /* BombImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4694D651BDFD820F019B32 /* BombImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,7 @@
 		A71DEFDB1E5B03A8003064AE /* LevelSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectViewController.swift; sourceTree = "<group>"; };
 		A71DEFDD1E5B07C1003064AE /* LevelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelCell.swift; sourceTree = "<group>"; };
 		A71DEFDF1E5B3439003064AE /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		A731D6551E6169F700A687BB /* BubbleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleImageView.swift; sourceTree = "<group>"; };
 		A74546491E55D2B0005C8B67 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		A77120F61E542454007564A2 /* BubbleBlastSaga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubbleBlastSaga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77120F91E542454007564A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +141,8 @@
 		A771218E1E54BC60007564A2 /* StarBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarBubble.swift; sourceTree = "<group>"; };
 		A77121901E54BC71007564A2 /* IndestructibleBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndestructibleBubble.swift; sourceTree = "<group>"; };
 		A78044121E5CA2C200652BBE /* RandomBubbleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomBubbleHelper.swift; sourceTree = "<group>"; };
+		BE4694D651BDFD820F019B32 /* BombImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombImageView.swift; sourceTree = "<group>"; };
+		BE4694E049EAD79353EB15C6 /* LightningImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +318,9 @@
 				A74546491E55D2B0005C8B67 /* RoundedButton.swift */,
 				A77121321E5424B2007564A2 /* PaletteButton.swift */,
 				A77121881E544AC7007564A2 /* CannonImageView.swift */,
+				A731D6551E6169F700A687BB /* BubbleImageView.swift */,
+				BE4694E049EAD79353EB15C6 /* LightningImageView.swift */,
+				BE4694D651BDFD820F019B32 /* BombImageView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -477,6 +486,7 @@
 				A77121371E5424B2007564A2 /* BubbleGridViewDelegate.swift in Sources */,
 				A77121701E542B31007564A2 /* GameLogic.swift in Sources */,
 				A77121671E542B31007564A2 /* BubbleType.swift in Sources */,
+				A731D6561E6169F700A687BB /* BubbleImageView.swift in Sources */,
 				A771217E1E542B31007564A2 /* TraversalHelper.swift in Sources */,
 				A77121651E542B31007564A2 /* AnimationRenderer.swift in Sources */,
 				A77121691E542B31007564A2 /* Circle.swift in Sources */,
@@ -500,6 +510,8 @@
 				A77121411E5424B2007564A2 /* StorageManager.swift in Sources */,
 				A77121661E542B31007564A2 /* BubbleGridCell.swift in Sources */,
 				A77121761E542B31007564A2 /* NormalBubbleColor.swift in Sources */,
+				BE46976BA4EB658E87D283E5 /* LightningImageView.swift in Sources */,
+				BE4697B869365E5F1CD68A26 /* BombImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

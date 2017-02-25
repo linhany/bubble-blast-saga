@@ -15,6 +15,8 @@ class AnimationRenderer: Renderer {
     private var loadCannonGameBubbles: [GameBubble] = []
     private var newlySnappedGameBubbles: [GameBubble] = []
     private var disconnectedGameBubbles: [GameBubble] = []
+    private var removedLightningBubbles: [GameBubble] = []
+    private var removedBombBubbles: [GameBubble] = []
     private var clusteredGameBubbles: [GameBubble] = []
 
     override init() {
@@ -22,6 +24,8 @@ class AnimationRenderer: Renderer {
         addObserverForNewlySnappedGameBubble()
         addObserverForRemoveDisconnectedGameBubble()
         addObserverForRemoveClusteredGameBubble()
+        addObserverForRemoveLightningBubble()
+        addObserverForRemoveBombBubble()
         addObserverForLoadingCannonGameBubble()
     }
 
@@ -41,10 +45,17 @@ class AnimationRenderer: Renderer {
         removeImage(image, for: gameBubble, on: view)
     }
 
+    override func makeImageView(imageString: String) -> UIImageView {
+        let image = UIImage(named: imageString)
+        let imageView = BubbleImageView(image: image)
+        return imageView
+    }
+
     override func untrackGameObjects() {
         newlySnappedGameBubbles.removeAll()
         disconnectedGameBubbles.removeAll()
         clusteredGameBubbles.removeAll()
+        removedLightningBubbles.removeAll()
         loadCannonGameBubbles.removeAll()
         super.untrackGameObjects()
     }
@@ -64,10 +75,14 @@ class AnimationRenderer: Renderer {
     }
 
     private func removeImage(_ image: UIImageView, for gameBubble: GameBubble, on view: UIView) {
-        if disconnectedGameBubbles.contains(gameBubble) {
+        if removedLightningBubbles.contains(gameBubble) {
+            animateZap(gameBubbleImage: image, on: view)
+        } else if removedBombBubbles.contains(gameBubble) {
+            animateBomb(gameBubbleImage: image, on: view)
+        } else if disconnectedGameBubbles.contains(gameBubble) {
             animateFall(gameBubbleImage: image, on: view)
         } else if clusteredGameBubbles.contains(gameBubble) {
-            animateFade(gameBubbleImage: image)
+            animateBurst(gameBubbleImage: image)
         } else {
             super.removeImage(image, for: gameBubble, on: view)
         }
@@ -87,7 +102,37 @@ class AnimationRenderer: Renderer {
         })
     }
 
-    private func animateFade(gameBubbleImage: UIImageView) {
+    private func animateBurst(gameBubbleImage: UIImageView) {
+        guard let gameBubbleBurstImage = gameBubbleImage as? BubbleImageView else {
+            assertionFailure("Not assigned the proper subclass.")
+            gameBubbleImage.removeFromSuperview()
+            return
+        }
+
+        gameBubbleBurstImage.animateBurstRemoval()
+    }
+
+    private func animateZap(gameBubbleImage: UIImageView, on view: UIView) {
+        let viewBounds = view.bounds.size
+        let lightningImageFrame = CGRect(x: 0.0,
+                                         y: gameBubbleImage.frame.origin.y,
+                                         width: viewBounds.width,
+                                         height: gameBubbleImage.frame.size.height)
+        let lightningImage = LightningImageView(frame: lightningImageFrame)
+        view.addSubview(lightningImage)
+        lightningImage.animateLightningRemoval()
+        gameBubbleImage.removeFromSuperview()
+    }
+
+    private func animateBomb(gameBubbleImage: UIImageView, on view: UIView) {
+        let bombImageFrame = CGRect(x: 0.0,
+                                    y: 0.0,
+                                    width: gameBubbleImage.frame.size.width * 3,
+                                    height: gameBubbleImage.frame.size.height * 3)
+        let bombImage = BombImageView(frame: bombImageFrame)
+        view.addSubview(bombImage)
+        bombImage.center = gameBubbleImage.center
+        bombImage.animateBombRemoval()
         gameBubbleImage.removeFromSuperview()
     }
 
@@ -137,6 +182,22 @@ class AnimationRenderer: Renderer {
             using: updateRemoveClusteredGameBubble)
     }
 
+    private func addObserverForRemoveLightningBubble() {
+        nc.addObserver(
+                forName: Notification.Name(rawValue: Constants.notifyRemoveLightningBubble),
+                object: nil,
+                queue: nil,
+                using: updateRemoveLightningBubble)
+    }
+
+    private func addObserverForRemoveBombBubble() {
+        nc.addObserver(
+                forName: Notification.Name(rawValue: Constants.notifyRemoveBombBubble),
+                object: nil,
+                queue: nil,
+                using: updateRemoveBombBubble)
+    }
+
     private func addObserverForLoadingCannonGameBubble() {
         nc.addObserver(
             forName: Notification.Name(rawValue: Constants.notifyLoadingCannonGameBubble),
@@ -173,6 +234,26 @@ class AnimationRenderer: Renderer {
                     return
         }
         clusteredGameBubbles.append(gameBubble)
+    }
+
+    private func updateRemoveBombBubble(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let gameBubble = userInfo["GameBubble"]
+              as? GameBubble else {
+            assertionFailure("Poster did not post it right.")
+            return
+        }
+        removedBombBubbles.append(gameBubble)
+    }
+
+    private func updateRemoveLightningBubble(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let gameBubble = userInfo["GameBubble"]
+              as? GameBubble else {
+            assertionFailure("Poster did not post it right.")
+            return
+        }
+        removedLightningBubbles.append(gameBubble)
     }
 
     private func updateLoadCannonGameBubble(notification: Notification) {
