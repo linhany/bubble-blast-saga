@@ -1,0 +1,393 @@
+Black-box testing
+    Test Menu Screen
+        Test interactivity of pictures
+            Tap/LongPress/Pan on Bubble Blast Saga Logo: Nothing should happen.
+            Tap/LongPress/Pan on Tag Line picture: Nothing should happen.
+        Test buttons
+            Test Play
+                Tap on Play: Button text turns gray. Should show Level Selection screen.
+                Long press on Play: Button text turns gray. Should show Level Selection screen on release.
+                Pan on Play: Should be similar to long press, unless pan is released without being on the button, in which case nothing happens.
+            Test Design
+                Tap/Long press/Pan behavior similar to play button. Should show Level Design screen instead.
+            Test Settings
+                Tap/Long press/Pan behavior similar to play button. Sould show Settings screen instead.
+    Test Settings
+        Test interactivity of text labels
+            All text labels should not be interactive, except for the easy, medium hard buttons which are not text labels but might be confused for them.
+        Test Limited Cannon Shots Mode switch
+            Should toggle on press.
+        Test Limited Time Mode Switch
+            Should toggle on press.
+        Test buttons
+            Should show white border on selected button, rest of the 2 buttons on the same row should not have a border
+        Notation:
+        Let Limited Cannon Shots Mode = LCM, its associated difficulty be e, m, h with regards to easy medium hard respectively.
+        Let Limited Time Mode = LTM, its associated difficulty be e, m, h with regards to easy medium hard respectively.
+        Test gameplay with regards to settings
+            Test LCM off(e) LTM off(e): Should be unlimited shots and time.
+            Test LCM on(e) LTM off(e): Should have 120 cannon shots and unlimited time.
+            Test LCM off(e) LTM on(e): Should have unlimited shots and 60 seconds.
+            Test LCM on(e) LTM on(e): Should have 120 cannon shots and 60 seconds.
+
+            Test LCM off(m) LTM off(m): Should be normal gameplay mode.
+            Test LCM on(m) LTM off(m): Should have 80 shots.
+            Test LCM off(m) LTM on(m): Should have 40 seconds.
+            Test LCM on(m) LTM on(m): Should have 80 shots and 40 seconds
+
+            Test LCM off(h) LTM off(h): Should be normal gameplay mode.
+            Test LCM on(h) LTM off(h): Should have 40 shots.
+            Test LCM off(h) LTM on(h): Should have 20 seconds.
+            Test LCM on(h) LTM on(h): Should have 40 shots and 20 seconds.
+
+            Test combination of different difficulty levels as well:
+            (For each state (on, on), permute (off, off), (off, on), (on, off) as well. Every off should make the associated mode normal (untimed or unlimited shots))
+            Test LCM on(e) LTM on(m): 120 shots, 40 seconds
+            Test LCM on(e) LTM on(h): 120 shots, 20 seconds
+            Test LCM on(m) LTM on(e): 80 shots, 60 seconds
+            Test LCM on(m) LTM on(h): 80 shots, 20 seconds
+            Test LCM on(h) LTM on(e): 40 shots, 60 seconds
+            Test LCM on(h) LTM on(m): 40 shots, 40 seconds
+
+        Test settings remain after going back to main menu:
+            Test for each permutation above. Settings should remain as they were.
+        Test reload app: Settings should go back to default state: LCM off(e) LTM off(e)
+
+    Test Level Selection Screen
+    //add in preloaded level tests
+    //test picture shown here too!
+        Segued From Main Menu:
+            Test interactivity of "Level selection text label": should not be interactive
+            Test Buttons
+                Test Back button: Should unwind to main menu.
+                Test Delete button: Should put into delete mode. Text label changed to red and shows deletion warning. Delete button text changes to Confirm, red.
+            Test Tap on level in normal mode: Should start the level.
+            Test Tap on level in delete mode: Should mark the level with a red border.
+            Test Delete confirm functionality
+                No Levels marked for deletion: Nothing happens, goes back into normal mode.
+                1 level marked for deletion: That level deleted.
+                2 levels marked for deletion: Two levels Deleted.
+                All levels marked for deletion: All levels deleted.
+            Test delete persistency:
+                After deletion, restart app and ensure deleted levels are not there.
+        Segued From Level Designer:
+            Test interactivity of "Level selection text label": should not be interactive
+            Test Buttons
+                Test Back button: Should unwind to level designer.
+                Test Delete button: Should put into delete mode. Text label changed to red and shows deletion warning. Delete button text changes to Confirm, red.
+            Test Tap on level in normal mode: Should load the level. Level should be editable in level design mode, and playable upon start button push.
+            Test Tap on level in delete mode: Should mark the level with a red border.
+            Test Delete confirm functionality
+                No Levels marked for deletion: Nothing happens, goes back into normal mode.
+                1 level marked for deletion: That level deleted.
+                2 levels marked for deletion: Two levels Deleted.
+                All levels marked for deletion: All levels deleted.
+            Test delete persistency:
+                After deletion, restart app and ensure deleted levels are not there.
+
+    Test Level Design Screen
+        Test implementation of buttons
+            Save button: should show save alert.
+            Load button: should segue to level selection screen.
+            Start button: 
+                Empty grid: game starts, default win.
+                One normal bubble connected to top wall in grid: game starts
+                One special bubble e.g. bomb connected to top wall in level: game starts, default win.
+                Bubbles not connected to top: Should dissappear upon game start.
+            Reset button: 
+                Empty grid: should show reset alert. Upon confirmation, should show that level is already empty.
+                Non-empty grid: should show reset alert. Game grid should be reset only upon confirmation.
+            Back button:
+                Should unwind to main menu.
+                Grid should be empty after coming back from main menu.
+
+        Test implementation of file operations
+            Save (make changes between each step to distinguish)
+                Test level name validity
+                    Empty level name: Should show level name not valid message.
+                    One whitespace name: Should show level name not valid message.
+                    25 whitespace name: Should show level name not valid message.
+                    One character (non-whitespace): Should show level saved.
+                    25 characters (at least one non-whitespace): Should show level saved.
+                    26 characters (at least one non-whitespace) : Should show level name not valid.
+                Test saving
+                    Press cancel on save alert: level should not be saved.
+                    Press confirm on save alert with level name "test": level should be saved, verify by resetting, then loading.
+                    Press confirm on save alert with level name "test": level should be updated, verify by loading.
+                    Press confirm on save alert with new level name "test2": level saved, verify by erasing, then loading.
+            Load
+                Load a few saved levels: levels should be loaded successfully. grid contents should be replaced by loaded level contents.
+                Save after loading under same name: Level should be updated with new contents.
+                Save after loading with different name: level should be saved under different name
+                Restart the app: previously saved levels can still be loaded.
+
+        Test implementation of game grid
+            Tap a grid cell
+                No palette item selected:
+                    Empty cell: Nothing happens
+                    Non-empty cell: Cell color cycles in order with palette items
+                Non-erase item selected e.g Red
+                    Empty cell: Cell filled with red
+                    Non-empty cell: Cell color cycles in order with the palette items
+                Erase selected:
+                    Empty cell: Nothing happens
+                    Non-empty cell: Cell becomes empty
+            Drag to fill the grid cells
+                No palette item selected: Nothing happens
+                Non-erase item selected e.g. Blue
+                    Empty cell: Cell filled with blue
+                    Non-empty but not blue cell: Cell color changed to blue
+                    Blue cell: Nothing happens
+                Erase selected:
+                    Empty cell: Nothing happens
+                    Non-empty cell: Cell becomes empty
+            Long press on grid cell
+                No palette item selected:
+                    Empty cell: Nothing happens
+                    Non-empty cell: Cell becomes empty
+                Non-erase item selected e.g. Blue
+                    Empty cell: Nothing happens
+                    Non-empty but not blue cell: Cell becomes empty
+                    Blue cell: Cell becomes empty
+                Erase selected:
+                    Empty cell: Nothing happens
+                    Non-empty cell: Cell becomes empty
+                Dragging after long press:
+                    Nothing should happen.
+
+        Test implementation of palette buttons
+            For each palette button,
+                Test animations:
+                    Should animate and marked with black border upon selection.
+                Test functionality:     
+                    Should apply the right color to an empty grid cell, and do the appropriate response to a non empty depending on gesture type. (Can test every one of such item using the "Implementation of game grid" above.)
+            Test overall cycle animation: 
+                Should animate in order of currently cycled bubble
+            Test longpress animation: 
+                Erase bubble should be animated.
+
+        Test implementation of user feedback
+            Press save and then cancel the alert: should show "SAVING CANCELLED!"
+            Press save and then click confirm without filling in level name: should show "LEVEL NAME IS NOT VALID!"
+            Press save with a level name more than 25 characters: should show "LEVEL NAME IS NOT VALID!"
+            Press save and then successfully save a game by filling in non-whitespace name less than or equal to 25 characters: should show "LEVEL SAVED!"
+            Press reset and confirm: 
+                if game grid is not empty, should show "LEVEL RESET!"
+                if game grid is empty, shoudl show "LEVEL IS ALREADY EMPTY!"
+
+    Test GamePlay Screen
+
+        Test buttons
+            Test Back Button:
+                Segued from Level Designer: Should unwind to Level Designer
+                Segued from Level Selection: Should unwind to Level Selection
+            Test Retry Button:
+                Test when game is started:
+                    Should restart the level.
+                    Score: Should be set to zero
+                    Timed Mode: Counter should reset to max time.
+                    Limited Shots Mode: Counter should reset to max shots
+                Test when game is ongoing:
+                    Should restart the level.
+                    Score: Should be set to zero
+                    Timed Mode: Counter should reset to max time.
+                    Limited Shots Mode: Counter should reset to max shots
+                Test when game is ended:
+                    Should restart the level, clear the end game screen.
+                    Score: Should be set to zero
+                    Timed Mode: Counter should reset to max time.
+                    Limited Shots Mode: Counter should reset to max shots
+
+        Test projectile firing
+            Test Tap 
+                Tap on screen in firing angle range: Projectile should fire in direction of tap location.
+                Tap on screen outside firing angle range: Projectile should not fire.
+            Test Pan
+                Pan on screen: Projectile should fire in direction of the last pan location before lifting finger. Unless this last pan location is outside firing angle range, then it should not fire.
+            Test Long Press
+                Long press on screen in firing angle range: Projectile should fire in direction of tap location upon release.
+                Long press on screen outside firing angle range: Projectile should not fire.
+    
+        Test cannon:
+            Test rotations
+                Tap
+                    Cannon should rotate to face tap location direction.
+                Pan & release
+                    Cannon should rotate and face user's panning location until user's finger is released. If user goes out of cannon firing angle range, cannon should stop following user.
+            Test animations
+                Firing animation: Should display firing animation upon every shot fired. Next projectile should be loaded into cannon, if any.
+
+        Test next projectile:
+            Should be set up at start of game.
+            Should set up a new next projectile after every shot.
+            Should not collide with any bubbles falling down.
+            Should be of a color that is in the game grid.
+
+        Test projectile movement
+            Test single projectile:
+                Fire the projectile. It should travel at a constant speed until collision.
+            Test multiple projectiles:
+                Should be able to fire the projectile when another projectile is still moving. Projectiles collided should bounce off each other realistically.
+
+        Test projectile collision
+            Test collision between projectile and a screen edge
+                Test projectile collision with right screen edge
+                    Should bounce off right screen naturally and change its direction to left.
+                Test projectile collision with left screen edge
+                    Should bounce off left screen naturally and change its direction to right.
+                Test projectile collision with top screen edge
+                    Should snap to nearest empty cell in the grid.
+                Test projectile collision with bottom screen edge
+                    Should disappear from the game
+                Test falling bubbles collision with bottom screen edge
+                    Should disappear from the game
+            Test collision between two bubbles
+                Test collision between projectile and a stationary bubble in grid
+                    Projectile should snap to nearest empty cell. 
+                    Exception: When projectile is shot at a bubble in the last row, and snap location is below white dashed line. Game will end.
+                Test collision between falling bubbles and stationary bubbles in grid: Nothing should happen.
+                Test collision between two projectiles: Should bounce off naturally, change direction naturally. Post collision, should be able to snap to grid, bounce off walls or collide with other projectiles in flight.
+
+        Test projectile post-snap to empty cell behavior
+            No neighbours: Nothing should happen
+            Neighbors of all different color from projectile: Nothing should happen
+            2 or more clusters(connected group of bubbles) of same color as projectile: The cluster of same color bubbles should pop. After they pop, bubbles not connected to the top wall should fall.
+
+        Test Special Bubbles:   
+
+
+        Test animations:
+            Pop animation: Normal bubbles should pop when in cluster of three of more same color bubbles.
+            Falling animation: Unconnected bubbles should fall off the bottom part of the screen
+            Lighting animation: Should fill the row the lightning bubble is on when it is activated.
+            Bomb animation: Should have a circular explosion radius that covers its adjacent neighbours
+            Exceptions: Animations should not play for game winning shots.
+
+        Test Game win/lose conditions
+            Test Default Win:
+
+            Test Time Out:
+
+            Test No More Shots:
+
+            Test Lose Game:
+
+            Test Win Game:
+
+        Test Game Score
+
+        Test Limited time mode
+
+        test Limited cannon shots mode
+
+        Test End game screen
+
+
+Glass-box testing
+    TestGameObject
+        testPosition
+            _position is nil
+                get: Should return nil
+                set: Should set _position to be the new position and post a notification.
+            _position is not nil
+                get: Should return _position
+                set: Should set _position to be the new position and post a notification.
+        testPhysicsBody
+            _physicsBody is nil
+                get: Should return nil
+                set with nil:
+                    Nothing changes, _physicsBody still nil
+                set with not nil:
+                    _physicsBody is set to this new value, physicsBody's physicsBodyOwner should be set up as this GameObject.
+            _physisBody is not nil
+                get: Should return _physicsBody
+                set with nil:
+                    _physicsBody is now nil
+                set with not nil:
+                    _physicsBody is set to this new value, physicsBody's physicsBodyOwner should be set up as this GameObject. 
+    TestScene
+        testInit
+            should initialise gameObjects array to be empty and instantiate physicsWorld.
+        testAdd
+            should add the gameObject into gameObjects array.
+        testRemove
+            gameObject does not exist in gameObjects
+                Nothing should happen.
+            gameObject exists in gameObjects
+                Gameobject should be removed from gameObjects.
+                Notification should be posted.
+                The gameObjects array should remain the same except for this removed gameObject.
+    TestRenderer
+        testDraw
+            Should create UIImageViews for each gameObject in scene on the view. Should set them to be at the position of the gameObject.
+        testMoveImage
+            Image should be set as its new center to be the gameobject's position.
+        testRemoveImage
+            Image should be removed from its superview.
+    TestPhysicsWorld
+        testAdd
+            Should add the physicsBody into physicsBodies array.
+        testRemove
+            physicsBody does not exist in physicsBodies
+                Nothing should happen.
+            physicsBody exists in physicsBodies
+                physicsBody should be removed from physicsBodies.
+                The physicsBodies array should remain the same except for this removed physicsBody.
+    TestPhysicsBody
+        testPosition
+            get
+                physicsBodyOwner is nil
+                    should return nil
+                physicsBodyOwner is not nil
+                    should return position of physicsBodyOwner
+            set
+                physicsBodyOwner is nil
+                    nothing should happen
+                physicsBodyOwner is not nil
+                    should change position of physicsBodyOwner
+        testIsResting
+            velocity is 0.0 for both dx and dy: returns true
+            velocity is 0.0 for dx and non 0.0 for dy: returns false
+            velocity is not 0.0 for dx and 0.0 for dy: returns false
+            velocity is not 0.0 for both dx and dy: returns false
+        testInit
+            initCircle
+                Should set physicsBodyType to be a new Circle instance.
+                Center of circle should be this physicsBodyOwner's position.
+                Radius of circle should be set up correctly.
+                Should be in PhysicsWorld's physicsBodies array.
+            initEdgeLoop
+                Should set physicsBodyType to be a new EdgeLoop instance.
+                Size of edgeloop should be this size of param rect.
+                Origin of edgeloop should be origin of param rect.
+                Should be in PhysicsWorld's physicsBodies array.
+    TestTraversalHelper
+        testInit
+            Should initialise all function references correctly.
+        testClusterCheckTraversal
+            targetBubble not in grid: 
+                Should trigger assertionFailure. Return nil.
+            no neighbours: 
+                Should return empty array.
+            clusters of same color:
+                Should return all of same color clustered bubbles as a GameBubble array.
+        testAttachedCheckTraversal
+            No bubbles in grid
+                Should return empty set.
+            No bubbles in first row of grid
+                Should return empty set.
+            1 bubble in top row of grid
+                Should return all bubbles connected to this top bubble.
+            Fully packed grid:
+                Should return all bubbles in grid.
+    TestGameLevelScene
+        testInit: Should set up all components correctly.
+        testUpdate: Should integrate with game logic to handle newly snapped bubble correctly.
+        testInitialiseGame: Should initialise gameobjects from param gridState correctly.
+        testRemoveGameObjectFromScene: Should remove param gameObject from its parent gameObjects array.
+    TestGameLogic
+        testDelegateDidSet: Should call delegate's initialise game with modelManager's gridState. Should remove unattached bubbles.
+        testInit: Should set up components correctly.
+        testHandleNewlySnappedBubble: Should work with TraversalHelper.
+        testAddToGameBubbleModel: Should work with ModelManager to add a new bubble to the grid.
+        testRemoveFromGameBubbleGridModel: Should work with ModelManager to remove a bubble from the grid.

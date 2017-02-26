@@ -96,7 +96,6 @@ class GameLogic {
     }
 
     /// Activates a bubble, by removing it, and unleashing any special effect it has.
-    /// For now just use cluster effect for all removal.
     func activate(bubble: GameBubble, with activatorBubble: GameBubble ) {
         switch bubble.type {
         case .bomb:

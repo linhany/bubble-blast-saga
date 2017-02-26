@@ -53,6 +53,7 @@
 		A771218D1E54BC3B007564A2 /* LightningBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771218C1E54BC3B007564A2 /* LightningBubble.swift */; };
 		A771218F1E54BC60007564A2 /* StarBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771218E1E54BC60007564A2 /* StarBubble.swift */; };
 		A77121911E54BC71007564A2 /* IndestructibleBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121901E54BC71007564A2 /* IndestructibleBubble.swift */; };
+		A77735061E62ED16005A0516 /* Levels in Resources */ = {isa = PBXBuildFile; fileRef = A77735051E62ED16005A0516 /* Levels */; };
 		A78044131E5CA2C200652BBE /* RandomBubbleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78044121E5CA2C200652BBE /* RandomBubbleHelper.swift */; };
 		BE46976BA4EB658E87D283E5 /* LightningImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4694E049EAD79353EB15C6 /* LightningImageView.swift */; };
 		BE4697B869365E5F1CD68A26 /* BombImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4694D651BDFD820F019B32 /* BombImageView.swift */; };
@@ -130,6 +131,7 @@
 		A771218C1E54BC3B007564A2 /* LightningBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningBubble.swift; sourceTree = "<group>"; };
 		A771218E1E54BC60007564A2 /* StarBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarBubble.swift; sourceTree = "<group>"; };
 		A77121901E54BC71007564A2 /* IndestructibleBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndestructibleBubble.swift; sourceTree = "<group>"; };
+		A77735051E62ED16005A0516 /* Levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Levels; path = BubbleBlastSaga/Levels; sourceTree = "<group>"; };
 		A78044121E5CA2C200652BBE /* RandomBubbleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomBubbleHelper.swift; sourceTree = "<group>"; };
 		BE4694D651BDFD820F019B32 /* BombImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombImageView.swift; sourceTree = "<group>"; };
 		BE4694E049EAD79353EB15C6 /* LightningImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningImageView.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				A77121181E542454007564A2 /* BubbleBlastSagaUITests */,
 				A77120F71E542454007564A2 /* Products */,
 				8218D1FD3BFDA280340EBBF7 /* Pods */,
+				A77735051E62ED16005A0516 /* Levels */,
 				94D35A4035FB5C8EDBB4BFCE /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A77121041E542454007564A2 /* LaunchScreen.storyboard in Resources */,
+				A77735061E62ED16005A0516 /* Levels in Resources */,
 				A77121011E542454007564A2 /* Assets.xcassets in Resources */,
 				A71DEFD61E5AD4CF003064AE /* Main.storyboard in Resources */,
 				A77121441E5424DE007564A2 /* LevelDesign.storyboard in Resources */,

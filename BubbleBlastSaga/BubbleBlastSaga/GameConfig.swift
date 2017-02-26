@@ -21,17 +21,21 @@ struct GameConfig {
         return timeLimitBase * timeLimitMultiplier.rawValue
     }
 
+    static var bubblesLeftBonus: Double {
+        return 90.0 / Double(cannonShotsMultiplier.rawValue * cannonShotsMultiplier.rawValue)
+    }
+    static var timeLeftBonus: Double {
+        return 100.0 / Double(timeLimitMultiplier.rawValue * timeLimitMultiplier.rawValue)
+    }
+
     /// Let user set these.
     static var timeLimitMultiplier = TimeLimitMultiplier.easy
     static var cannonShotsMultiplier = CannonShotsMultiplier.easy
 
-    static var bubblesLeftBonus = 90 / cannonShotsMultiplier.rawValue
-    static var timeLeftBonus = 100 / timeLimitMultiplier.rawValue
-
     /// Base number of shots for the user.
-    private static var cannonShotsBase = 20
+    private static var cannonShotsBase = 40
     /// Base time limit for the user.
-    private static var timeLimitBase = 30
+    private static var timeLimitBase = 20
 }
 
 /// Multipliers for number of shots before user loses.

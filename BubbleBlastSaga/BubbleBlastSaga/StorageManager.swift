@@ -16,6 +16,10 @@ struct StorageManager {
     private let imageExtension = ".png"
     private let levelKey = "levelKeyString"
 
+    init() {
+        loadInPreloadedLevels()
+    }
+
     func saveLevel(level: Level, levelPreviewImage image: UIImage) -> Bool {
         let documentDirectory = getUrlForFileInDocumentDirectory()
         let fileURL = documentDirectory.appendingPathComponent(
@@ -73,7 +77,7 @@ struct StorageManager {
             fatalError("Unable to access document directory contents")
         }
 
-        let pLists = directoryContents.filter{ $0.pathExtension == "pList" }
+        let pLists = directoryContents.filter { $0.pathExtension == "pList" }
         var levels: [(String, UIImage)] = []
         for pList in pLists {
             let name = pList.deletingPathExtension().lastPathComponent
@@ -99,6 +103,34 @@ struct StorageManager {
         } catch {
             assertionFailure("Files cannot be missing!")
         }
+    }
+
+    private func loadInPreloadedLevels() {
+        let documentDirectory = getUrlForFileInDocumentDirectory()
+
+        let bundleImagesPath = Bundle.main.paths(forResourcesOfType: imageExtension, inDirectory: "Levels")
+        let bundleFilesPath = Bundle.main.paths(forResourcesOfType: pListExtension, inDirectory: "Levels")
+
+        for imagePath in bundleImagesPath {
+            let imageName = (imagePath as NSString).lastPathComponent
+            do {
+                try FileManager.default.copyItem(atPath: imagePath, toPath: documentDirectory.appendingPathComponent(imageName).path)
+            } catch {
+                // Already copied.
+                continue
+            }
+        }
+
+        for filePath in bundleFilesPath {
+            let fileName = (filePath as NSString).lastPathComponent
+            do {
+                try FileManager.default.copyItem(atPath: filePath, toPath:documentDirectory.appendingPathComponent(fileName).path)
+            } catch {
+                // Already copied.
+                continue
+            }
+        }
+
     }
 
     /// Returns the url for a file in the document directory.

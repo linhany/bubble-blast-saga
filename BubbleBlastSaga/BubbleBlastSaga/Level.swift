@@ -11,8 +11,10 @@ import UIKit
 class Level: NSObject, NSCoding {
     private let fileNameKey = "FileNameKey"
     private let gridStateKey = "GridStateKey"
+    private let preloadedKey = "PreloadedKey"
     internal let gridState: [[GameBubble?]]
     internal let fileName: String
+    internal var isPreloaded = false
 
     init(gridState: [[GameBubble?]], fileName: String) {
         self.gridState = gridState
@@ -23,6 +25,7 @@ class Level: NSObject, NSCoding {
         // This tells the archiver how to encode the object
         aCoder.encode(gridState, forKey: gridStateKey)
         aCoder.encode(fileName, forKey: fileNameKey)
+        aCoder.encode(isPreloaded, forKey: preloadedKey)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -31,8 +34,10 @@ class Level: NSObject, NSCoding {
               let fileName = aDecoder.decodeObject(forKey: fileNameKey) as? String else {
             return nil
         }
+        let isPreloaded = aDecoder.decodeBool(forKey: preloadedKey)
         self.gridState = gridState
         self.fileName = fileName
+        self.isPreloaded = isPreloaded
     }
 
 }
