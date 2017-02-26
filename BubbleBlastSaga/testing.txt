@@ -54,9 +54,10 @@ Black-box testing
         Test reload app: Settings should go back to default state: LCM off(e) LTM off(e)
 
     Test Level Selection Screen
-    //add in preloaded level tests
-    //test picture shown here too!
         Segued From Main Menu:
+            Test Level Preview: 
+                Should be able to show the picture of the level.
+                After resaving under same name: Picture should update to show the change.
             Test interactivity of "Level selection text label": should not be interactive
             Test Buttons
                 Test Back button: Should unwind to main menu.
@@ -71,6 +72,9 @@ Black-box testing
             Test delete persistency:
                 After deletion, restart app and ensure deleted levels are not there.
         Segued From Level Designer:
+            Test Level Preview: 
+                Should be able to show the picture of the level.
+                After resaving under same name: Picture should update to show the change.
             Test interactivity of "Level selection text label": should not be interactive
             Test Buttons
                 Test Back button: Should unwind to level designer.
@@ -84,7 +88,9 @@ Black-box testing
                 All levels marked for deletion: All levels deleted.
             Test delete persistency:
                 After deletion, restart app and ensure deleted levels are not there.
-
+        Test Preloaded Levels
+            Delete preloaded levels: They should reappear when app is relaunched.
+            Load and modify preloaded levels: Should be able to update it by saving under same name.
     Test Level Design Screen
         Test implementation of buttons
             Save button: should show save alert.
@@ -253,8 +259,20 @@ Black-box testing
             Neighbors of all different color from projectile: Nothing should happen
             2 or more clusters(connected group of bubbles) of same color as projectile: The cluster of same color bubbles should pop. After they pop, bubbles not connected to the top wall should fall.
 
-        Test Special Bubbles:   
-
+        Test Special Bubbles:
+            Test activation priority: 
+                When a bubble is newly snapped next to a star, lightning and bomb bubble, the priority should be star first, then lightning, then bomb. So the one that destroyed the star must be this newly snapped bubble
+            Following tests: Test by snapping a projectile next to the special bubble.
+            Test Lightning
+                Should be able to destroy all bubbles in same row as it, except indestructible bubble. Disconnected bubbles should fall after.
+            Test Bomb
+                Should be able to destroy all adjacent bubbles, except indestructible bubble. Disconnected bubbles should fall after.
+            Test Indestructible
+                Should not be popped in any way. Should be able to fall out the screen.
+            Test Star
+                Test normal bubble activates star: all normal bubbles of that type removed.
+                Test lightning activates star: all lightning bubbles should activate and remove bubbles in their row.
+                Test bomb activates star: all bomb bubbles should activate and remove bubbles adjacent to them.
 
         Test animations:
             Pop animation: Normal bubbles should pop when in cluster of three of more same color bubbles.
@@ -265,25 +283,119 @@ Black-box testing
 
         Test Game win/lose conditions
             Test Default Win:
+                The following conditions should trigger the default win screen:
+                    Start a level with empty grid
+                    Start a level without any normal bubbles, with any amount of special bubbles.
+                    Start a level without any normal bubble that is connected to the top of grid in any way.
 
             Test Time Out:
+                Let the timer run to 0 in timed mode. Should trigger Lose Game Screen.
 
             Test No More Shots:
+                Let the shot count run to 0. Shoot again with count at 0. Should trigger no more shots screen.
 
             Test Lose Game:
+                Fire shots of different color in a line until it reaches the white dashed line. Snapping past the white dashed line should trigger lose game screen.
 
             Test Win Game:
+                Clear all normal colored bubbles from the grid. Should trigger win game screen. 
 
         Test Game Score
-
-        Test Limited time mode
-
-        test Limited cannon shots mode
+            Game score should update itself throughout the game according to scoring system defined in Constants file.
+            At the game of game, game score multipliers and additions should be applied correctly.
 
         Test End game screen
-
+            Should show the title: Win/Loss/Default win.
+            Should show win bonus x2 if game is won.
+            Should show number of shots fired and time taken.
+            Should show initial GamePlay score and Final Score.
+            In timed mode, should show time left and time bonus.
+            In limited shots mode, should show shots left and shows left bonus.
 
 Glass-box testing
+    TestModelManager
+        TestInit: 
+            Assert grid row and column same as specified in Constants.swift, assert every cell is empty
+
+        TestSetBubbleAt
+            Row not in grid: Nothing happens
+            Column not in grid: Nothing happens
+            Row and column in grid, BubbleType .empty, no bubble at location: Nothing happens
+            Row and column in grid, BubbleType .empty, bubble at location: The grid location is now empty.
+            Row and column in grid, BubbleType nonempty, no bubble at location: The normal bubble is now at the location
+            Row and column in grid, BubbleType nonempty, bubble at location: The bubble type at grid is replaced by the new one.
+        TestRemoveBubbleAt
+            Row not in grid: Nothing happens
+            Column not in grid: Nothing happens
+            Row and column in grid, no bubble at location: Nothing happens
+            Row and column in grid, bubble at location: bubble removed.
+        TestGetBubbleAt
+            Row not in grid: Should return nil
+            Column not in grid: Should return nil
+            Row and column in grid, no bubble at location: Should return nil
+            Row and column in grid, bubble at location: Should return the bubble.
+        TestResetGridState
+            Initially empty: Should be be empty after reset.
+            Initially non-empty: Should still be empty after reset.
+        TestBuildBubble
+            All types of bubbles in BubbleType
+        TestGetNeighborsOfBubble
+            Bubble not in grid: Should return nil
+            Bubble no neighbours: Should return empty array.
+            Check these edge cases: Should return the correct neighbours
+            Bubble in front of odd row
+            Bubble in back of odd row
+            Bubble in front of even row
+            Bubble in back of odd row
+        TestIsBubbleTypeInGrid
+            Zero of that bubble type in grid: Should return false
+            One or more of that bubble type in grid: Should return true
+        TestIsAnyNormalBubblesInGrid
+            One normal bubble in grid: Should return true
+            No normal bubbles in grid: Should return false
+            No bubbles in grid: Should return false
+
+    TestStorageManager
+        TestInit
+            Should load in prepackaged levels. If levels with same name already exists, should skip them.
+        TestSaveLevel
+            Should be able to save a level along with its associated image inside the documents directory, under the same fileName, with one being .pList and the other .png
+        TestLoadLevel
+            Should be able to load a level and its associated image from the documents directory based on fileName.
+        TestDeleteLevel
+            Should be able to delete any level and its associated image from the documents directory based on fileName.
+
+    TestGameViewController
+        TestFireCannon
+            Should animate cannon, update shots count, and update the text displayed if in limited shots mode.
+        TestUpdateGameScore
+            Param Score: Should be able to set gameScoreText's text to be the param score.
+        TestEndGame
+            Should stop the game
+        TestGetBubbleWidth
+            Should return the width of a bubble grid cell.
+        TestGetBubbleRadius
+            Should return the radius of a bubble grid cell.
+        TestGetCannonAreaPosition
+            Should return the position of the projectile in cannon.
+        TestGetNextProjectilePosition
+            Should return the positon of the next projectile.
+        TestGetBubbleRowAndCol
+            Bubble with position: Should return the correct row and col it is in.
+            Bubble without positon: Should trigger assertionFailure
+        TestGetBubbleIndexPath
+            Bubble with position: Should return the correct indexPath it is at.
+            Bubble without positon: Should trigger assertionFailure
+
+    TestRandomBubbleHelper
+        TestNextBubble
+            isAccountingForBubblesGenerated is false
+                noOfBubbles attribute is 0: Should return a bubble in the grid.
+                noOfBubbles attribute is non zero: Should return a bubble in the grid.
+            isAccountingForBubblesGenerated is true
+                noOfBubbles attribute is 0: Should return nil.
+                noOfBubbles attribute is non zero: Should return a bubble in the grid.
+
     TestGameObject
         testPosition
             _position is nil
@@ -317,6 +429,7 @@ Glass-box testing
                 Gameobject should be removed from gameObjects.
                 Notification should be posted.
                 The gameObjects array should remain the same except for this removed gameObject.
+
     TestRenderer
         testDraw
             Should create UIImageViews for each gameObject in scene on the view. Should set them to be at the position of the gameObject.
@@ -324,6 +437,7 @@ Glass-box testing
             Image should be set as its new center to be the gameobject's position.
         testRemoveImage
             Image should be removed from its superview.
+
     TestPhysicsWorld
         testAdd
             Should add the physicsBody into physicsBodies array.
@@ -333,6 +447,7 @@ Glass-box testing
             physicsBody exists in physicsBodies
                 physicsBody should be removed from physicsBodies.
                 The physicsBodies array should remain the same except for this removed physicsBody.
+
     TestPhysicsBody
         testPosition
             get
@@ -361,6 +476,7 @@ Glass-box testing
                 Size of edgeloop should be this size of param rect.
                 Origin of edgeloop should be origin of param rect.
                 Should be in PhysicsWorld's physicsBodies array.
+
     TestTraversalHelper
         testInit
             Should initialise all function references correctly.
@@ -380,14 +496,23 @@ Glass-box testing
                 Should return all bubbles connected to this top bubble.
             Fully packed grid:
                 Should return all bubbles in grid.
+
     TestGameLevelScene
         testInit: Should set up all components correctly.
         testUpdate: Should integrate with game logic to handle newly snapped bubble correctly.
         testInitialiseGame: Should initialise gameobjects from param gridState correctly.
         testRemoveGameObjectFromScene: Should remove param gameObject from its parent gameObjects array.
+
     TestGameLogic
         testDelegateDidSet: Should call delegate's initialise game with modelManager's gridState. Should remove unattached bubbles.
         testInit: Should set up components correctly.
-        testHandleNewlySnappedBubble: Should work with TraversalHelper.
+        testIsGameWon: 
+            GameGrid is empty: Should return true
+            GameGrid has no normal bubbles: Should return true
+            GameGrid has one or more normal bubble: Should return false
+        testHandleNewlySnappedBubble: 
+            Should work with TraversalHelper.
+            Test all types of neighbors: Should work with the define behavior given in README.md.
         testAddToGameBubbleModel: Should work with ModelManager to add a new bubble to the grid.
         testRemoveFromGameBubbleGridModel: Should work with ModelManager to remove a bubble from the grid.
+

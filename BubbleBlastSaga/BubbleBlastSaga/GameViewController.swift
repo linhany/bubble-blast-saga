@@ -261,7 +261,7 @@ class GameViewController: UIViewController {
         timeLeftValue -= 1
         timerText.text = String(timeLeftValue)
         if timeLeftValue <= 0 {
-            endGame(message: "Time Limit!")
+            endGame(message: Constants.endGameLoseText)
             timer?.invalidate()
         }
     }
