@@ -7,6 +7,7 @@
 //  Credits: https://www.raywenderlich.com/145318/spritekit-swift-3-tutorial-beginners
 
 import UIKit
+import PhysicsEngine
 
 /// A game specific `scene` for our Bubble Game.
 /// Contains the `GameBubble`s in this `scene`.

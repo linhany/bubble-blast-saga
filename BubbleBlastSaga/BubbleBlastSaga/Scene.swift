@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PhysicsEngine
 
 /// `Scene` represents a scene of content for the GameEngine.
 /// Provides a general framework for a game to run.

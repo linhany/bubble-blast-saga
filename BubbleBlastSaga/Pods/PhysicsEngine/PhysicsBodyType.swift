@@ -9,7 +9,7 @@
 import Foundation
 
 /// The abstract class representing different possible `PhysicsBodyType`s.
-class PhysicsBodyType {
+public class PhysicsBodyType {
     /// The `physicsBody` that has this particular `PhysicsBodyType`.
-    internal weak var physicsBody: PhysicsBody?
+    public weak var physicsBody: PhysicsBody?
 }

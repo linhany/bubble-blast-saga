@@ -7,7 +7,7 @@
 //
 
 /// The different `CollisionType`s that can occur in the Physics simulation.
-enum CollisionType {
+public enum CollisionType {
     case circleWithCircle
     case circleWithTopOfEdgeLoop
     case circleWithLeftOfEdgeLoop

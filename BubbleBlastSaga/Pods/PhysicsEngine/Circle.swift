@@ -9,9 +9,9 @@
 import UIKit
 
 /// A circular `PhysicsBodyType`.
-class Circle: PhysicsBodyType {
+public class Circle: PhysicsBodyType {
     /// The `center` of the circular body is the physicsBody's` position`.
-    var center: CGPoint {
+    public var center: CGPoint {
         get {
             guard let center = physicsBody?.position else {
                 fatalError("Physics body not set up properly!")
@@ -23,9 +23,9 @@ class Circle: PhysicsBodyType {
         }
     }
     /// The `radius` of the circular body.
-    var radius: CGFloat
+    public var radius: CGFloat
 
-    init(radius: CGFloat) {
+    public init(radius: CGFloat) {
         self.radius = radius
     }
 }

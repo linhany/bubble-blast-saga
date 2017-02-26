@@ -10,7 +10,7 @@ import UIKit
 
 /// The protocol that `GameObject`s must conform to have a `PhysicsBody`.
 /// Separates `PhysicsBody` from having to know about `GameObject`.
-protocol PhysicsBodyOwner {
+public protocol PhysicsBodyOwner {
     /// The position of the `PhysicsBodyOwner` will be used as
     /// the position for this `PhysicsBody`.
     var position: CGPoint? {

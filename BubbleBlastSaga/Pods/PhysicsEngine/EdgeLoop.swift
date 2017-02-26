@@ -9,11 +9,11 @@
 import UIKit
 
 /// An `edgeLoop` typically used to bound a game scene.
-class EdgeLoop: PhysicsBodyType {
-    var origin: CGPoint
-    var size: CGSize
+public class EdgeLoop: PhysicsBodyType {
+    public var origin: CGPoint
+    public var size: CGSize
 
-    init(size: CGSize, origin: CGPoint) {
+    public init(size: CGSize, origin: CGPoint) {
         self.size = size
         self.origin = origin
     }

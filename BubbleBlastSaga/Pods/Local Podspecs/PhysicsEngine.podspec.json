@@ -1,0 +1,19 @@
+{
+  "name": "PhysicsEngine",
+  "version": "0.1",
+  "summary": "NUS CS3217 Problem Set 5 physics engine.",
+  "description": "A physics engine that provides path calculation and collision detection.",
+  "homepage": "https://bitbucket.org/cs3217/2017-ps4-a0139498j",
+  "license": "",
+  "authors": {
+    "Yong Lin Han": "linhan@u.nus.edu"
+  },
+  "platforms": {
+    "ios": "8.1"
+  },
+  "source": {
+    "git": "https://linhany@bitbucket.org/cs3217/2017-ps4-a0139498j.git",
+    "tag": "0.1"
+  },
+  "source_files": "*.swift"
+}

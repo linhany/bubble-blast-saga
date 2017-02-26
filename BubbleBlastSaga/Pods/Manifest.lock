@@ -1,0 +1,22 @@
+PODS:
+  - PhysicsEngine (0.1)
+
+DEPENDENCIES:
+  - PhysicsEngine (from `https://linhany@bitbucket.org/cs3217/2017-ps4-a0139498j.git`, tag `0.1`)
+
+EXTERNAL SOURCES:
+  PhysicsEngine:
+    :git: https://linhany@bitbucket.org/cs3217/2017-ps4-a0139498j.git
+    :tag: '0.1'
+
+CHECKOUT OPTIONS:
+  PhysicsEngine:
+    :git: https://linhany@bitbucket.org/cs3217/2017-ps4-a0139498j.git
+    :tag: '0.1'
+
+SPEC CHECKSUMS:
+  PhysicsEngine: f6f290bdf5b6fc48a0435cfa03461afbb9624d64
+
+PODFILE CHECKSUM: ea6646530ac28294b5f4780df6bd1e151df2aac1
+
+COCOAPODS: 1.2.0

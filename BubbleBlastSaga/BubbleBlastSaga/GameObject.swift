@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PhysicsEngine
 
 /// The `GameObject` class is the basic game entity recognized by the GameEngine.
 /// Subclass this to use custom classes as game entities.

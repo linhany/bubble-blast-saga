@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PhysicsEngine
 
 /// The Controller responsible for starting `GameLevelScene` through the `GameView`,
 /// and handling user interactions for views that are not `GameObject`s in the scene,

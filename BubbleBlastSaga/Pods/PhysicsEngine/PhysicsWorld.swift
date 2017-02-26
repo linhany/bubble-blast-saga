@@ -11,7 +11,7 @@ import UIKit
 // MARK: - PhysicsContactDelegate protocol.
 /// The `PhysicsContactDelegate` handles collisions 
 /// when physics bodies come into contact.
-protocol PhysicsContactDelegate {
+public protocol PhysicsContactDelegate {
     /// Handle collisions between physics bodies.
     func handleCollisions(_ collisions: [Collision])
 }
@@ -22,29 +22,32 @@ protocol PhysicsContactDelegate {
 /// It is heavily simplified to only account for simple object movement
 /// and collision detection between specific-shaped physics bodies, 
 /// but can be easily extended if necessary.
-class PhysicsWorld {
+public class PhysicsWorld {
 
     /// The array of `PhysicsBody`s that are in this `PhysicsWorld`.
     static private var physicsBodies: [PhysicsBody] = []
 
     /// The PhysicsContactDelegate that handles collisions.
-    internal var contactDelegate: PhysicsContactDelegate?
+    public var contactDelegate: PhysicsContactDelegate?
 
     /// The array that tracks `Collision`s occuring.
     private var collisions: [Collision] = []
 
     private var physicsBodiesToCheckAgainst: [PhysicsBody] = []
 
+    public init() {
+    }
+
     /// Adds the `physicsBody` into this `PhysicsWorld`.
     /// Static to enable an individual `PhysicsBody` to add itself in upon
     /// initialisation.
-    static func add(physicsBody: PhysicsBody) {
+    public static func add(physicsBody: PhysicsBody) {
         physicsBodies.append(physicsBody)
     }
 
     /// Removes the `physicsBody` from this `PhysicsWorld`.
     /// If `physicsBody` does not exist, does nothing.
-    static func remove(physicsBody: PhysicsBody) {
+    public static func remove(physicsBody: PhysicsBody) {
         var indexToRemove: Int?
         for index in 0..<physicsBodies.count {
             if physicsBodies[index] === physicsBody {
@@ -58,21 +61,21 @@ class PhysicsWorld {
         physicsBodies.remove(at: foundIndexToRemove)
     }
 
-    static func resetWorld() {
+    public static func resetWorld() {
         for physicsBody in physicsBodies {
             remove(physicsBody: physicsBody)
         }
         physicsBodies.removeAll()
     }
 
-    func reset() {
+    public func reset() {
         PhysicsWorld.resetWorld()
         collisions.removeAll()
         physicsBodiesToCheckAgainst.removeAll()
     }
 
     /// Advances the `PhysicsWorld`.
-    func run() {
+    public func run() {
         updatePhysicsBodies()
         detectCollisions()
         resolveCollisions()

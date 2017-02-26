@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3421D80F48C9C7D93B350C58 /* Pods_BubbleBlastSaga.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB8169329EFC3445DA3DAC9 /* Pods_BubbleBlastSaga.framework */; };
 		A71DEFD31E5AD4AE003064AE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71DEFD11E5AD4AE003064AE /* MenuViewController.swift */; };
 		A71DEFD61E5AD4CF003064AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A71DEFD51E5AD4CF003064AE /* Main.storyboard */; };
 		A71DEFDA1E5B0380003064AE /* LevelSelect.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A71DEFD91E5B0380003064AE /* LevelSelect.storyboard */; };
@@ -32,12 +33,7 @@
 		A77121651E542B31007564A2 /* AnimationRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771214B1E542B31007564A2 /* AnimationRenderer.swift */; };
 		A77121661E542B31007564A2 /* BubbleGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771214C1E542B31007564A2 /* BubbleGridCell.swift */; };
 		A77121671E542B31007564A2 /* BubbleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771214D1E542B31007564A2 /* BubbleType.swift */; };
-		A77121681E542B31007564A2 /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771214E1E542B31007564A2 /* CGPointExtension.swift */; };
-		A77121691E542B31007564A2 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771214F1E542B31007564A2 /* Circle.swift */; };
-		A771216A1E542B31007564A2 /* Collision.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121501E542B31007564A2 /* Collision.swift */; };
-		A771216B1E542B31007564A2 /* CollisionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121511E542B31007564A2 /* CollisionType.swift */; };
 		A771216C1E542B31007564A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121521E542B31007564A2 /* Constants.swift */; };
-		A771216D1E542B31007564A2 /* EdgeLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121531E542B31007564A2 /* EdgeLoop.swift */; };
 		A771216E1E542B31007564A2 /* GameBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121541E542B31007564A2 /* GameBubble.swift */; };
 		A771216F1E542B31007564A2 /* GameLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121551E542B31007564A2 /* GameLevelScene.swift */; };
 		A77121701E542B31007564A2 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121561E542B31007564A2 /* GameLogic.swift */; };
@@ -47,10 +43,6 @@
 		A77121741E542B31007564A2 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771215A1E542B31007564A2 /* ModelManager.swift */; };
 		A77121751E542B31007564A2 /* NormalBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771215B1E542B31007564A2 /* NormalBubble.swift */; };
 		A77121761E542B31007564A2 /* NormalBubbleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771215C1E542B31007564A2 /* NormalBubbleColor.swift */; };
-		A77121771E542B31007564A2 /* PhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771215D1E542B31007564A2 /* PhysicsBody.swift */; };
-		A77121781E542B31007564A2 /* PhysicsBodyOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771215E1E542B31007564A2 /* PhysicsBodyOwner.swift */; };
-		A77121791E542B31007564A2 /* PhysicsBodyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A771215F1E542B31007564A2 /* PhysicsBodyType.swift */; };
-		A771217A1E542B31007564A2 /* PhysicsWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121601E542B31007564A2 /* PhysicsWorld.swift */; };
 		A771217B1E542B31007564A2 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121611E542B31007564A2 /* Queue.swift */; };
 		A771217C1E542B31007564A2 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121621E542B31007564A2 /* Renderer.swift */; };
 		A771217D1E542B31007564A2 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77121631E542B31007564A2 /* Scene.swift */; };
@@ -85,6 +77,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0CB8169329EFC3445DA3DAC9 /* Pods_BubbleBlastSaga.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BubbleBlastSaga.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		301C20B07ECCE61B464115C8 /* Pods-BubbleBlastSaga.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubbleBlastSaga.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BubbleBlastSaga/Pods-BubbleBlastSaga.debug.xcconfig"; sourceTree = "<group>"; };
 		A71DEFD11E5AD4AE003064AE /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		A71DEFD51E5AD4CF003064AE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A71DEFD91E5B0380003064AE /* LevelSelect.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LevelSelect.storyboard; sourceTree = "<group>"; };
@@ -116,12 +110,7 @@
 		A771214B1E542B31007564A2 /* AnimationRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationRenderer.swift; sourceTree = "<group>"; };
 		A771214C1E542B31007564A2 /* BubbleGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleGridCell.swift; sourceTree = "<group>"; };
 		A771214D1E542B31007564A2 /* BubbleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleType.swift; sourceTree = "<group>"; };
-		A771214E1E542B31007564A2 /* CGPointExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
-		A771214F1E542B31007564A2 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
-		A77121501E542B31007564A2 /* Collision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collision.swift; sourceTree = "<group>"; };
-		A77121511E542B31007564A2 /* CollisionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollisionType.swift; sourceTree = "<group>"; };
 		A77121521E542B31007564A2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		A77121531E542B31007564A2 /* EdgeLoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeLoop.swift; sourceTree = "<group>"; };
 		A77121541E542B31007564A2 /* GameBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBubble.swift; sourceTree = "<group>"; };
 		A77121551E542B31007564A2 /* GameLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLevelScene.swift; sourceTree = "<group>"; };
 		A77121561E542B31007564A2 /* GameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
@@ -131,10 +120,6 @@
 		A771215A1E542B31007564A2 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		A771215B1E542B31007564A2 /* NormalBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalBubble.swift; sourceTree = "<group>"; };
 		A771215C1E542B31007564A2 /* NormalBubbleColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalBubbleColor.swift; sourceTree = "<group>"; };
-		A771215D1E542B31007564A2 /* PhysicsBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsBody.swift; sourceTree = "<group>"; };
-		A771215E1E542B31007564A2 /* PhysicsBodyOwner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsBodyOwner.swift; sourceTree = "<group>"; };
-		A771215F1E542B31007564A2 /* PhysicsBodyType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsBodyType.swift; sourceTree = "<group>"; };
-		A77121601E542B31007564A2 /* PhysicsWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsWorld.swift; sourceTree = "<group>"; };
 		A77121611E542B31007564A2 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		A77121621E542B31007564A2 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		A77121631E542B31007564A2 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
@@ -149,6 +134,7 @@
 		BE4694D651BDFD820F019B32 /* BombImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombImageView.swift; sourceTree = "<group>"; };
 		BE4694E049EAD79353EB15C6 /* LightningImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightningImageView.swift; sourceTree = "<group>"; };
 		BE4698C45193C13D0974D82D /* GameConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
+		C500F51103C39FABF2B780BC /* Pods-BubbleBlastSaga.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubbleBlastSaga.release.xcconfig"; path = "Pods/Target Support Files/Pods-BubbleBlastSaga/Pods-BubbleBlastSaga.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3421D80F48C9C7D93B350C58 /* Pods_BubbleBlastSaga.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +163,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8218D1FD3BFDA280340EBBF7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				301C20B07ECCE61B464115C8 /* Pods-BubbleBlastSaga.debug.xcconfig */,
+				C500F51103C39FABF2B780BC /* Pods-BubbleBlastSaga.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		94D35A4035FB5C8EDBB4BFCE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CB8169329EFC3445DA3DAC9 /* Pods_BubbleBlastSaga.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A77120ED1E542453007564A2 = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +187,8 @@
 				A771210D1E542454007564A2 /* BubbleBlastSagaTests */,
 				A77121181E542454007564A2 /* BubbleBlastSagaUITests */,
 				A77120F71E542454007564A2 /* Products */,
+				8218D1FD3BFDA280340EBBF7 /* Pods */,
+				94D35A4035FB5C8EDBB4BFCE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -243,25 +249,8 @@
 				A77121621E542B31007564A2 /* Renderer.swift */,
 				A77121631E542B31007564A2 /* Scene.swift */,
 				A77121581E542B31007564A2 /* GameView.swift */,
-				A77121801E542B6D007564A2 /* PhysicsEngine */,
 			);
 			name = GameEngine;
-			sourceTree = "<group>";
-		};
-		A77121801E542B6D007564A2 /* PhysicsEngine */ = {
-			isa = PBXGroup;
-			children = (
-				A77121601E542B31007564A2 /* PhysicsWorld.swift */,
-				A771215D1E542B31007564A2 /* PhysicsBody.swift */,
-				A771215E1E542B31007564A2 /* PhysicsBodyOwner.swift */,
-				A771215F1E542B31007564A2 /* PhysicsBodyType.swift */,
-				A77121501E542B31007564A2 /* Collision.swift */,
-				A771214E1E542B31007564A2 /* CGPointExtension.swift */,
-				A77121511E542B31007564A2 /* CollisionType.swift */,
-				A771214F1E542B31007564A2 /* Circle.swift */,
-				A77121531E542B31007564A2 /* EdgeLoop.swift */,
-			);
-			name = PhysicsEngine;
 			sourceTree = "<group>";
 		};
 		A77121811E542BB9007564A2 /* BubbleGameEngine */ = {
@@ -341,9 +330,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A771211E1E542454007564A2 /* Build configuration list for PBXNativeTarget "BubbleBlastSaga" */;
 			buildPhases = (
+				6EA3A2006B5192320AD2C64E /* [CP] Check Pods Manifest.lock */,
 				A77120F21E542453007564A2 /* Sources */,
 				A77120F31E542453007564A2 /* Frameworks */,
 				A77120F41E542453007564A2 /* Resources */,
+				61E6CE52B73F61DFF8E14F75 /* [CP] Embed Pods Frameworks */,
+				2CC4574DC5549022BB03E2E2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -470,16 +462,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2CC4574DC5549022BB03E2E2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BubbleBlastSaga/Pods-BubbleBlastSaga-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61E6CE52B73F61DFF8E14F75 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BubbleBlastSaga/Pods-BubbleBlastSaga-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6EA3A2006B5192320AD2C64E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A77120F21E542453007564A2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A77121781E542B31007564A2 /* PhysicsBodyOwner.swift in Sources */,
 				A77121711E542B31007564A2 /* GameObject.swift in Sources */,
 				A78044131E5CA2C200652BBE /* RandomBubbleHelper.swift in Sources */,
 				A77121361E5424B2007564A2 /* BubbleGridViewDataSource.swift in Sources */,
-				A77121791E542B31007564A2 /* PhysicsBodyType.swift in Sources */,
 				A745464A1E55D2B0005C8B67 /* RoundedButton.swift in Sources */,
 				A771217C1E542B31007564A2 /* Renderer.swift in Sources */,
 				A77121751E542B31007564A2 /* NormalBubble.swift in Sources */,
@@ -499,20 +537,13 @@
 				A731D6561E6169F700A687BB /* BubbleImageView.swift in Sources */,
 				A771217E1E542B31007564A2 /* TraversalHelper.swift in Sources */,
 				A77121651E542B31007564A2 /* AnimationRenderer.swift in Sources */,
-				A77121691E542B31007564A2 /* Circle.swift in Sources */,
 				A77121721E542B31007564A2 /* GameView.swift in Sources */,
-				A771216D1E542B31007564A2 /* EdgeLoop.swift in Sources */,
 				A771216F1E542B31007564A2 /* GameLevelScene.swift in Sources */,
 				A771216E1E542B31007564A2 /* GameBubble.swift in Sources */,
-				A77121681E542B31007564A2 /* CGPointExtension.swift in Sources */,
 				A74E0A4D1E620BF600C47533 /* SettingsViewController.swift in Sources */,
-				A771216A1E542B31007564A2 /* Collision.swift in Sources */,
 				A71DEFD31E5AD4AE003064AE /* MenuViewController.swift in Sources */,
-				A77121771E542B31007564A2 /* PhysicsBody.swift in Sources */,
 				A77120FA1E542454007564A2 /* AppDelegate.swift in Sources */,
-				A771217A1E542B31007564A2 /* PhysicsWorld.swift in Sources */,
 				A71DEFE01E5B3439003064AE /* Level.swift in Sources */,
-				A771216B1E542B31007564A2 /* CollisionType.swift in Sources */,
 				A77121911E54BC71007564A2 /* IndestructibleBubble.swift in Sources */,
 				A77121891E544AC7007564A2 /* CannonImageView.swift in Sources */,
 				A77121401E5424B2007564A2 /* PaletteButton.swift in Sources */,
@@ -665,6 +696,7 @@
 		};
 		A771211F1E542454007564A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 301C20B07ECCE61B464115C8 /* Pods-BubbleBlastSaga.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = P96TCWFSBR;
@@ -678,6 +710,7 @@
 		};
 		A77121201E542454007564A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C500F51103C39FABF2B780BC /* Pods-BubbleBlastSaga.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = P96TCWFSBR;
