@@ -65,8 +65,6 @@ The beauty of the activate() function is that I can reuse it and customise what 
 
 Please save your diagram as `class-diagram.png` in the root directory of the repository.
 
-Why is this only 5 marks??!
-
 ### Problem 8: Testing
 
 Please refer to `testing.txt`.
@@ -88,4 +86,17 @@ Please refer to `testing.txt`.
 
 ### Problem 10: Final Reflection
 
-Your answer here
+The original design of my MVC architecture was pretty decent for the purposes of this application I feel. <br>
+One improvement I observed: When I first designed the Storage component of the game, I only thought to save the gridState (2D array) to file. Later on, I realised that I could save additional information like high score for a particular level with it, or even include information to show if the level is a preloaded or custom made one. Even though I did not end up doing these extensions, I did change the Storage to store a Level object instead, making it easier to include more details about the level to be saved if needed. <br>
+Otherwise, I like the design of my Level Design ViewController. Because I had extracted the CollectionView related functions from it, I was able to easily reuse the extracted components for my GameViewController as well. I had originally thought that I would extract just to make the initial view controller less lengthy, but it turned out I can eliminate alot of code duplication for this. <br>
+Also, it was very easy for me to add new bubble types into the game. Using the button's tag as the bubble type's raw value proved to be a great choice since I did not have to tweak the cycle and etc functionalities associated with the level designer. <br>
+Separating the storage component from model was also a great choice, as I did not have to worry about breaking the functionalities of either component when tweaking one, allowing me to modify the existing class easily. <br>
+Further improvement of architecture seems like it would take a great deal of consideration, because the separation of concerns is already quite clear. Maybe one area which I had doubts about would be regarding the collectionview required implementations. As a data source class, my bubble grid data source is only responsible for initialising the empty grid and this might go against what it seems to be responsible for. Perhaps there is a way to tweak this class to hold a reference to ModelManager, and use reload grid when receiving updates from modelManager though a notification. However, if I do that, I would not be able to reuse it for the GameViewController.
+
+Regarding my game engine design, I like it alot since I was able to add in the extra features easily. <br>
+One possible improvement: I often wondered if my GameViewController really needed to have a CollectionView, since the CollectionView is only used to guide where the bubbles should snap to, with the convenient point to index path conversion API. It can be quite weird for the collectionview to just be doing that. If I could implement the snap to grid in another way, then perhaps I do not need the collectionview in my GameViewController after all.<br>
+Another possible improvement: Because of the way I structure my game engine, I will only delete the bubbles together in one pass when it is the game renderer's turn to run, since the renderer only handles the drawing of game objects after the logic is done. Also, all my animations regarding gameplay objects are handled in Animation Renderer. This makes it hard for me to extend my animations to take place simultaneously as the logic is doing its job, and prevented me from implementing e.g. a chain explosion effect which in my opinion would look cooler. To change this, it seems that I would need to either run the renderer & gamelogic in parallel or somehow store the order that each bubble to be deleted, only use the renderer to update it when appropriate. Of course, the easiest way would be for the game logic to do the animation itself, or hold a reference to the renderer (or maybe through a delegate protocol), and call the delegate to do the animation each time the removal occurs. After some thought it seems that the delegate way is most appropriate. <br>
+Another possible improvement I thought about: Do I really need so many classes for my special bubbles? Is it better to have a special bubble enum, and maybe let these special bubbles inherit from e.g. SpecialBubble. For the purposes of this app there isn't really a difference with either options. I suppose if there is a huge amount of special bubbles that share certain common characteristics, then it would make sense to group them together and put their common stuff inside this SpecialBubble class.
+<br>
+Other than that, I liked the design of my Physics Engine as it did not have to know about GameObjects at all. Not sure if that will affect the cocoapods making, but regardless separation of concerns is always good. Since my Game Engine is overall decently structured, I have a clear idea about which component of my app is doing what, and it makes it easier for me to isolate bugs and discover what went wrong. <br>
+I also liked that I separated GameLogic from GameLevelScene in PS4. It allowed me to easily implement and extend functionalities in PS5 such as shooting of multiple projectiles and new bubble types, since it is clear that GameLogic is responsible for post-snap behavior only.
