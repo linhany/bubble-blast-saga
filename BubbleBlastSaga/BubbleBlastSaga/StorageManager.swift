@@ -115,8 +115,10 @@ struct StorageManager {
 
         for imagePath in bundleImagesPath {
             let imageName = (imagePath as NSString).lastPathComponent
+            let destinationPath = documentDirectory.appendingPathComponent(imageName).path
             do {
-                try FileManager.default.copyItem(atPath: imagePath, toPath: documentDirectory.appendingPathComponent(imageName).path)
+                try FileManager.default.copyItem(atPath: imagePath,
+                                                 toPath: destinationPath)
             } catch {
                 // Already copied.
                 continue
@@ -125,8 +127,10 @@ struct StorageManager {
 
         for filePath in bundleFilesPath {
             let fileName = (filePath as NSString).lastPathComponent
+            let destinationPath = documentDirectory.appendingPathComponent(fileName).path
             do {
-                try FileManager.default.copyItem(atPath: filePath, toPath:documentDirectory.appendingPathComponent(fileName).path)
+                try FileManager.default.copyItem(atPath: filePath,
+                                                 toPath: destinationPath)
             } catch {
                 // Already copied.
                 continue

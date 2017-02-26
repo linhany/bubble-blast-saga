@@ -20,8 +20,8 @@ public struct Collision {
     /// the player moved object should always be stored first in the parameter
     /// `physicsBody` to allow for ease of retrieval.
     public init(_ physicsBody: PhysicsBody,
-         with otherPhysicsBody: PhysicsBody,
-         collisionType: CollisionType) {
+                with otherPhysicsBody: PhysicsBody,
+                collisionType: CollisionType) {
         self.physicsBody = physicsBody
         self.otherPhysicsBody = otherPhysicsBody
         self.collisionType = collisionType

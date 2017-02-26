@@ -19,7 +19,6 @@ class PaletteButton: UIButton {
     private let springDamping: CGFloat = 0.2
     private let springVelocity: CGFloat = 6.0
 
-
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setUpBorderProperties()

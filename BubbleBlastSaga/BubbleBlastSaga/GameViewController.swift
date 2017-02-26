@@ -393,7 +393,6 @@ class GameViewController: UIViewController {
         timerText.isHidden = true
     }
 
-
     private func disableUserInteractionOnViews() {
         endGameScreen.isUserInteractionEnabled = false
         remainingCountText.isUserInteractionEnabled = false

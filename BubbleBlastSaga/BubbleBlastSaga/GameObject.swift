@@ -14,16 +14,16 @@ import PhysicsEngine
 class GameObject: NSObject, PhysicsBodyOwner {
 
     /// The String which identifies the image associated with this `GameObject`, if any.
-    internal var imageString: String? = nil
+    internal var imageString: String?
 
     /// The size of the `GameObject` when rendered on the view.
-    internal var size: CGSize? = nil
+    internal var size: CGSize?
 
     /// The position of this `GameObject` with regards to the view it is on.
-    private var _position: CGPoint? = nil
+    private var _position: CGPoint?
 
     /// The `PhysicsBody` associated with this `GameObject`, if any.
-    private var _physicsBody: PhysicsBody? = nil
+    private var _physicsBody: PhysicsBody?
 
     /// Notification Center to notify observers when this `GameObject` is moving.
     private let nc = NotificationCenter.default

@@ -71,6 +71,7 @@ Please refer to `testing.txt`.
 
 ### Problem 9: The Bells & Whistles
 <ul>
+<li> Add more normal bubble color types. </li>
 <li> Add animations: bubble burst, bomb, lightning.</li>
 <li> Add game score. </li>
 <li> Add end game screen with stats.</li>
