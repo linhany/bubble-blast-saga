@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// An indestructible bubble cannot be destroyed by any bubble.
+/// It can only be removed by falling out of the game screen.
 class IndestructibleBubble: GameBubble {
     override var type: BubbleType {
         return .indestructible

@@ -8,6 +8,9 @@
 
 import UIKit
 
+/// The Controller responsible for the Settings screen.
+/// This screen has several switches and buttons for the user
+/// to select game modes and difficulty levels.
 class SettingsViewController: UIViewController {
 
     @IBOutlet var limitedShotsSwitch: UISwitch!

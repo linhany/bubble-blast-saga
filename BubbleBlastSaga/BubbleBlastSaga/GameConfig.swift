@@ -16,6 +16,7 @@ struct GameConfig {
     static var timeLimitMultiplier = TimeLimitMultiplier.easy
     static var cannonShotsMultiplier = CannonShotsMultiplier.easy
 
+    /// The number of cannon shots available.
     static var cannonShots: Int {
         return cannonShotsBase * cannonShotsMultiplier.rawValue
     }
@@ -25,6 +26,7 @@ struct GameConfig {
         return timeLimitBase * timeLimitMultiplier.rawValue
     }
 
+    /// Bonus for game modes
     static var bubblesLeftBonus: Double {
         return bubbleLeftBonusBase / Double(cannonShotsMultiplier.rawValue * cannonShotsMultiplier.rawValue)
     }

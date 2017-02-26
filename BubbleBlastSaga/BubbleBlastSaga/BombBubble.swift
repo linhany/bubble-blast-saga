@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// A bomb bubble is a special bubble that explodes upon activation
+/// and activates all its neighbors.
 class BombBubble: GameBubble {
     override var type: BubbleType {
         return .bomb

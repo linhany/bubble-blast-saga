@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// A lightning bubble activates all bubbles on same row as it upon
+/// activation.
 class LightningBubble: GameBubble {
     override var type: BubbleType {
         return .lightning

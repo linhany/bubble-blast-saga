@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A star bubble will activate all types of the activator bubble.
 class StarBubble: GameBubble {
     override var type: BubbleType {
         return .star
