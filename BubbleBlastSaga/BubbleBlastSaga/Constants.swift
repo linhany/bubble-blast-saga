@@ -46,10 +46,12 @@ struct Constants {
     static let levelSelectUnwindToMenuSegueIdentifier = "LevelSelectUnwindToMenuSegue"
     static let menuToLevelSelectSegueIdentifier = "MenuToLevelSelectSegue"
     static let menuToLevelDesignSegueIdentifier = "MenuToLevelDesignSegue"
+    static let menuToSettingsSegueIdentifier = "MenuToSettingsSegue"
     static let levelDesignToLevelSelectSegueIdentifier = "LevelDesignToLevelSelectSegue"
 
     static let endGameLoseText = "YOU LOST! :("
     static let endGameWinText = "YOU WON! :)"
+    static let endGameDefaultWinText = "DEFAULT WIN :O"
 
     static let redBubbleIdentifier = "bubble-red"
     static let orangeBubbleIdentifier = "bubble-orange"
@@ -104,7 +106,6 @@ struct Constants {
     static let levelSelectionDeleteModeHeaderText = "Deletion is permanent! Mark levels to delete"
 
     static let emptyString = ""
-    static let infinity = "∞"
 
     static let levelNameCharacterCountLimit = 25
 

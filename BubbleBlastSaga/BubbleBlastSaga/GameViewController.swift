@@ -38,6 +38,7 @@ class GameViewController: UIViewController {
     internal var unwindSegueIdentifier: String?
 
     private var timer: Timer?
+    private var isGameOngoing = false
     private var shotsFired = 0
     private var playTime = 0
 
@@ -76,18 +77,36 @@ class GameViewController: UIViewController {
 
     func fireCannon() {
         cannonImage.startAnimating()
-        updateRemainingCountText()
         incrementShotsFiredCount()
+        if GameConfig.isCannonShotsLimited {
+            updateRemainingCountText()
+        }
     }
 
     func updateGameScore(_ score: Int) {
         gameScoreText.text = String(score)
     }
 
+    private func isDefaultWin() -> Bool {
+        return shotsFired == 0
+    }
+
     /// Stops the game and displays the `message`.
     func endGame(message: String) {
+        guard isGameOngoing else {
+            return
+        }
+        isGameOngoing = false
         stopGame()
         var endGameMessages: [String] = []
+        if isDefaultWin() {
+            let messages = getDefaultWinMessages()
+            for message in messages {
+                endGameMessages.append(message)
+            }
+            showEndGameScreen(endGameStats: endGameMessages)
+            return
+        }
         endGameMessages.append(message)
         endGameMessages.append(getGamePlayScoreMessage())
         endGameMessages.append(getShotsFiredMessage())
@@ -112,6 +131,15 @@ class GameViewController: UIViewController {
         showEndGameScreen(endGameStats: endGameMessages)
     }
 
+    private func getDefaultWinMessages() -> [String] {
+        var messages: [String] = []
+        messages.append(Constants.endGameDefaultWinText)
+        messages.append("Life is not fun if it's too easy")
+        messages.append("Add some normal bubbles")
+        messages.append("Make sure they are connected to the top")
+        return messages
+    }
+
     private func getGamePlayScoreMessage() -> String {
         guard let currentGameScore = gameScoreText?.text else {
             fatalError("Must have a current game score.")
@@ -123,11 +151,11 @@ class GameViewController: UIViewController {
         var messages: [String] = []
         guard let shotsLeft = remainingCountText.text,
               let shotsLeftValue = Int(shotsLeft) else {
-            fatalError("Must have shots left count")
+            fatalError("Must have shots left!")
         }
         guard let currentGameScore = gameScoreText?.text,
               var currentGameScoreValue = Int(currentGameScore) else {
-            fatalError("Must have a current game score.")
+            fatalError("Must have score!")
         }
         let shotsLeftBonus = shotsLeftValue * GameConfig.bubblesLeftBonus
         currentGameScoreValue += shotsLeftBonus
@@ -143,11 +171,11 @@ class GameViewController: UIViewController {
         var messages: [String] = []
         guard let timeLeft = timerText?.text,
               let timeLeftValue = Int(timeLeft) else {
-            fatalError("Must have time!")
+            fatalError("Must have time left!")
         }
         guard let currentGameScore = gameScoreText?.text,
               var currentGameScoreValue = Int(currentGameScore) else {
-            fatalError("Must have a current game score.")
+            fatalError("Must have score!")
         }
         let timeLeftBonus = timeLeftValue * Int(GameConfig.timeLeftBonus)
         currentGameScoreValue += timeLeftBonus
@@ -299,6 +327,7 @@ class GameViewController: UIViewController {
         self.gameView = gameView
         self.shotsFired = 0
         self.playTime = 0
+        self.isGameOngoing = true
         initGameTimer()
     }
 
@@ -344,8 +373,6 @@ class GameViewController: UIViewController {
         if GameConfig.isCannonShotsLimited {
             noOfBubbles = GameConfig.cannonShots
             remainingCountText.text = String(noOfBubbles)
-        } else {
-            remainingCountText.text = Constants.infinity
         }
         return noOfBubbles
     }
@@ -359,6 +386,7 @@ class GameViewController: UIViewController {
         guard let gameView = gameView else {
             return
         }
+        isGameOngoing = false
         gameView.stopPresenting()
         timer?.invalidate()
     }
@@ -385,8 +413,7 @@ class GameViewController: UIViewController {
     }
 
     private func updateRemainingCountText() {
-        guard let text = remainingCountText.text,
-                text != Constants.infinity else {
+        guard let text = remainingCountText.text else {
             return
         }
         guard let textIntValue = Int(text) else {

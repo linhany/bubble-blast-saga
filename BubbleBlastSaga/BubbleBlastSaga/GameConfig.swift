@@ -9,13 +9,17 @@
 import Foundation
 
 struct GameConfig {
-    static var isCannonShotsLimited = true
-    static var isTimed = true
+    static var isCannonShotsLimited = false
+    static var isTimed = false
 
-    static var cannonShots = cannonShotsBase * cannonShotsMultiplier.rawValue
+    static var cannonShots: Int {
+        return cannonShotsBase * cannonShotsMultiplier.rawValue
+    }
 
     /// The time limit in seconds.
-    static var timeLimit = Int(timeLimitBase * timeLimitMultiplier.rawValue)
+    static var timeLimit: Int {
+        return timeLimitBase * timeLimitMultiplier.rawValue
+    }
 
     /// Let user set these.
     static var timeLimitMultiplier = TimeLimitMultiplier.easy
@@ -27,7 +31,7 @@ struct GameConfig {
     /// Base number of shots for the user.
     private static var cannonShotsBase = 20
     /// Base time limit for the user.
-    private static var timeLimitBase = 30.0
+    private static var timeLimitBase = 30
 }
 
 /// Multipliers for number of shots before user loses.
@@ -38,8 +42,14 @@ enum CannonShotsMultiplier: Int {
 }
 
 /// Multipliers for TimeLimit to clear the level, in seconds.
-enum TimeLimitMultiplier: Double {
-    case easy = 2
-    case medium = 1.5
+enum TimeLimitMultiplier: Int {
+    case easy = 3
+    case medium = 2
     case hard = 1
 }
+
+//enum GridSize: (Int, Int) {
+//    case easy = (14, 12)
+//    case medium = (21, 18)
+//    case hard = (28, 24)
+//}

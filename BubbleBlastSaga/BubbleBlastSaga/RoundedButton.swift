@@ -31,4 +31,12 @@ class RoundedButton: UIButton {
         setTitleColor(.lightGray, for: .focused)
         setTitleColor(.lightGray, for: .highlighted)
     }
+
+    func markAsSelected() {
+        layer.borderWidth = 1
+    }
+
+    func unmark() {
+        layer.borderWidth = 0
+    }
 }

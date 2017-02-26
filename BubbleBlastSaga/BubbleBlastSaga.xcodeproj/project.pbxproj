@@ -15,6 +15,8 @@
 		A71DEFE01E5B3439003064AE /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71DEFDF1E5B3439003064AE /* Level.swift */; };
 		A731D6561E6169F700A687BB /* BubbleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731D6551E6169F700A687BB /* BubbleImageView.swift */; };
 		A745464A1E55D2B0005C8B67 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74546491E55D2B0005C8B67 /* RoundedButton.swift */; };
+		A74E0A4D1E620BF600C47533 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74E0A4C1E620BF600C47533 /* SettingsViewController.swift */; };
+		A74E0A511E62862E00C47533 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74E0A501E62862E00C47533 /* Settings.storyboard */; };
 		A77120FA1E542454007564A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77120F91E542454007564A2 /* AppDelegate.swift */; };
 		A77121011E542454007564A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77121001E542454007564A2 /* Assets.xcassets */; };
 		A77121041E542454007564A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A77121021E542454007564A2 /* LaunchScreen.storyboard */; };
@@ -91,6 +93,8 @@
 		A71DEFDF1E5B3439003064AE /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		A731D6551E6169F700A687BB /* BubbleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleImageView.swift; sourceTree = "<group>"; };
 		A74546491E55D2B0005C8B67 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		A74E0A4C1E620BF600C47533 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A74E0A501E62862E00C47533 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		A77120F61E542454007564A2 /* BubbleBlastSaga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubbleBlastSaga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77120F91E542454007564A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A77121001E542454007564A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 				A77121851E542BFE007564A2 /* View */,
 				A77121821E542BDD007564A2 /* Helpers */,
 				A71DEFD51E5AD4CF003064AE /* Main.storyboard */,
+				A74E0A501E62862E00C47533 /* Settings.storyboard */,
 				A71DEFD91E5B0380003064AE /* LevelSelect.storyboard */,
 				A77121431E5424DE007564A2 /* LevelDesign.storyboard */,
 				A77121861E542D5A007564A2 /* GameLevel.storyboard */,
@@ -287,6 +292,7 @@
 			children = (
 				A71DEFD11E5AD4AE003064AE /* MenuViewController.swift */,
 				A71DEFDB1E5B03A8003064AE /* LevelSelectViewController.swift */,
+				A74E0A4C1E620BF600C47533 /* SettingsViewController.swift */,
 				A771212D1E5424B2007564A2 /* LevelDesignViewController.swift */,
 				A77121591E542B31007564A2 /* GameViewController.swift */,
 				A77121281E5424B2007564A2 /* BubbleGridViewDataSource.swift */,
@@ -444,6 +450,7 @@
 				A77121441E5424DE007564A2 /* LevelDesign.storyboard in Resources */,
 				A77121871E542D5A007564A2 /* GameLevel.storyboard in Resources */,
 				A71DEFDA1E5B0380003064AE /* LevelSelect.storyboard in Resources */,
+				A74E0A511E62862E00C47533 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +505,7 @@
 				A771216F1E542B31007564A2 /* GameLevelScene.swift in Sources */,
 				A771216E1E542B31007564A2 /* GameBubble.swift in Sources */,
 				A77121681E542B31007564A2 /* CGPointExtension.swift in Sources */,
+				A74E0A4D1E620BF600C47533 /* SettingsViewController.swift in Sources */,
 				A771216A1E542B31007564A2 /* Collision.swift in Sources */,
 				A71DEFD31E5AD4AE003064AE /* MenuViewController.swift in Sources */,
 				A77121771E542B31007564A2 /* PhysicsBody.swift in Sources */,
