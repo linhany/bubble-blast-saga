@@ -72,13 +72,17 @@ class GameLogic {
         removeUnattachedBubbles()
     }
 
-    func handleSurroundingSpecialBubbles(with bubble: GameBubble) {
+    func isBubbleTypeInGrid(_ bubbleType: BubbleType) -> Bool {
+        return modelManager.isBubbleTypeInGrid(bubbleType)
+    }
+
+    private func handleSurroundingSpecialBubbles(with bubble: GameBubble) {
         handleSurroundingSpecialBubblesOfType(.star, with: bubble)
         handleSurroundingSpecialBubblesOfType(.lightning, with: bubble)
         handleSurroundingSpecialBubblesOfType(.bomb, with: bubble)
     }
 
-    func handleSurroundingSpecialBubblesOfType(_ bubbleType: BubbleType, with bubble: GameBubble) {
+    private func handleSurroundingSpecialBubblesOfType(_ bubbleType: BubbleType, with bubble: GameBubble) {
         guard let (row, col) = gameViewController.getBubbleRowAndCol(bubble: bubble),
               let neighbors = modelManager.getNeighboursOfBubbleAt(row: row, column: col) else {
                 assertionFailure("GameBubble must be in grid!")
@@ -91,12 +95,8 @@ class GameLogic {
         }
     }
 
-    func isBubbleTypeInGrid(_ bubbleType: BubbleType) -> Bool {
-        return modelManager.isBubbleTypeInGrid(bubbleType)
-    }
-
     /// Activates a bubble, by removing it, and unleashing any special effect it has.
-    func activate(bubble: GameBubble, with activatorBubble: GameBubble ) {
+    private func activate(bubble: GameBubble, with activatorBubble: GameBubble ) {
         switch bubble.type {
         case .bomb:
             bombAllAdjacentBubbles(as: bubble)
@@ -105,11 +105,11 @@ class GameLogic {
         case .star:
             activateAllBubblesWithSameType(as: activatorBubble, with: bubble)
         case .indestructible: return
-        default: removeClusteredGameBubbles([bubble])
+        default: removePoppedGameBubbles([bubble])
         }
     }
 
-    func bombAllAdjacentBubbles(as bombBubble: GameBubble) {
+    private func bombAllAdjacentBubbles(as bombBubble: GameBubble) {
         guard let bombBubble = bombBubble as? BombBubble else {
             assertionFailure("Bubble must be a BombBubble")
             return
@@ -123,7 +123,7 @@ class GameLogic {
         }
     }
 
-    func zapAllBubblesOnSameRow(as lightningBubble: GameBubble) {
+    private func zapAllBubblesOnSameRow(as lightningBubble: GameBubble) {
         guard let lightningBubble = lightningBubble as? LightningBubble else {
             assertionFailure("Bubble must be a LightningBubble")
             return
@@ -137,19 +137,19 @@ class GameLogic {
         }
     }
 
-    func activateAllBubblesWithSameType(as bubble: GameBubble, with starBubble: GameBubble) {
+    private func activateAllBubblesWithSameType(as bubble: GameBubble, with starBubble: GameBubble) {
         guard let starBubble = starBubble as? StarBubble else {
             assertionFailure("Bubble must be a StarBubble")
             return
         }
         let bubblesOfSameType = getAllBubblesOfSameType(as: bubble)
-        removeClusteredGameBubbles([bubble, starBubble])
+        removePoppedGameBubbles([bubble, starBubble])
         for bubbleOfSameType in bubblesOfSameType {
             activate(bubble: bubbleOfSameType, with: starBubble)
         }
     }
 
-    func getAdjacentBubbles(of gameBubble: GameBubble) -> [GameBubble]? {
+    private func getAdjacentBubbles(of gameBubble: GameBubble) -> [GameBubble]? {
         guard let (row, col) = gameViewController.getBubbleRowAndCol(bubble: gameBubble),
             let neighbors = modelManager.getNeighboursOfBubbleAt(row: row, column: col) else {
                 assertionFailure("GameBubble is not in the grid!")
@@ -159,7 +159,7 @@ class GameLogic {
     }
 
     /// Excludes the gameBubble itself.
-    func getBubblesOnSameRow(as gameBubble: GameBubble) -> [GameBubble]? {
+    private func getBubblesOnSameRow(as gameBubble: GameBubble) -> [GameBubble]? {
         guard let (row, col) = gameViewController.getBubbleRowAndCol(bubble: gameBubble) else {
             assertionFailure("GameBubble must be in the grid!")
             return nil
@@ -182,7 +182,7 @@ class GameLogic {
     }
 
     /// Excluding the gameBubble itself.
-    func getAllBubblesOfSameType(as gameBubble: GameBubble) -> [GameBubble] {
+    private func getAllBubblesOfSameType(as gameBubble: GameBubble) -> [GameBubble] {
         var bubblesToRemove: [GameBubble] = []
         let grid = modelManager.getGridState()
         for row in 0..<grid.count {
@@ -198,9 +198,8 @@ class GameLogic {
         return bubblesToRemove
     }
 
-
     /// Adds `gameBubble` to grid.
-    func addToBubbleGridModel(gameBubble: GameBubble) {
+    private func addToBubbleGridModel(gameBubble: GameBubble) {
         guard let position = gameBubble.position else {
             assertionFailure("Game Bubble must have a position!")
             return
@@ -213,7 +212,7 @@ class GameLogic {
     }
 
     /// Removes `gameBubble` from grid.
-    func removeFromBubbleGridModel(gameBubble: GameBubble) {
+    private func removeFromBubbleGridModel(gameBubble: GameBubble) {
         guard let position = gameBubble.position else {
             assertionFailure("Game Bubble must have a position!")
             return
@@ -231,7 +230,7 @@ class GameLogic {
             return
         }
         if bubblesToRemove.count >= Constants.gameBubbleClusterLimit {
-            removeClusteredGameBubbles(bubblesToRemove)
+            removePoppedGameBubbles(bubblesToRemove)
         }
     }
 
@@ -276,10 +275,10 @@ class GameLogic {
         }
     }
 
-    private func removeClusteredGameBubbles(_ gameBubbles: [GameBubble]) {
+    private func removePoppedGameBubbles(_ gameBubbles: [GameBubble]) {
         for gameBubble in gameBubbles {
             removeGameBubble(gameBubble)
-            nc.post(name: Notification.Name(Constants.notifyRemoveClusteredGameBubble),
+            nc.post(name: Notification.Name(Constants.notifyRemovePoppedGameBubble),
                     object: nil,
                     userInfo: [Constants.gameBubbleIdentifier: gameBubble])
         }

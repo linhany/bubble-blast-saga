@@ -112,7 +112,7 @@ struct Constants {
     static let notifyLoadingCannonGameBubble = "Game bubble loaded into cannon!"
     static let notifyNewlySnappedGameBubble = "Game bubble snapped into grid!"
     static let notifyRemoveDisconnectedGameBubble = "Game bubble disconnected!"
-    static let notifyRemoveClusteredGameBubble = "Game bubble clustered!"
+    static let notifyRemovePoppedGameBubble = "Game bubble clustered!"
     static let notifyRemoveLightningBubble = "Lightning bubble zapped!"
     static let notifyRemoveBombBubble = "Bomb bubble exploded!"
     static let notifyBubbleCountDecrease = "Bubble generated! Count decreased."

@@ -176,7 +176,7 @@ class AnimationRenderer: Renderer {
 
     private func addObserverForRemoveClusteredGameBubble() {
         nc.addObserver(
-            forName: Notification.Name(rawValue: Constants.notifyRemoveClusteredGameBubble),
+            forName: Notification.Name(rawValue: Constants.notifyRemovePoppedGameBubble),
             object: nil,
             queue: nil,
             using: updateRemoveClusteredGameBubble)
@@ -208,7 +208,7 @@ class AnimationRenderer: Renderer {
 
     private func updateNewlySnappedGameBubble(notification: Notification) {
         guard let userInfo = notification.userInfo,
-            let gameBubble = userInfo["GameBubble"]
+            let gameBubble = userInfo[Constants.gameBubbleIdentifier]
                 as? GameBubble else {
                     assertionFailure("Poster did not post it right.")
                     return
@@ -218,7 +218,7 @@ class AnimationRenderer: Renderer {
 
     private func updateRemoveDisconnectedGameBubble(notification: Notification) {
         guard let userInfo = notification.userInfo,
-            let gameBubble = userInfo["GameBubble"]
+            let gameBubble = userInfo[Constants.gameBubbleIdentifier]
                 as? GameBubble else {
                     assertionFailure("Poster did not post it right.")
                     return
@@ -228,7 +228,7 @@ class AnimationRenderer: Renderer {
 
     private func updateRemoveClusteredGameBubble(notification: Notification) {
         guard let userInfo = notification.userInfo,
-              let gameBubble = userInfo["GameBubble"]
+              let gameBubble = userInfo[Constants.gameBubbleIdentifier]
                 as? GameBubble else {
                     assertionFailure("Poster did not post it right.")
                     return
@@ -238,7 +238,7 @@ class AnimationRenderer: Renderer {
 
     private func updateRemoveBombBubble(notification: Notification) {
         guard let userInfo = notification.userInfo,
-              let gameBubble = userInfo["GameBubble"]
+              let gameBubble = userInfo[Constants.gameBubbleIdentifier]
               as? GameBubble else {
             assertionFailure("Poster did not post it right.")
             return
@@ -248,7 +248,7 @@ class AnimationRenderer: Renderer {
 
     private func updateRemoveLightningBubble(notification: Notification) {
         guard let userInfo = notification.userInfo,
-              let gameBubble = userInfo["GameBubble"]
+              let gameBubble = userInfo[Constants.gameBubbleIdentifier]
               as? GameBubble else {
             assertionFailure("Poster did not post it right.")
             return
@@ -258,7 +258,7 @@ class AnimationRenderer: Renderer {
 
     private func updateLoadCannonGameBubble(notification: Notification) {
         guard let userInfo = notification.userInfo,
-            let gameBubble = userInfo["GameBubble"]
+            let gameBubble = userInfo[Constants.gameBubbleIdentifier]
                 as? GameBubble else {
                     assertionFailure("Poster did not post it right.")
                     return
