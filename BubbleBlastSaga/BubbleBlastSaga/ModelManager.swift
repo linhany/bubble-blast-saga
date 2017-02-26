@@ -107,9 +107,10 @@ class ModelManager: NSObject {
             return nil
         }
         var neighbours: [GameBubble] = []
-        let neighbourEvenRowOffsets = [(-1, -1), (1, -1), (0, -1), (-1, 0), (1, 0), (0, 1)]
-        let neighbourOddRowOffsets = [(-1, 1), (1, 1), (0, -1), (-1, 0), (1, 0), (0, 1)]
-        let neighbourOffsets = isEven(row) ? neighbourEvenRowOffsets : neighbourOddRowOffsets
+
+        let neighbourOffsets = isEven(row)
+            ? Constants.neighbourEvenRowOffsets
+            : Constants.neighbourOddRowOffsets
 
         for (rowOffset, columnOffset) in neighbourOffsets {
             let neighbourRow = row + rowOffset

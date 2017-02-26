@@ -302,7 +302,7 @@ class GameViewController: UIViewController {
         guard let currentGameScore = gameScoreText?.text else {
             fatalError("Must have a current game score.")
         }
-        return "Gameplay Score: " + currentGameScore
+        return Constants.messageGamePlayScore + currentGameScore
     }
 
     private func handleShotsLeftBonus() -> [String] {
@@ -318,9 +318,9 @@ class GameViewController: UIViewController {
         let shotsLeftBonus = shotsLeftValue * Int(GameConfig.bubblesLeftBonus)
         currentGameScoreValue += shotsLeftBonus
         updateGameScore(currentGameScoreValue)
-        var message = "Shots Left: " + shotsLeft
+        var message = Constants.messageShotsLeft + shotsLeft
         messages.append(message)
-        message = "Shots Left Bonus: +" + String(shotsLeftBonus)
+        message = Constants.messageShotsLeftBonus + String(shotsLeftBonus)
         messages.append(message)
         return messages
     }
@@ -328,31 +328,31 @@ class GameViewController: UIViewController {
     private func handleTimeLeftBonus() -> [String] {
         var messages: [String] = []
         guard let timeLeft = timerText?.text,
-            let timeLeftValue = Int(timeLeft) else {
-                fatalError("Must have time left!")
+              let timeLeftValue = Int(timeLeft) else {
+            fatalError("Must have time left!")
         }
         guard let currentGameScore = gameScoreText?.text,
-            var currentGameScoreValue = Int(currentGameScore) else {
-                fatalError("Must have score!")
+              var currentGameScoreValue = Int(currentGameScore) else {
+            fatalError("Must have score!")
         }
         let timeLeftBonus = timeLeftValue * Int(GameConfig.timeLeftBonus)
         currentGameScoreValue += timeLeftBonus
         updateGameScore(currentGameScoreValue)
 
-        var message = "Time Left: " + timeLeft + " seconds"
+        var message = Constants.messageTimeLeft + timeLeft + Constants.messageTimeSeconds
         messages.append(message)
-        message = "Time Left Bonus: +" + String(timeLeftBonus)
+        message = Constants.messageTimeLeftBonus + String(timeLeftBonus)
         messages.append(message)
         return messages
     }
 
     private func getShotsFiredMessage() -> String {
-        let message = "Bubbles Fired: " + String(shotsFired)
+        let message = Constants.messageBubblesFired + String(shotsFired)
         return message
     }
 
     private func getPlayTimeMessage() -> String {
-        let message = "Play Time: " + String(playTime) + " seconds"
+        let message = Constants.messagePlayTime + String(playTime) + Constants.messageTimeSeconds
         return message
     }
 
@@ -362,12 +362,12 @@ class GameViewController: UIViewController {
 
     private func handleWinBonus() -> String {
         guard let currentGameScore = gameScoreText?.text,
-            let currentGameScoreValue = Int(currentGameScore) else {
-                fatalError("Must have a current game score.")
+              let currentGameScoreValue = Int(currentGameScore) else {
+            fatalError("Must have a current game score.")
         }
         let newGameScoreValue = currentGameScoreValue * Constants.winBonusMultiplier
         gameScoreText.text = String(newGameScoreValue)
-        return "Win Bonus: x2"
+        return Constants.messageWinBonus
     }
 
     private func showEndGameScreen(endGameStats: [String]) {
@@ -375,7 +375,8 @@ class GameViewController: UIViewController {
             fatalError("Must have a current game score.")
         }
         var endGameStats = endGameStats
-        endGameStats.append("Final Score: " + currentGameScore)
+        let finalScoreMessage = Constants.messageFinalScore + currentGameScore
+        endGameStats.append(finalScoreMessage)
         for endGameStat in endGameStats {
             let textField = UITextField()
             textField.text = endGameStat
@@ -384,7 +385,7 @@ class GameViewController: UIViewController {
             guard let fontName = textField.font?.fontName else {
                 fatalError("Must have font name")
             }
-            textField.font = UIFont(name: fontName, size: 30)
+            textField.font = UIFont(name: fontName, size: CGFloat(Constants.endGameScreenFontSize))
             endGameScreen.addArrangedSubview(textField)
         }
         gameScoreText.isHidden = true
@@ -417,7 +418,8 @@ class GameViewController: UIViewController {
             assertionFailure("Must have an integer value.")
             return
         }
-        remainingCountText.text = String(textIntValue - 1)
+        let decrementedCount = textIntValue - 1
+        remainingCountText.text = String(decrementedCount)
     }
 
     private func clearScreen() {

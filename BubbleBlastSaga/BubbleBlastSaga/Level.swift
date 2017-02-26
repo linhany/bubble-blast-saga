@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Represents a game level to be stored.
 class Level: NSObject, NSCoding {
     private let fileNameKey = "FileNameKey"
     private let gridStateKey = "GridStateKey"

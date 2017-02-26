@@ -115,7 +115,9 @@ class GameLevelScene: Scene {
 
     /// Adds velocity to the `gameProjectile` in the `direction` given.
     private func addVelocity(toProjectile gameProjectile: GameObject, inDirection direction: CGPoint) {
-        gameProjectile.physicsBody?.velocity = CGVector(dx: direction.x*2, dy: direction.y*2)
+        let velocityMultiplier = CGFloat(Constants.gameProjectileVelocityMultiplier)
+        gameProjectile.physicsBody?.velocity = CGVector(dx: direction.x * velocityMultiplier,
+                                                        dy: direction.y * velocityMultiplier)
     }
 
     // MARK: - Projectile management helpers.
@@ -159,7 +161,7 @@ class GameLevelScene: Scene {
         // Move to Cannon position.
         nextProjectile.position = gameViewController.getCannonProjectilePosition()
         postNotification(name: Constants.notifyLoadingCannonGameBubble,
-                userInfo: ["GameBubble": nextProjectile])
+                userInfo: [Constants.gameBubbleIdentifier: nextProjectile])
 
         guard let secondNextProjectile =
         randomBubbleHelper.nextBubble(isAccountingForBubblesGenerated: true) else {
@@ -393,7 +395,7 @@ extension GameLevelScene: PhysicsContactDelegate {
         gameBubble.physicsBody?.isResting = true
         newlySnappedBubbles.append(gameBubble)
         postNotification(name: Constants.notifyNewlySnappedGameBubble,
-                userInfo: ["GameBubble": gameBubble])
+                userInfo: [Constants.gameBubbleIdentifier: gameBubble])
     }
 
     /// Drops out the `gameBubble` from bottom of grid.

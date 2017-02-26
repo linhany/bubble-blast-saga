@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Lazily generates random bubbles that are in the game grid.
 class RandomBubbleHelper {
 
     private let bubbleTypeRawValueRange: (Int, Int)

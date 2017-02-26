@@ -12,6 +12,14 @@ import UIKit
 /// to keep track of user's selected bubble type.
 class PaletteButton: UIButton {
 
+    private let proportionOfCornerRadius: CGFloat = 2
+    private let borderWidth: CGFloat = 5
+    private let transformScaleX: CGFloat = 0.1
+    private let transformScaleY: CGFloat = 0.1
+    private let springDamping: CGFloat = 0.2
+    private let springVelocity: CGFloat = 6.0
+
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setUpBorderProperties()
@@ -24,12 +32,7 @@ class PaletteButton: UIButton {
     /// Makes the border of this button visible by
     /// increasing the border width.
     func showBorder() {
-		/**
-		
-		Tutor: magic number, coding style - 1 (cap at -5).
-		
-		*/
-        layer.borderWidth = 5
+        layer.borderWidth = borderWidth
     }
 
     /// Makes the border of this button invisible by
@@ -40,12 +43,12 @@ class PaletteButton: UIButton {
 
     /// Shows a simple animation that represents a press of the button.
     func animatePress() {
-        transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        transform = CGAffineTransform(scaleX: transformScaleX, y: transformScaleY)
 
-        UIView.animate(withDuration: 2.0,
+        UIView.animate(withDuration: Constants.paletteBubbleAnimationDuration,
                        delay: 0,
-                       usingSpringWithDamping: 0.2,
-                       initialSpringVelocity: 6.0,
+                       usingSpringWithDamping: springDamping,
+                       initialSpringVelocity: springVelocity,
                        options: .allowUserInteraction,
                        animations: { [weak self] in
                         self?.transform = .identity
@@ -54,7 +57,7 @@ class PaletteButton: UIButton {
     }
 
     private func setUpBorderProperties() {
-        layer.cornerRadius = frame.size.width / 2
+        layer.cornerRadius = frame.size.width / proportionOfCornerRadius
         layer.borderColor = UIColor.black.cgColor
     }
 

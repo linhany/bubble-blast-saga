@@ -27,8 +27,8 @@ class BubbleImageView: UIImageView {
     }
 
     private func setUpBubbleBurstImages() {
-        let imagePrefix = "bubble-burst_"
-        let imageSuffixes = ["01", "02", "03", "04"]
+        let imagePrefix = Constants.bubbleBurstImagePrefix
+        let imageSuffixes = Constants.bubbleBurstImageSuffixes
         for suffix in imageSuffixes {
             guard let bubbleBurstImage = UIImage(named: imagePrefix + suffix) else {
                 fatalError("Bubble burst images not found!")

@@ -143,10 +143,6 @@ class GameLogic {
             return
         }
         let bubblesOfSameType = getAllBubblesOfSameType(as: bubble)
-        // remove bubble &
-        // remove star bubble too.
-        // TODO: CHANGE ANIMATION
-        // Check if starbubble is sitll in grid??
         removeClusteredGameBubbles([bubble, starBubble])
         for bubbleOfSameType in bubblesOfSameType {
             activate(bubble: bubbleOfSameType, with: starBubble)
@@ -169,7 +165,8 @@ class GameLogic {
             return nil
         }
         var bubbles: [GameBubble] = []
-        let noOfColumns = row % 2 == 0
+        let isRowEven = row % 2 == 0
+        let noOfColumns = isRowEven
             ? Constants.noOfColumnsInEvenRowOfGameGrid
             : Constants.noOfColumnsInOddRowOfGameGrid
         for column in 0..<noOfColumns {
@@ -201,7 +198,6 @@ class GameLogic {
         return bubblesToRemove
     }
 
-    // END
 
     /// Adds `gameBubble` to grid.
     func addToBubbleGridModel(gameBubble: GameBubble) {
@@ -276,7 +272,7 @@ class GameLogic {
             removeGameBubble(gameBubble)
             nc.post(name: Notification.Name(Constants.notifyRemoveDisconnectedGameBubble),
                     object: nil,
-                    userInfo: ["GameBubble": gameBubble])
+                    userInfo: [Constants.gameBubbleIdentifier: gameBubble])
         }
     }
 
@@ -285,7 +281,7 @@ class GameLogic {
             removeGameBubble(gameBubble)
             nc.post(name: Notification.Name(Constants.notifyRemoveClusteredGameBubble),
                     object: nil,
-                    userInfo: ["GameBubble": gameBubble])
+                    userInfo: [Constants.gameBubbleIdentifier: gameBubble])
         }
     }
 
@@ -293,14 +289,14 @@ class GameLogic {
         removeGameBubble(gameBubble)
         nc.post(name: Notification.Name(Constants.notifyRemoveLightningBubble),
                 object: nil,
-                userInfo: ["GameBubble": gameBubble])
+                userInfo: [Constants.gameBubbleIdentifier: gameBubble])
     }
 
     private func removeBombBubble(gameBubble: GameBubble) {
         removeGameBubble(gameBubble)
         nc.post(name: Notification.Name(Constants.notifyRemoveBombBubble),
                 object: nil,
-                userInfo: ["GameBubble": gameBubble])
+                userInfo: [Constants.gameBubbleIdentifier: gameBubble])
     }
 
     /// Removes `gameBubble` from the model and delegates removal of it from the game scene.

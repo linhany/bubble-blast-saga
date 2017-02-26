@@ -18,8 +18,8 @@ Bomb: Removes its adjacent neighbouring bubbles. (Except indestructible) <br>
 Star: "Takes Revenge" on whichever bubble destroyed it, by activating all types of that bubble in the grid. <br>
 4) Priority of special bubbles activation: If a newly shot bubble snaps to a grid with neighbouring star, lightning and bomb bubbles, the order of activation is star -> lightning -> bomb, and then clustering. This is needed to handle ambiguity as to which bubble activated the star. Clustering will always occur even if the bubble also activated a special bubble. <br>
 5) Limited shots mode: Every shot counts! Game is over as soon as you try to fire a shot without having any shots left in the cannon. The count is shown on the base of cannon. <br>
-6) Timed mode: Game is over when timer reaches 0.  The timer is shown just above the cannon. 
-
+6) Timed mode: Game is over when timer reaches 0.  The timer is shown just above the cannon. <br>
+7) Preloaded levels: The game comes with a few preloaded levels. These levels may be modified by the user in any way, and resaved. However, if these levels are deleted, upon the next starting of the application, they will be loaded in again. (Unless the user circumvents this by creating a level with the same name as a preloaded level).
 
 ### Problem 1: Cannon Direction
 
@@ -59,7 +59,7 @@ My solution is to have an activate() function. This function takes in a bubble a
 
 For example, suppose a newly shot bubble landed next to a lightning bubble. The newly shot bubble will activate the lightning bubble, which calls the function zapAllBubblesOnSameRow(). In this function, for each bubble in the same row as the lightning bubble, I will call activate() on it, passing in the proper arguments. If one of these bubbles is a star bubble, when I call activate(star, lightning), the next function activateAllBubblesWithSameType() will be called, which in turns activates all the lightning bubbles, and for each of these activated lightning bubble, it will activate each of the bubble on same row as it, and so on..
 
-The beauty of the activate() function is that I can reuse it and customise what behavior to take depending on the activated and activator bubble. If I want to add additional animations, I can do so easily. To block removal of indestructible bubbles, all I have to do is to return if bubble's type is indestructible. I do not have to keep checking the type of each bubble as I write some complicated algorithm with several layered nested loops. As a result, my code for support the special bubbles and chaining is very short, neat and readable, allowing for ease of maintainability and extension.
+The beauty of the activate() function is that I can reuse it and customise what behavior to take depending on the activated and activator bubble. If I want to add additional animations, I can do so easily. To block removal of indestructible bubbles, all I have to do is to return if bubble's type is indestructible. I do not have to keep checking the type of each bubble as I write some complicated algorithm with several layered nested loops. As a result, my code for supporting the special bubbles and chaining is very short, neat and readable, allowing for ease of maintainability and extension.
 
 ### Problem 7: Class Diagram
 
@@ -71,11 +71,20 @@ Why is this only 5 marks??!
 
 Please refer to `testing.txt`.
 
-
 ### Problem 9: The Bells & Whistles
-
-Your answer here
-
+<ul>
+<li> Add animations: bubble burst, bomb, lightning.</li>
+<li> Add game score. </li>
+<li> Add end game screen with stats.</li>
+<li> Limited cannon shots mode with 3 levels of difficulty.</li>
+<li> Timed mode with 3 levels of difficulty.</li>
+<li> Unconnected bubbles won't appear in game start + Handle default win case for levels.</li>
+<li> Upcoming bubbles are restricted to those found in grid only, and replacement occurs if needed.</li>
+<li> Level selection screen shows image preview of levels.</li>
+<li> Support level deletion.</li>
+<li> Complete and fun chaining behavior for all special bubbles.</li>
+<li> Indestructible bubble that is indestructible.</li>
+</ul>
 
 ### Problem 10: Final Reflection
 

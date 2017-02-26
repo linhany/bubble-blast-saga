@@ -125,10 +125,11 @@ class AnimationRenderer: Renderer {
     }
 
     private func animateBomb(gameBubbleImage: UIImageView, on view: UIView) {
+        let radiusMultiplier = CGFloat(Constants.bombBubbleExplosionRadiusMultiplier)
         let bombImageFrame = CGRect(x: 0.0,
                                     y: 0.0,
-                                    width: gameBubbleImage.frame.size.width * 3,
-                                    height: gameBubbleImage.frame.size.height * 3)
+                                    width: gameBubbleImage.frame.size.width * radiusMultiplier,
+                                    height: gameBubbleImage.frame.size.height * radiusMultiplier)
         let bombImage = BombImageView(frame: bombImageFrame)
         view.addSubview(bombImage)
         bombImage.center = gameBubbleImage.center
@@ -140,8 +141,8 @@ class AnimationRenderer: Renderer {
         let snapBehavior = UISnapBehavior(item: gameBubbleImage, snapTo: position)
         let behavior = UIDynamicItemBehavior(items: [gameBubbleImage])
         let animator = UIDynamicAnimator(referenceView: view)
-        snapBehavior.damping = 0.3
-        behavior.elasticity = 1.4
+        snapBehavior.damping = CGFloat(Constants.snapBehaviorDamping)
+        behavior.elasticity = CGFloat(Constants.snapBehaviorElasticity)
         animator.addBehavior(snapBehavior)
         animator.addBehavior(behavior)
     }
@@ -152,8 +153,7 @@ class AnimationRenderer: Renderer {
             animations: {
                 gameBubbleImage.center = position
             },
-            completion: { _ in
-        })
+            completion: nil)
     }
 
     // MARK: - Notification helper functions

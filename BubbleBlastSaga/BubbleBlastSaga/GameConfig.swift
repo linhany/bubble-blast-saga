@@ -8,9 +8,13 @@
 
 import Foundation
 
+/// The GameConfig file provides the user settings for the game.
 struct GameConfig {
+    /// User adjustable options
     static var isCannonShotsLimited = false
     static var isTimed = false
+    static var timeLimitMultiplier = TimeLimitMultiplier.easy
+    static var cannonShotsMultiplier = CannonShotsMultiplier.easy
 
     static var cannonShots: Int {
         return cannonShotsBase * cannonShotsMultiplier.rawValue
@@ -22,20 +26,19 @@ struct GameConfig {
     }
 
     static var bubblesLeftBonus: Double {
-        return 90.0 / Double(cannonShotsMultiplier.rawValue * cannonShotsMultiplier.rawValue)
+        return bubbleLeftBonusBase / Double(cannonShotsMultiplier.rawValue * cannonShotsMultiplier.rawValue)
     }
     static var timeLeftBonus: Double {
-        return 100.0 / Double(timeLimitMultiplier.rawValue * timeLimitMultiplier.rawValue)
+        return timeLeftBonusBase / Double(timeLimitMultiplier.rawValue * timeLimitMultiplier.rawValue)
     }
-
-    /// Let user set these.
-    static var timeLimitMultiplier = TimeLimitMultiplier.easy
-    static var cannonShotsMultiplier = CannonShotsMultiplier.easy
 
     /// Base number of shots for the user.
     private static var cannonShotsBase = 40
     /// Base time limit for the user.
     private static var timeLimitBase = 20
+
+    private static var bubbleLeftBonusBase = 90.0
+    private static var timeLeftBonusBase = 100.0
 }
 
 /// Multipliers for number of shots before user loses.
@@ -51,9 +54,3 @@ enum TimeLimitMultiplier: Int {
     case medium = 2
     case hard = 1
 }
-
-//enum GridSize: (Int, Int) {
-//    case easy = (14, 12)
-//    case medium = (21, 18)
-//    case hard = (28, 24)
-//}

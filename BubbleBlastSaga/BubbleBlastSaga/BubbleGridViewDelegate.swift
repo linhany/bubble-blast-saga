@@ -34,11 +34,7 @@ extension BubbleGridViewDelegate: UICollectionViewDelegateFlowLayout {
         let diameterOfGameCell =
             Int(collectionView.frame.size.width) / Constants.noOfColumnsInEvenRowOfGameGrid
         let radiusOfGameCell = CGFloat(diameterOfGameCell / 2)
-        let oneEighthOfGameCellDiameter = CGFloat(diameterOfGameCell / 8)
-
-        // One eighth of game cell diameter is the right offset
-        // to pack the grid cells together, discovered through trial and error.
-        let negativeOffsetForRowSpacing = -oneEighthOfGameCellDiameter
+        let negativeOffsetForRowSpacing = CGFloat(diameterOfGameCell / Constants.proportionOfCellToOffset)
 
         let evenSectionEdgeInset = UIEdgeInsets(top: 0.0,
                                                 left: 0.0,

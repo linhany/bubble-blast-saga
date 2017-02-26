@@ -9,6 +9,8 @@
 import UIKit
 
 class RoundedButton: UIButton {
+    private let borderWidth: CGFloat = 1.0
+    private let proportionOfCornerRadius: CGFloat = 12.0
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,15 +27,15 @@ class RoundedButton: UIButton {
     }
 
     func setUpButtonProperties() {
-        layer.cornerRadius = layer.frame.width/12
+        layer.cornerRadius = layer.frame.width / proportionOfCornerRadius
         layer.borderColor = UIColor.white.cgColor
-        layer.borderWidth = 1
+        layer.borderWidth = borderWidth
         setTitleColor(.lightGray, for: .focused)
         setTitleColor(.lightGray, for: .highlighted)
     }
 
     func markAsSelected() {
-        layer.borderWidth = 1
+        layer.borderWidth = borderWidth
     }
 
     func unmark() {

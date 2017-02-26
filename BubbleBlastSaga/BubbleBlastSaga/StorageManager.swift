@@ -13,8 +13,10 @@ import UIKit
 struct StorageManager {
 
     private let pListExtension = ".pList"
+    private let pListExtensionWithoutDot = "pList"
     private let imageExtension = ".png"
     private let levelKey = "levelKeyString"
+    private let levelsIdentifier = "Levels"
 
     init() {
         loadInPreloadedLevels()
@@ -77,7 +79,7 @@ struct StorageManager {
             fatalError("Unable to access document directory contents")
         }
 
-        let pLists = directoryContents.filter { $0.pathExtension == "pList" }
+        let pLists = directoryContents.filter { $0.pathExtension == pListExtensionWithoutDot }
         var levels: [(String, UIImage)] = []
         for pList in pLists {
             let name = pList.deletingPathExtension().lastPathComponent
@@ -108,8 +110,8 @@ struct StorageManager {
     private func loadInPreloadedLevels() {
         let documentDirectory = getUrlForFileInDocumentDirectory()
 
-        let bundleImagesPath = Bundle.main.paths(forResourcesOfType: imageExtension, inDirectory: "Levels")
-        let bundleFilesPath = Bundle.main.paths(forResourcesOfType: pListExtension, inDirectory: "Levels")
+        let bundleImagesPath = Bundle.main.paths(forResourcesOfType: imageExtension, inDirectory: levelsIdentifier)
+        let bundleFilesPath = Bundle.main.paths(forResourcesOfType: pListExtension, inDirectory: levelsIdentifier)
 
         for imagePath in bundleImagesPath {
             let imageName = (imagePath as NSString).lastPathComponent
@@ -138,7 +140,9 @@ struct StorageManager {
         // Get the URL of the Documents Directory
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         // Get the URL for a file in the Documents Directory
-        let documentDirectory = urls[0]
+        guard let documentDirectory = urls.first else {
+            fatalError("Should never happen.")
+        }
         return documentDirectory
     }
 

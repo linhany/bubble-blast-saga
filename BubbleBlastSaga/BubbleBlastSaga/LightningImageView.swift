@@ -27,8 +27,8 @@ class LightningImageView: UIImageView {
     }
 
     private func setUpLightningImages() {
-        let imagePrefix = "lightning_"
-        let imageSuffixes = ["01", "02", "03", "04", "05", "06", "07", "08"]
+        let imagePrefix = Constants.lightningImagePrefix
+        let imageSuffixes = Constants.lightningImageSuffixes
         for suffix in imageSuffixes {
             guard let lightningImage = UIImage(named: imagePrefix + suffix) else {
                 fatalError("Lightning images not found!")

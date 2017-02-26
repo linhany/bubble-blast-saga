@@ -27,9 +27,8 @@ class BombImageView: UIImageView {
     }
 
     private func setUpBombImages() {
-        let imagePrefix = "bomb_"
-        let imageSuffixes = ["01", "02", "03", "04", "05", "06", "07",
-                             "08", "09", "10", "11", "12", "13", "14"]
+        let imagePrefix = Constants.bombImagePrefix
+        let imageSuffixes = Constants.bombImageSuffixes
         for suffix in imageSuffixes {
             guard let bombImage = UIImage(named: imagePrefix + suffix) else {
                 fatalError("Bomb images not found!")

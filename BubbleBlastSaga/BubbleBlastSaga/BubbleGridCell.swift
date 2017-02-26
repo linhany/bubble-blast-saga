@@ -11,14 +11,17 @@ import UIKit
 /// Custom view class for the bubble grid cells used in bubble grid.
 class BubbleGridCell: UICollectionViewCell {
 
+    private let proportionOfCornerRadius: CGFloat = 2
+    private let borderWidth: CGFloat = 1
+
     /// The UIImageView that represents a game bubble being at that location.
     private var imageView: UIImageView?
     private var isBorderShown = true
 
     override func layoutSubviews() {
-        layer.cornerRadius = frame.size.width / 2
+        layer.cornerRadius = frame.size.width / proportionOfCornerRadius
         layer.borderColor = UIColor.lightGray.cgColor
-        layer.borderWidth = isBorderShown ? 1 : 0
+        layer.borderWidth = isBorderShown ? borderWidth : 0
     }
 
     /// Initializer for image view size.

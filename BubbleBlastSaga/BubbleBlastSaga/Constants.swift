@@ -34,6 +34,17 @@ struct Constants {
 
     static let noOfNormalBubbleTypes = 7
 
+    static let gameProjectileVelocityMultiplier = 2
+
+    static let bombBubbleExplosionRadiusMultiplier = 3
+    static let snapBehaviorDamping = 0.3
+    static let snapBehaviorElasticity = 1.4
+
+    static let proportionOfCellToOffset = -8
+
+    static let neighbourEvenRowOffsets = [(-1, -1), (1, -1), (0, -1), (-1, 0), (1, 0), (0, 1)]
+    static let neighbourOddRowOffsets = [(-1, 1), (1, 1), (0, -1), (-1, 0), (1, 0), (0, 1)]
+
     static let bubbleGridCellReuseIdentifier = "bubbleGridCell"
     static let levelCellReuseIdentifier = "levelCell"
     static let loadLevelsCellIdentifier = "LevelCell"
@@ -65,6 +76,32 @@ struct Constants {
     static let starBubbleIdentifier = "bubble-star"
     static let indestructibleBubbleIdentifier = "bubble-indestructible"
     static let gameObjectIdentifier = "GameObject"
+    static let gameBubbleIdentifier = "GameBubble"
+
+    static let cannonImagePrefix = "cannon_"
+    static let cannonImageSuffixes = ["01", "02", "03", "04", "05", "06",
+                         "07", "08", "09", "10", "11", "12"]
+    static let cannonFireAnimationDuration = 0.3
+    static let bubbleBurstImagePrefix = "bubble-burst_"
+    static let bubbleBurstImageSuffixes = ["01", "02", "03", "04"]
+    static let lightningImagePrefix = "lightning_"
+    static let lightningImageSuffixes = ["01", "02", "03", "04", "05", "06", "07", "08"]
+    static let bombImagePrefix = "bomb_"
+    static let bombImageSuffixes = ["01", "02", "03", "04", "05", "06", "07",
+                                    "08", "09", "10", "11", "12", "13", "14"]
+
+    static let messageGamePlayScore = "Gameplay Score: "
+    static let messageShotsLeft = "Shots Left: "
+    static let messageShotsLeftBonus = "Shots Left Bonus: +"
+    static let messageTimeLeft = "Time Left: "
+    static let messageTimeSeconds = " seconds"
+    static let messageTimeLeftBonus = "Time Left Bonus: +"
+    static let messageBubblesFired = "Bubbles Fired: "
+    static let messagePlayTime = "Play Time: "
+    static let messageWinBonus = "Win Bonus: x2"
+    static let messageFinalScore = "Final Score: "
+
+    static let endGameScreenFontSize = 30
 
     static let notifyBubbleGridUpdated = "Bubble grid updated."
     static let notifyPosition = "Position in grid"
@@ -85,6 +122,7 @@ struct Constants {
     static let burstingBubbleAnimationDuration = 0.4
     static let lightningBubbleAnimationDuration = 0.4
     static let bombBubbleAnimationDuration = 0.4
+    static let paletteBubbleAnimationDuration = 2.0
 
     static let feedbackLevelSavingCancelled = "SAVING CANCELLED!"
     static let feedbackLevelNameRequired = "LEVEL NAME IS NOT VALID!"

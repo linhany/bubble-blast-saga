@@ -145,10 +145,11 @@ class Renderer {
               let size = gameObject.size else {
             return
         }
+        let indexToInsert = 1
         let imageView = makeImageView(imageString: imageString)
         imageView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         imageView.center = position
-        view.insertSubview(imageView, at: 1)
+        view.insertSubview(imageView, at: indexToInsert)
         gameObjectImages.append(gameObject, imageView)
     }
 

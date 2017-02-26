@@ -8,12 +8,19 @@
 
 import UIKit
 
+/// The level cell represents a level in the level selection screen.
+/// It has an imageView as a preview of that level, and a text label that displays
+/// the level name.
 class LevelCell: UICollectionViewCell {
-    var textLabel: UILabel?
-    var imageView: UIImageView?
+    /// The proportion of corner radius to divide by.
+    private let proportionOfCornerRadius: CGFloat = 16
+    private let borderWidth: CGFloat = 5
+    private let alphaLevel: CGFloat = 0.25
+    internal var textLabel: UILabel?
+    internal var imageView: UIImageView?
 
     override func layoutSubviews() {
-        layer.cornerRadius = layer.frame.size.width/16
+        layer.cornerRadius = layer.frame.size.width / proportionOfCornerRadius
         layer.borderColor = UIColor.red.cgColor
     }
 
@@ -33,7 +40,7 @@ class LevelCell: UICollectionViewCell {
     }
 
     func showRedBorder() {
-        layer.borderWidth = 5
+        layer.borderWidth = borderWidth
     }
 
     func hideBorder() {
@@ -41,7 +48,10 @@ class LevelCell: UICollectionViewCell {
     }
 
     private func initTextLabelProperties() {
-        let textLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height - frame.size.height/5, width: frame.size.width, height: frame.size.height/5))
+        let textLabel = UILabel(frame: CGRect(x: 0,
+                                              y: frame.size.height - frame.size.height/borderWidth,
+                                              width: frame.size.width,
+                                              height: frame.size.height/borderWidth))
         textLabel.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
         textLabel.textAlignment = .center
         textLabel.textColor = UIColor.black
@@ -52,9 +62,9 @@ class LevelCell: UICollectionViewCell {
 
     private func initImageViewProperties() {
         let imageView = UIImageView()
-        imageView.alpha = 0.25
+        imageView.alpha = alphaLevel
         backgroundView = imageView
         self.imageView = imageView
     }
-
+    
 }
