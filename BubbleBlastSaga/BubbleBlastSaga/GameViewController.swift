@@ -100,10 +100,7 @@ class GameViewController: UIViewController {
         stopGame()
         var endGameMessages: [String] = []
         if isDefaultWin() {
-            let messages = getDefaultWinMessages()
-            for message in messages {
-                endGameMessages.append(message)
-            }
+            endGameMessages.append(getDefaultWinMessage())
             showEndGameScreen(endGameStats: endGameMessages)
             return
         }
@@ -131,13 +128,8 @@ class GameViewController: UIViewController {
         showEndGameScreen(endGameStats: endGameMessages)
     }
 
-    private func getDefaultWinMessages() -> [String] {
-        var messages: [String] = []
-        messages.append(Constants.endGameDefaultWinText)
-        messages.append("Life is not fun if it's too easy")
-        messages.append("Add some normal bubbles")
-        messages.append("Make sure they are connected to the top")
-        return messages
+    private func getDefaultWinMessage() -> String {
+        return Constants.endGameDefaultWinText
     }
 
     private func getGamePlayScoreMessage() -> String {
@@ -219,7 +211,10 @@ class GameViewController: UIViewController {
             textField.text = endGameStat
             textField.textAlignment = .center
             textField.textColor = UIColor.white
-            textField.font = UIFont(name: textField.font!.fontName, size: 30)
+            guard let fontName = textField.font?.fontName else {
+                fatalError("Must have font name")
+            }
+            textField.font = UIFont(name: fontName, size: 30)
             endGameScreen.addArrangedSubview(textField)
         }
         gameScoreText.isHidden = true
